@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+<link href="//cdn.staticfile.org/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<link href="//cdn.staticfile.org/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.png?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文来继续介绍一下常见的位运算 /cy 获取一个数的符号1234int v;int sign; // 符号sign = -(v &amp;lt; 0);">
+<meta name="keywords" content="位运算,OI,指令集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「OI」OI 中的常用位运算">
+<meta property="og:url" content="https://blog.ishq.site/articles/Binary-in-OI/index.html">
+<meta property="og:site_name" content="Shq&#39;s Blog">
+<meta property="og:description" content="本文来继续介绍一下常见的位运算 /cy 获取一个数的符号1234int v;int sign; // 符号sign = -(v &amp;lt; 0);">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/12/08/5c0b74af68bd6.png">
+<meta property="og:updated_time" content="2019-07-29T11:05:58.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「OI」OI 中的常用位运算">
+<meta name="twitter:description" content="本文来继续介绍一下常见的位运算 /cy 获取一个数的符号1234int v;int sign; // 符号sign = -(v &amp;lt; 0);">
+<meta name="twitter:image" content="https://i.loli.net/2018/12/08/5c0b74af68bd6.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Shq's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://blog.ishq.site/articles/Binary-in-OI/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>「OI」OI 中的常用位运算 | Shq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Real Artists simplify</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-bandcamp"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-id-card"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">164</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>系列<span class="badge">4</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">5</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-frlink">
+    <a href="/frlink/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-link"></i> <br>友链</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+    <a href="/comments/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-comments"></i> <br>留言板</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-remittance">
+    <a href="/remittance/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-bitcoin"></i> <br>给本站投食</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/Binary-in-OI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shq">
+      <meta itemprop="description" content="我不知道能否会成功，但我仍想试一试，哪怕只有一线希望">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shq's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「OI」OI 中的常用位运算
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2018-12-08 14:01:45" itemprop="dateCreated datePublished" datetime="2018-12-08T14:01:45+08:00">2018-12-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="更新于：2019-07-29 19:05:58" itemprop="dateModified" datetime="2019-07-29T19:05:58+08:00">2019-07-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">属于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文来继续介绍一下常见的位运算 /cy</p>
+<h1 id="获取一个数的符号"><a href="#获取一个数的符号" class="headerlink" title="获取一个数的符号"></a>获取一个数的符号</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">int</span> sign; <span class="comment">// 符号</span></span><br><span class="line"></span><br><span class="line">sign = -(v &lt; <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>当然这样是不够的, 我们要处理分支预测 (</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 避免在带有标志寄存器的CPU上分支</span></span><br><span class="line"><span class="comment">// CHAR_BIT 是指占的字节数,(一般是 8</span></span><br><span class="line">sign = -(<span class="keyword">int</span>)((<span class="keyword">unsigned</span> <span class="keyword">int</span>)((<span class="keyword">int</span>)v) &gt;&gt; (<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * CHAR_BIT - <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>使用更少的指令</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sign = v &gt;&gt; (<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * CHAR_BIT - <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>因为当有符号整数向右移位时，最左边的位的值被复制到其他位。 当值为负时，最左边的位为 $1$ ，否则为 $0$ ; 所有 $1$ 位给出 $-1$</p>
+<p>不幸的是，这种行为是 <strong>特定于架构的</strong></p>
+<p>如果你感觉结果不是 $-1$ 或者 $1$ 而感到很难过,你可以这样写</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sign = +<span class="number">1</span> | (v &gt;&gt; (<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * CHAR_BIT - <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>你还想要判断 $0$ 的话,你可以这样写 (</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sign = (v != <span class="number">0</span>) | -(<span class="keyword">int</span>)((<span class="keyword">unsigned</span> <span class="keyword">int</span>)((<span class="keyword">int</span>)v) &gt;&gt; (<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * CHAR_BIT - <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更快一些:</span></span><br><span class="line">sign = (v != <span class="number">0</span>) | (v &gt;&gt; (<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * CHAR_BIT - <span class="number">1</span>));  <span class="comment">// -1, 0, or +1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者是使用这种好记好看 更快(可能) 的写法</span></span><br><span class="line">sign = (v &gt; <span class="number">0</span>) - (v &lt; <span class="number">0</span>); <span class="comment">// -1, 0, or +1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="检测两个整数是否有相反的符号"><a href="#检测两个整数是否有相反的符号" class="headerlink" title="检测两个整数是否有相反的符号"></a>检测两个整数是否有相反的符号</h1><p>可以分别检验两个数的符号然后进行判断</p>
+<p>当然有更为简洁的方法:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x, y;               <span class="comment">// 要比较的两个数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> f = ((x ^ y) &lt; <span class="number">0</span>); <span class="comment">// 不同则为 true, 相同则为 false</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="计算数字的绝对值"><a href="#计算数字的绝对值" class="headerlink" title="计算数字的绝对值"></a>计算数字的绝对值</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = (a &gt; <span class="number">0</span>) ? a : -a;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> r;  <span class="comment">// 结果</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mask = v &gt;&gt; <span class="keyword">sizeof</span>(<span class="keyword">int</span>) * CHAR_BIT - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">r = (v + mask) ^ mask;</span><br><span class="line"><span class="comment">// 或者是 : r = (v ^ mask) - mask;</span></span><br></pre></td></tr></table></figure>
+
+<p>某些 CPU 没有整数绝对值指令（或编译器无法使用它们）</p>
+<p>在分治预测失败代价十分高的机器上，上述代码可能比第一段的方法更快,即使操作次数相同 (</p>
+<h1 id="计算两个整数的最小值或最大值"><a href="#计算两个整数的最小值或最大值" class="headerlink" title="计算两个整数的最小值或最大值"></a>计算两个整数的最小值或最大值</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x, y;   </span><br><span class="line"><span class="keyword">int</span> r;</span><br><span class="line"></span><br><span class="line">r = y ^ ((x ^ y) &amp; -(x &lt; y)); <span class="comment">// min(x, y)</span></span><br><span class="line">r = x ^ ((x ^ y) &amp; -(x &lt; y)); <span class="comment">// max(x, y)</span></span><br></pre></td></tr></table></figure>
+
+<p>在一些毒瘤的 CPU 上，分治预测失败代价十分高并且没有条件移动指令存在，上面的表达式可能比下一段代码更快</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = (x &lt; y) ? x : y;</span><br></pre></td></tr></table></figure>
+
+<p>即使它涉及两个以上的指令（通常情况下，上面是最好的）</p>
+<p>它的作用是因为如果 $x &lt; y$，则 $-(x &lt; y)$ 将全部为1，因此 <code>r = y ^ x ^ y = x</code> 否则，如果 $x \geq y$，则 $-(x &lt; y)$ 将全为零，因此 <code>r = y ^ ((x ^ y) &amp; 0) = y</code></p>
+<p>在某些 CPU 上，计算 $x &lt; y$ 的结果也需要分支指令，因此 <em>可能没有任何优势</em></p>
+<p>如果您知道 <code>INT_MIN &lt;= x - y &lt;= INT_MAX</code>，那么您可以使用以下更快的内容，因为$x - y$ 只需要评估一次。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r = y + ((x - y) &amp; ((x - y) &gt;&gt; (<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * CHAR_BIT - <span class="number">1</span>))); <span class="comment">// min(x, y)</span></span><br><span class="line">r = x - ((x - y) &amp; ((x - y) &gt;&gt; (<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * CHAR_BIT - <span class="number">1</span>))); <span class="comment">// max(x, y)</span></span><br></pre></td></tr></table></figure>
+
+<p>请注意，<code>1989 ANSI C</code> 规范未指定有符号右移的结果，因此这些 <strong>不可移植</strong></p>
+<h1 id="判断是是否是-2-的整数次幂"><a href="#判断是是否是-2-的整数次幂" class="headerlink" title="判断是是否是 2 的整数次幂"></a>判断是是否是 2 的整数次幂</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">bool</span> f;</span><br><span class="line"></span><br><span class="line">f = (v &amp; (v - <span class="number">1</span>)) == <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这样写可能会有锅</p>
+<p>如果 $v$ 为 $0$ ,那么会得到错误的结果</p>
+<p>可以采取这样的方式:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = v &amp;&amp; !(v &amp; (v - <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<h1 id="二进制中-1-出现的奇偶性"><a href="#二进制中-1-出现的奇偶性" class="headerlink" title="二进制中 1 出现的奇偶性"></a>二进制中 1 出现的奇偶性</h1><p>暴力查询</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">bool</span> parity = <span class="literal">false</span>; <span class="comment">// 结果</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (v) &#123;</span><br><span class="line">    parity = !parity;</span><br><span class="line">    v = v &amp; (v - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以通过查表法来解决(</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 静态表</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">bool</span> ParityTable256[<span class="number">256</span>] = &#123;</span><br><span class="line">#define P2(n) n, n^<span class="number">1</span>, n^<span class="number">1</span>, n</span><br><span class="line">#define P4(n) P2(n), P2(n^<span class="number">1</span>), P2(n^<span class="number">1</span>), P2(n)</span><br><span class="line">#define P6(n) P4(n), P4(n^<span class="number">1</span>), P4(n^<span class="number">1</span>), P4(n)</span><br><span class="line">    P6(<span class="number">0</span>), P6(<span class="number">1</span>), P6(<span class="number">1</span>), P6(<span class="number">0</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v; <span class="comment">// 输入</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> *p = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *) &amp;v;</span><br><span class="line">parity = ParityTable256[p[<span class="number">0</span>] ^ p[<span class="number">1</span>] ^ p[<span class="number">2</span>] ^ p[<span class="number">3</span>]];</span><br></pre></td></tr></table></figure>
+
+<p>可以使用 $64$ 位乘法和模数除法计算 <em>字节</em> 的奇偶校验</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> t;  <span class="comment">// byte value to compute the parity of</span></span><br><span class="line"><span class="keyword">bool</span> parity = (((t * <span class="number">0x0101010101010101</span>ULL) &amp; <span class="number">0x8040201008040201</span>ULL) % <span class="number">0x1FF</span>) &amp; <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="交换两个数字"><a href="#交换两个数字" class="headerlink" title="交换两个数字"></a>交换两个数字</h1><p>首先就是经常用的 <code>xor</code> 交换法, 唯一的优点就是不使用额外空间</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> i, j;</span><br><span class="line">i ^= j ^= i ^= j;</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以使用加减法, 虽然有时候并没有上面的快 (</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> i, j;</span><br><span class="line">&amp;i == &amp;j || (i -= j, j += i, i = j - i);</span><br></pre></td></tr></table></figure>
+
+<h1 id="交换两个数字的单个位"><a href="#交换两个数字的单个位" class="headerlink" title="交换两个数字的单个位"></a>交换两个数字的单个位</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> i, j;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> n;    <span class="comment">// 位数</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> b;    <span class="comment">// 要交换的位</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> r;    <span class="comment">// 位交换结果</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> x = ((b &gt;&gt; i) ^ (b &gt;&gt; j)) &amp; ((<span class="number">1U</span> &lt;&lt; n) - <span class="number">1</span>); <span class="comment">// 临时变量</span></span><br><span class="line">r = b ^ ((x &lt;&lt; i) | (x &lt;&lt; j));</span><br></pre></td></tr></table></figure>
+
+<h1 id="将一个数的二进制翻转"><a href="#将一个数的二进制翻转" class="headerlink" title="将一个数的二进制翻转"></a>将一个数的二进制翻转</h1><h2 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> r = v;</span><br><span class="line"><span class="keyword">int</span> s = <span class="keyword">sizeof</span>(v) * CHAR_BIT - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (v &gt;&gt;= <span class="number">1</span>; v; v &gt;&gt;= <span class="number">1</span>) &#123;</span><br><span class="line">    r &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">    r |= v &amp; <span class="number">1</span>;</span><br><span class="line">    s--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">r &lt;&lt;= s;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查表法"><a href="#查表法" class="headerlink" title="查表法"></a>查表法</h2><p>继续查表 /cy</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> BitReverseTable256[<span class="number">256</span>] = &#123;</span><br><span class="line">#   define R2(n)     n,     n + <span class="number">2</span>*<span class="number">64</span>,     n + <span class="number">1</span>*<span class="number">64</span>,     n + <span class="number">3</span>*<span class="number">64</span></span><br><span class="line">#   define R4(n) R2(n), R2(n + <span class="number">2</span>*<span class="number">16</span>), R2(n + <span class="number">1</span>*<span class="number">16</span>), R2(n + <span class="number">3</span>*<span class="number">16</span>)</span><br><span class="line">#   define R6(n) R4(n), R4(n + <span class="number">2</span>*<span class="number">4</span> ), R4(n + <span class="number">1</span>*<span class="number">4</span> ), R4(n + <span class="number">3</span>*<span class="number">4</span> )</span><br><span class="line">    R6(<span class="number">0</span>), R6(<span class="number">2</span>), R6(<span class="number">1</span>), R6(<span class="number">3</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> c;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法 1</span></span><br><span class="line">c = (BitReverseTable256[v &amp; <span class="number">0xff</span>] &lt;&lt; <span class="number">24</span>) | </span><br><span class="line">    (BitReverseTable256[(v &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xff</span>] &lt;&lt; <span class="number">16</span>) | </span><br><span class="line">    (BitReverseTable256[(v &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xff</span>] &lt;&lt; <span class="number">8</span>) |</span><br><span class="line">    (BitReverseTable256[(v &gt;&gt; <span class="number">24</span>) &amp; <span class="number">0xff</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法 2</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> *p = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *) &amp;v;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> *q = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *) &amp;c;</span><br><span class="line">q[<span class="number">3</span>] = BitReverseTable256[p[<span class="number">0</span>]]; </span><br><span class="line">q[<span class="number">2</span>] = BitReverseTable256[p[<span class="number">1</span>]]; </span><br><span class="line">q[<span class="number">1</span>] = BitReverseTable256[p[<span class="number">2</span>]]; </span><br><span class="line">q[<span class="number">0</span>] = BitReverseTable256[p[<span class="number">3</span>]];</span><br></pre></td></tr></table></figure>
+
+<p>如果你的 CPU 可以轻松加载和存储字节，第一种方法需要大约 $17$ 次操作，第二种方法大约需要 $12$ 次</p>
+<h2 id="使用-64-位乘法和取模来翻转-单字节"><a href="#使用-64-位乘法和取模来翻转-单字节" class="headerlink" title="使用 $64$ 位乘法和取模来翻转 (单字节)"></a>使用 $64$ 位乘法和取模来翻转 (单字节)</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> b;</span><br><span class="line"> </span><br><span class="line">b = (b * <span class="number">0x0202020202</span>ULL &amp; <span class="number">0x010884422010</span>ULL) % <span class="number">1023</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="不使用取模操作"><a href="#不使用取模操作" class="headerlink" title="不使用取模操作"></a>不使用取模操作</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> b;</span><br><span class="line"> </span><br><span class="line">b = ((b * <span class="number">0x80200802</span>ULL) &amp; <span class="number">0x0884422110</span>ULL) * <span class="number">0x0101010101</span>ULL &gt;&gt; <span class="number">32</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个不是十分好理解 /cy</p>
+<p>可以自己手算一下(?</p>
+<p>栗子: 对于字节 (<code>abcdefgh</code>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">                                                                                        abcd efgh (-&gt; hgfe dcba)</span><br><span class="line">*                                                      1000 0000  0010 0000  0000 1000  0000 0010 (0x80200802)</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">                                            0abc defg  h00a bcde  fgh0 0abc  defg h00a  bcde fgh0</span><br><span class="line">&amp;                                           0000 1000  1000 0100  0100 0010  0010 0001  0001 0000 (0x0884422110)</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">                                            0000 d000  h000 0c00  0g00 00b0  00f0 000a  000e 0000</span><br><span class="line">*                                           0000 0001  0000 0001  0000 0001  0000 0001  0000 0001 (0x0101010101)</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">                                            0000 d000  h000 0c00  0g00 00b0  00f0 000a  000e 0000</span><br><span class="line">                                 0000 d000  h000 0c00  0g00 00b0  00f0 000a  000e 0000</span><br><span class="line">                      0000 d000  h000 0c00  0g00 00b0  00f0 000a  000e 0000</span><br><span class="line">           0000 d000  h000 0c00  0g00 00b0  00f0 000a  000e 0000</span><br><span class="line">0000 d000  h000 0c00  0g00 00b0  00f0 000a  000e 0000</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">0000 d000  h000 dc00  hg00 dcb0  hgf0 dcba  hgfe dcba  hgfe 0cba  0gfe 00ba  00fe 000a  000e 0000</span><br><span class="line">&gt;&gt; 32</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">                                            0000 d000  h000 dc00  hg00 dcb0  hgf0 dcba  hgfe dcba  </span><br><span class="line">&amp;                                                                                       1111 1111</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">                                                                                        hgfe dcba</span><br></pre></td></tr></table></figure>
+
+<p>显示可能有锅, 可以看这个截图:</p>
+<p><img src="https://i.loli.net/2018/12/08/5c0b74af68bd6.png" alt="img"></p>
+<p>请注意，最后两个步骤可以组合在某些处理器上，因为 <em>寄存器可以作为字节访问</em></p>
+<p>只是乘以使寄存器存储结果的高 $32$ 位并取低字节。 因此，它可能只需要 $6$ 次操作</p>
+<h2 id="不使用-64-位进行翻转"><a href="#不使用-64-位进行翻转" class="headerlink" title="不使用 $64$ 位进行翻转"></a>不使用 $64$ 位进行翻转</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = ((b * <span class="number">0x0802</span>LU &amp; <span class="number">0x22110</span>LU) | (b * <span class="number">0x8020</span>LU &amp; <span class="number">0x88440</span>LU)) * <span class="number">0x10101</span>LU &gt;&gt; <span class="number">16</span>;</span><br></pre></td></tr></table></figure>
+
+<p>确保将结果赋值或转换为 <code>unsigned char</code> 以删除较高位中的多余位</p>
+<h1 id="计算以二为底的对数"><a href="#计算以二为底的对数" class="headerlink" title="计算以二为底的对数"></a>计算以二为底的对数</h1><h2 id="暴力计算"><a href="#暴力计算" class="headerlink" title="暴力计算"></a>暴力计算</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> r = <span class="number">0</span>; <span class="comment">// lg(v)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (v &gt;&gt;= <span class="number">1</span>) &#123;</span><br><span class="line">    r++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="IEEE"><a href="#IEEE" class="headerlink" title="IEEE"></a>IEEE</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">int</span> r; <span class="comment">// lg(v)</span></span><br><span class="line"><span class="keyword">union</span> &#123; <span class="keyword">unsigned</span> <span class="keyword">int</span> u[<span class="number">2</span>]; <span class="keyword">double</span> d; &#125; t;</span><br><span class="line"></span><br><span class="line">t.u[__FLOAT_WORD_ORDER==LITTLE_ENDIAN] = <span class="number">0x43300000</span>;</span><br><span class="line">t.u[__FLOAT_WORD_ORDER!=LITTLE_ENDIAN] = v;</span><br><span class="line">t.d -= <span class="number">4503599627370496.0</span>;</span><br><span class="line">r = (t.u[__FLOAT_WORD_ORDER==LITTLE_ENDIAN] &gt;&gt; <span class="number">20</span>) - <span class="number">0x3FF</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这种方法只需要 $5$ 次操作，但是许多 CPU 在操作双精度方面都很慢，并且必须适应不同架构</p>
+<h2 id="查表法-1"><a href="#查表法-1" class="headerlink" title="查表法"></a>查表法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> LogTable256[<span class="number">256</span>] = </span><br><span class="line">&#123;</span><br><span class="line">#define LT(n) n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n</span><br><span class="line">    <span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>,</span><br><span class="line">    LT(<span class="number">4</span>), LT(<span class="number">5</span>), LT(<span class="number">5</span>), LT(<span class="number">6</span>), LT(<span class="number">6</span>), LT(<span class="number">6</span>), LT(<span class="number">6</span>),</span><br><span class="line">    LT(<span class="number">7</span>), LT(<span class="number">7</span>), LT(<span class="number">7</span>), LT(<span class="number">7</span>), LT(<span class="number">7</span>), LT(<span class="number">7</span>), LT(<span class="number">7</span>), LT(<span class="number">7</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">unsigned</span> r;     <span class="comment">// lg(v)</span></span><br><span class="line"><span class="keyword">register</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> t, tt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (tt = v &gt;&gt; <span class="number">16</span>) &#123;</span><br><span class="line">    r = (t = tt &gt;&gt; <span class="number">8</span>) ? <span class="number">24</span> + LogTable256[t] : <span class="number">16</span> + LogTable256[tt];</span><br><span class="line">&#125; <span class="keyword">else</span>  &#123;</span><br><span class="line">    r = (t = v &gt;&gt; <span class="number">8</span>) ? <span class="number">8</span> + LogTable256[t] : LogTable256[v];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查找表方法仅需要大约 $7$ 个操作来查找 $32$ 位值的日志。 如果扩展为 $64$ 位，则大约需要9次操作。 可以使用四个表来替换另一个操作，每个表都包含可能的添加</p>
+<p>如果输入比较分散，请考虑使用下面这种方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (tt = v &gt;&gt; <span class="number">24</span>) &#123;</span><br><span class="line">  r = <span class="number">24</span> + LogTable256[tt];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (tt = v &gt;&gt; <span class="number">16</span>) &#123;</span><br><span class="line">  r = <span class="number">16</span> + LogTable256[tt];</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (tt = v &gt;&gt; <span class="number">8</span>) &#123;</span><br><span class="line">  r = <span class="number">8</span> + LogTable256[tt];</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  r = LogTable256[v];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="lg-的复杂度实现"><a href="#lg-的复杂度实现" class="headerlink" title="lg 的复杂度实现"></a>lg 的复杂度实现</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> b[] = &#123;<span class="number">0x2</span>, <span class="number">0xC</span>, <span class="number">0xF0</span>, <span class="number">0xFF00</span>, <span class="number">0xFFFF0000</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> S[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">register</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> r = <span class="number">0</span>; <span class="comment">// lg(v)</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">4</span>; i &gt;= <span class="number">0</span>; i--) &#123; <span class="comment">// 可以循环展开 (</span></span><br><span class="line">    <span class="keyword">if</span> (v &amp; b[i]) &#123;</span><br><span class="line">        v &gt;&gt;= S[i];</span><br><span class="line">        r |= S[i];</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你的 CPU 分支预测失败的代价很高,可以使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;	         <span class="comment">// 32-bit value to find the log2 of </span></span><br><span class="line"><span class="keyword">register</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> r; <span class="comment">// result of log2(v) will go here</span></span><br><span class="line"><span class="keyword">register</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> shift;</span><br><span class="line"></span><br><span class="line">r =     (v &gt; <span class="number">0xFFFF</span>) &lt;&lt; <span class="number">4</span>; v &gt;&gt;= r;</span><br><span class="line">shift = (v &gt; <span class="number">0xFF</span>  ) &lt;&lt; <span class="number">3</span>; v &gt;&gt;= shift; r |= shift;</span><br><span class="line">shift = (v &gt; <span class="number">0xF</span>   ) &lt;&lt; <span class="number">2</span>; v &gt;&gt;= shift; r |= shift;</span><br><span class="line">shift = (v &gt; <span class="number">0x3</span>   ) &lt;&lt; <span class="number">1</span>; v &gt;&gt;= shift; r |= shift;</span><br><span class="line">                                        r |= (v &gt;&gt; <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="向上取到-2-的整数次幂"><a href="#向上取到-2-的整数次幂" class="headerlink" title="向上取到 2 的整数次幂"></a>向上取到 2 的整数次幂</h1><p>找到一个最小的 $2$ 的整数次幂 $t$ , 使得 $t \geq v$</p>
+<h2 id="暴力-1"><a href="#暴力-1" class="headerlink" title="暴力"></a>暴力</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="keyword">const</span> v;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> r;       <span class="comment">// 结果</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (r &lt;= v) r &gt;&gt;= <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度 $O(\log n)$</p>
+<h2 id="二分答案"><a href="#二分答案" class="headerlink" title="二分答案"></a>二分答案</h2><p>可以使用二分答案进行操作</p>
+<p>二分 $t$, 也是 $O(\log n)$ 的</p>
+<h2 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="keyword">const</span> v; </span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> r; <span class="comment">// 结果</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (v &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">float</span> f = (<span class="keyword">float</span>)v;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="keyword">const</span> t = <span class="number">1U</span> &lt;&lt; ((*(<span class="keyword">unsigned</span> <span class="keyword">int</span> *)&amp;f &gt;&gt; <span class="number">23</span>) - <span class="number">0x7f</span>);</span><br><span class="line">    r = t &lt;&lt; (t &lt; v);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    r = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码使用了 $8$ 个操作，但适用于所有 $v \le 2^{31}$</p>
+<p>还有更快的版本, 但是只适用于 $v \le 2^{25}$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f = (<span class="keyword">float</span>)(v - <span class="number">1</span>);  </span><br><span class="line">r = <span class="number">1U</span> &lt;&lt; ((*(<span class="keyword">unsigned</span> <span class="keyword">int</span>*)(&amp;f) &gt;&gt; <span class="number">23</span>) - <span class="number">126</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;</span><br><span class="line"></span><br><span class="line">v--;</span><br><span class="line">v |= v &gt;&gt; <span class="number">1</span>;</span><br><span class="line">v |= v &gt;&gt; <span class="number">2</span>;</span><br><span class="line">v |= v &gt;&gt; <span class="number">4</span>;</span><br><span class="line">v |= v &gt;&gt; <span class="number">8</span>;</span><br><span class="line">v |= v &gt;&gt; <span class="number">16</span>;</span><br><span class="line">v++;</span><br></pre></td></tr></table></figure>
+
+<p>直接枚举 $32$ 位(</p>
+<p>注意到如果 $v$ 是 $0$ 的时候, 最终的 $v$ 就是 $0$ 我们可以在后面加上 <code>v += (v == 0)</code> 来避免 $0$ 的问题 (</p>
+<h1 id="确认一个字节是否有-0"><a href="#确认一个字节是否有-0" class="headerlink" title="确认一个字节是否有 0"></a>确认一个字节是否有 0</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> v;</span><br><span class="line"><span class="keyword">bool</span> hasZeroByte = ~((((v &amp; <span class="number">0x7F7F7F7F</span>) + <span class="number">0x7F7F7F7F</span>) | v) | <span class="number">0x7F7F7F7F</span>);</span><br></pre></td></tr></table></figure>
+
+<p>下面是另外几种方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> hasNoZeroByte = ((v &amp; <span class="number">0xff</span>) &amp;&amp; (v &amp; <span class="number">0xff00</span>) &amp;&amp; (v &amp; <span class="number">0xff0000</span>) &amp;&amp; (v &amp; <span class="number">0xff000000</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> * p = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *) &amp;v;  </span><br><span class="line"><span class="keyword">bool</span> hasNoZeroByte = *p &amp;&amp; *(p + <span class="number">1</span>) &amp;&amp; *(p + <span class="number">2</span>) &amp;&amp; *(p + <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<p>第一种如果将她扩展到 $64$ 位, 只需要将 <code>0x7F7F7F7F</code> 替换为 <code>0x7F7F7F7F7F7F7F7F</code> 即可</p>
+<p>为了进一步改进，可以执行仅需要 $4$ 次操作的快速预测试以确定该字是否可以具有零字节</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> hasZeroByte = ((v + <span class="number">0x7efefeff</span>) ^ ~v) &amp; <span class="number">0x81010100</span>;</span><br><span class="line"><span class="keyword">if</span> (hasZeroByte) &#123;</span><br><span class="line">  hasZeroByte = ~((((v &amp; <span class="number">0x7F7F7F7F</span>) + <span class="number">0x7F7F7F7F</span>) | v) | <span class="number">0x7F7F7F7F</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果高字节为 <code>0x80</code>，则测试也返回true，因此偶尔会出现误报，但上面较慢且更可靠的版本可能会用于候选者，以便在正确输出的情况下全面提高速度</p>
+<p>可以简化为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> haszero(v) (((v) - 0x01010101UL) &amp; ~(v) &amp; 0x80808080UL)</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="确认一个字节是否等于-n"><a href="#确认一个字节是否等于-n" class="headerlink" title="确认一个字节是否等于 n"></a>确认一个字节是否等于 n</h1><p>我们可能想知道任何字节是否具有特定值</p>
+<p>注意到对自身进行异或运算导致零字节而非零，否则我们可以将结果传递给 <code>haszero</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> hasvalue(x,n) (haszero((x) ^ (~0UL / 255 * (n))))</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="确认一个字节是否小于-n"><a href="#确认一个字节是否小于-n" class="headerlink" title="确认一个字节是否小于 n"></a>确认一个字节是否小于 n</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> hasless(x, n) (((x) - ~0UL / 255 * (n)) &amp; ~(x) &amp; ~0UL / 255 * 128)</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="确认一个字节是否大于-n"><a href="#确认一个字节是否大于-n" class="headerlink" title="确认一个字节是否大于 n"></a>确认一个字节是否大于 n</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> hasmore(x,n) (((x) + ~0UL / 255 * (127 - (n)) | (x)) &amp; ~0UL / 255 * 128)</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="确认一个字节是否介于-m-n"><a href="#确认一个字节是否介于-m-n" class="headerlink" title="确认一个字节是否介于 m, n"></a>确认一个字节是否介于 m, n</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> likelyhasbetween(x, m, n) \</span></span><br><span class="line">    ((((x) - ~<span class="number">0U</span>L / <span class="number">255</span> * (n)) &amp; ~(x) &amp; ((x) &amp; ~<span class="number">0U</span>L / <span class="number">255</span> * <span class="number">127</span>) + ~<span class="number">0U</span>L / <span class="number">255</span> * (<span class="number">127</span> - (m))) &amp; ~<span class="number">0U</span>L / <span class="number">255</span> * <span class="number">128</span>)</span><br></pre></td></tr></table></figure>
+
+<p>当 $m &lt; n$ 时，该技术测试字 $x$ 是否包含无符号字节值，使得 $m &lt;x&lt;n$ 。 当 $n$ 和 $m$ 为常数时，它使用 $7$ 次算术/逻辑运算</p>
+<p>注意：等于 $n$ 的字节可以通过可能误报，因此如果需要某个结果，应该按字符检查</p>
+<p>这种方法适用于快速预处理。一个变量需要多一次操作（常量m和n总共8个），但提供的确切答案是</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> likelyhasbetween(x, m, n) \</span></span><br><span class="line">    ((((x) - ~<span class="number">0U</span>L / <span class="number">255</span> * (n)) &amp; ~(x) &amp; ((x) &amp; ~<span class="number">0U</span>L / <span class="number">255</span> * <span class="number">127</span>) + ~<span class="number">0U</span>L / <span class="number">255</span> * (<span class="number">127</span> - (m))) &amp; ~<span class="number">0U</span>L / <span class="number">255</span> * <span class="number">128</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="计算余数"><a href="#计算余数" class="headerlink" title="计算余数"></a>计算余数</h1><h2 id="计算除以-2-s-的余数"><a href="#计算除以-2-s-的余数" class="headerlink" title="计算除以 $2^s$ 的余数"></a>计算除以 $2^s$ 的余数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> s;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> d = <span class="number">1U</span> &lt;&lt; s;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> m;</span><br><span class="line">m = n &amp; (d - <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>大多数 OIer 很早就学会了这个技巧，但为了完整起见，我们还是放在这里了(</p>
+<h2 id="计算除以-2-s-1-的余数"><a href="#计算除以-2-s-1-的余数" class="headerlink" title="计算除以 $2^s-1$ 的余数"></a>计算除以 $2^s-1$ 的余数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> s;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> d = (<span class="number">1</span> &lt;&lt; s) - <span class="number">1</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> m;                      <span class="comment">// n % d 的答案</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (m = n; n &gt; d; n = m) &#123;</span><br><span class="line">    <span class="keyword">for</span> (m = <span class="number">0</span>; n; n &gt;&gt;= s) &#123;</span><br><span class="line">        m += n &amp; d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">m = m == d ? <span class="number">0</span> : m;</span><br></pre></td></tr></table></figure>
+
+<p>这种方法最多花费 $5 + (4 + 5 * \text{ceil}(\lg n / s)) * \text{ceil}(\lg(\lg n / s))$ 的时间, 所以说她的时间复杂度为 $O(\lg n\times \lg \lg n)$</p>
+<h2 id="并行计算"><a href="#并行计算" class="headerlink" title="并行计算"></a>并行计算</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// The following is for a word size of 32 bits!</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> M[] = </span><br><span class="line">&#123;</span><br><span class="line">  <span class="number">0x00000000</span>, <span class="number">0x55555555</span>, <span class="number">0x33333333</span>, <span class="number">0xc71c71c7</span>,  </span><br><span class="line">  <span class="number">0x0f0f0f0f</span>, <span class="number">0xc1f07c1f</span>, <span class="number">0x3f03f03f</span>, <span class="number">0xf01fc07f</span>, </span><br><span class="line">  <span class="number">0x00ff00ff</span>, <span class="number">0x07fc01ff</span>, <span class="number">0x3ff003ff</span>, <span class="number">0xffc007ff</span>,</span><br><span class="line">  <span class="number">0xff000fff</span>, <span class="number">0xfc001fff</span>, <span class="number">0xf0003fff</span>, <span class="number">0xc0007fff</span>,</span><br><span class="line">  <span class="number">0x0000ffff</span>, <span class="number">0x0001ffff</span>, <span class="number">0x0003ffff</span>, <span class="number">0x0007ffff</span>, </span><br><span class="line">  <span class="number">0x000fffff</span>, <span class="number">0x001fffff</span>, <span class="number">0x003fffff</span>, <span class="number">0x007fffff</span>,</span><br><span class="line">  <span class="number">0x00ffffff</span>, <span class="number">0x01ffffff</span>, <span class="number">0x03ffffff</span>, <span class="number">0x07ffffff</span>,</span><br><span class="line">  <span class="number">0x0fffffff</span>, <span class="number">0x1fffffff</span>, <span class="number">0x3fffffff</span>, <span class="number">0x7fffffff</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> Q[][<span class="number">6</span>] = </span><br><span class="line">&#123;</span><br><span class="line">  &#123; <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>&#125;, &#123;<span class="number">16</span>,  <span class="number">8</span>,  <span class="number">4</span>,  <span class="number">2</span>,  <span class="number">1</span>,  <span class="number">1</span>&#125;, &#123;<span class="number">16</span>,  <span class="number">8</span>,  <span class="number">4</span>,  <span class="number">2</span>,  <span class="number">2</span>,  <span class="number">2</span>&#125;,</span><br><span class="line">  &#123;<span class="number">15</span>,  <span class="number">6</span>,  <span class="number">3</span>,  <span class="number">3</span>,  <span class="number">3</span>,  <span class="number">3</span>&#125;, &#123;<span class="number">16</span>,  <span class="number">8</span>,  <span class="number">4</span>,  <span class="number">4</span>,  <span class="number">4</span>,  <span class="number">4</span>&#125;, &#123;<span class="number">15</span>,  <span class="number">5</span>,  <span class="number">5</span>,  <span class="number">5</span>,  <span class="number">5</span>,  <span class="number">5</span>&#125;,</span><br><span class="line">  &#123;<span class="number">12</span>,  <span class="number">6</span>,  <span class="number">6</span>,  <span class="number">6</span> , <span class="number">6</span>,  <span class="number">6</span>&#125;, &#123;<span class="number">14</span>,  <span class="number">7</span>,  <span class="number">7</span>,  <span class="number">7</span>,  <span class="number">7</span>,  <span class="number">7</span>&#125;, &#123;<span class="number">16</span>,  <span class="number">8</span>,  <span class="number">8</span>,  <span class="number">8</span>,  <span class="number">8</span>,  <span class="number">8</span>&#125;,</span><br><span class="line">  &#123; <span class="number">9</span>,  <span class="number">9</span>,  <span class="number">9</span>,  <span class="number">9</span>,  <span class="number">9</span>,  <span class="number">9</span>&#125;, &#123;<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>&#125;, &#123;<span class="number">11</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">11</span>&#125;,</span><br><span class="line">  &#123;<span class="number">12</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">12</span>&#125;, &#123;<span class="number">13</span>, <span class="number">13</span>, <span class="number">13</span>, <span class="number">13</span>, <span class="number">13</span>, <span class="number">13</span>&#125;, &#123;<span class="number">14</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">14</span>, <span class="number">14</span>&#125;,</span><br><span class="line">  &#123;<span class="number">15</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="number">15</span>&#125;, &#123;<span class="number">16</span>, <span class="number">16</span>, <span class="number">16</span>, <span class="number">16</span>, <span class="number">16</span>, <span class="number">16</span>&#125;, &#123;<span class="number">17</span>, <span class="number">17</span>, <span class="number">17</span>, <span class="number">17</span>, <span class="number">17</span>, <span class="number">17</span>&#125;,</span><br><span class="line">  &#123;<span class="number">18</span>, <span class="number">18</span>, <span class="number">18</span>, <span class="number">18</span>, <span class="number">18</span>, <span class="number">18</span>&#125;, &#123;<span class="number">19</span>, <span class="number">19</span>, <span class="number">19</span>, <span class="number">19</span>, <span class="number">19</span>, <span class="number">19</span>&#125;, &#123;<span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>, <span class="number">20</span>&#125;,</span><br><span class="line">  &#123;<span class="number">21</span>, <span class="number">21</span>, <span class="number">21</span>, <span class="number">21</span>, <span class="number">21</span>, <span class="number">21</span>&#125;, &#123;<span class="number">22</span>, <span class="number">22</span>, <span class="number">22</span>, <span class="number">22</span>, <span class="number">22</span>, <span class="number">22</span>&#125;, &#123;<span class="number">23</span>, <span class="number">23</span>, <span class="number">23</span>, <span class="number">23</span>, <span class="number">23</span>, <span class="number">23</span>&#125;,</span><br><span class="line">  &#123;<span class="number">24</span>, <span class="number">24</span>, <span class="number">24</span>, <span class="number">24</span>, <span class="number">24</span>, <span class="number">24</span>&#125;, &#123;<span class="number">25</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">25</span>&#125;, &#123;<span class="number">26</span>, <span class="number">26</span>, <span class="number">26</span>, <span class="number">26</span>, <span class="number">26</span>, <span class="number">26</span>&#125;,</span><br><span class="line">  &#123;<span class="number">27</span>, <span class="number">27</span>, <span class="number">27</span>, <span class="number">27</span>, <span class="number">27</span>, <span class="number">27</span>&#125;, &#123;<span class="number">28</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">28</span>&#125;, &#123;<span class="number">29</span>, <span class="number">29</span>, <span class="number">29</span>, <span class="number">29</span>, <span class="number">29</span>, <span class="number">29</span>&#125;,</span><br><span class="line">  &#123;<span class="number">30</span>, <span class="number">30</span>, <span class="number">30</span>, <span class="number">30</span>, <span class="number">30</span>, <span class="number">30</span>&#125;, &#123;<span class="number">31</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">31</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> R[][<span class="number">6</span>] = </span><br><span class="line">&#123;</span><br><span class="line">  &#123;<span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>, <span class="number">0x00000000</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x0000ffff</span>, <span class="number">0x000000ff</span>, <span class="number">0x0000000f</span>, <span class="number">0x00000003</span>, <span class="number">0x00000001</span>, <span class="number">0x00000001</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x0000ffff</span>, <span class="number">0x000000ff</span>, <span class="number">0x0000000f</span>, <span class="number">0x00000003</span>, <span class="number">0x00000003</span>, <span class="number">0x00000003</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x00007fff</span>, <span class="number">0x0000003f</span>, <span class="number">0x00000007</span>, <span class="number">0x00000007</span>, <span class="number">0x00000007</span>, <span class="number">0x00000007</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x0000ffff</span>, <span class="number">0x000000ff</span>, <span class="number">0x0000000f</span>, <span class="number">0x0000000f</span>, <span class="number">0x0000000f</span>, <span class="number">0x0000000f</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x00007fff</span>, <span class="number">0x0000001f</span>, <span class="number">0x0000001f</span>, <span class="number">0x0000001f</span>, <span class="number">0x0000001f</span>, <span class="number">0x0000001f</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x00000fff</span>, <span class="number">0x0000003f</span>, <span class="number">0x0000003f</span>, <span class="number">0x0000003f</span>, <span class="number">0x0000003f</span>, <span class="number">0x0000003f</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x00003fff</span>, <span class="number">0x0000007f</span>, <span class="number">0x0000007f</span>, <span class="number">0x0000007f</span>, <span class="number">0x0000007f</span>, <span class="number">0x0000007f</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x0000ffff</span>, <span class="number">0x000000ff</span>, <span class="number">0x000000ff</span>, <span class="number">0x000000ff</span>, <span class="number">0x000000ff</span>, <span class="number">0x000000ff</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x000001ff</span>, <span class="number">0x000001ff</span>, <span class="number">0x000001ff</span>, <span class="number">0x000001ff</span>, <span class="number">0x000001ff</span>, <span class="number">0x000001ff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x000003ff</span>, <span class="number">0x000003ff</span>, <span class="number">0x000003ff</span>, <span class="number">0x000003ff</span>, <span class="number">0x000003ff</span>, <span class="number">0x000003ff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x000007ff</span>, <span class="number">0x000007ff</span>, <span class="number">0x000007ff</span>, <span class="number">0x000007ff</span>, <span class="number">0x000007ff</span>, <span class="number">0x000007ff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x00000fff</span>, <span class="number">0x00000fff</span>, <span class="number">0x00000fff</span>, <span class="number">0x00000fff</span>, <span class="number">0x00000fff</span>, <span class="number">0x00000fff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x00001fff</span>, <span class="number">0x00001fff</span>, <span class="number">0x00001fff</span>, <span class="number">0x00001fff</span>, <span class="number">0x00001fff</span>, <span class="number">0x00001fff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x00003fff</span>, <span class="number">0x00003fff</span>, <span class="number">0x00003fff</span>, <span class="number">0x00003fff</span>, <span class="number">0x00003fff</span>, <span class="number">0x00003fff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x00007fff</span>, <span class="number">0x00007fff</span>, <span class="number">0x00007fff</span>, <span class="number">0x00007fff</span>, <span class="number">0x00007fff</span>, <span class="number">0x00007fff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x0000ffff</span>, <span class="number">0x0000ffff</span>, <span class="number">0x0000ffff</span>, <span class="number">0x0000ffff</span>, <span class="number">0x0000ffff</span>, <span class="number">0x0000ffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x0001ffff</span>, <span class="number">0x0001ffff</span>, <span class="number">0x0001ffff</span>, <span class="number">0x0001ffff</span>, <span class="number">0x0001ffff</span>, <span class="number">0x0001ffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x0003ffff</span>, <span class="number">0x0003ffff</span>, <span class="number">0x0003ffff</span>, <span class="number">0x0003ffff</span>, <span class="number">0x0003ffff</span>, <span class="number">0x0003ffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x0007ffff</span>, <span class="number">0x0007ffff</span>, <span class="number">0x0007ffff</span>, <span class="number">0x0007ffff</span>, <span class="number">0x0007ffff</span>, <span class="number">0x0007ffff</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x000fffff</span>, <span class="number">0x000fffff</span>, <span class="number">0x000fffff</span>, <span class="number">0x000fffff</span>, <span class="number">0x000fffff</span>, <span class="number">0x000fffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x001fffff</span>, <span class="number">0x001fffff</span>, <span class="number">0x001fffff</span>, <span class="number">0x001fffff</span>, <span class="number">0x001fffff</span>, <span class="number">0x001fffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x003fffff</span>, <span class="number">0x003fffff</span>, <span class="number">0x003fffff</span>, <span class="number">0x003fffff</span>, <span class="number">0x003fffff</span>, <span class="number">0x003fffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x007fffff</span>, <span class="number">0x007fffff</span>, <span class="number">0x007fffff</span>, <span class="number">0x007fffff</span>, <span class="number">0x007fffff</span>, <span class="number">0x007fffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x00ffffff</span>, <span class="number">0x00ffffff</span>, <span class="number">0x00ffffff</span>, <span class="number">0x00ffffff</span>, <span class="number">0x00ffffff</span>, <span class="number">0x00ffffff</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x01ffffff</span>, <span class="number">0x01ffffff</span>, <span class="number">0x01ffffff</span>, <span class="number">0x01ffffff</span>, <span class="number">0x01ffffff</span>, <span class="number">0x01ffffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x03ffffff</span>, <span class="number">0x03ffffff</span>, <span class="number">0x03ffffff</span>, <span class="number">0x03ffffff</span>, <span class="number">0x03ffffff</span>, <span class="number">0x03ffffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x07ffffff</span>, <span class="number">0x07ffffff</span>, <span class="number">0x07ffffff</span>, <span class="number">0x07ffffff</span>, <span class="number">0x07ffffff</span>, <span class="number">0x07ffffff</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x0fffffff</span>, <span class="number">0x0fffffff</span>, <span class="number">0x0fffffff</span>, <span class="number">0x0fffffff</span>, <span class="number">0x0fffffff</span>, <span class="number">0x0fffffff</span>&#125;,</span><br><span class="line">  &#123;<span class="number">0x1fffffff</span>, <span class="number">0x1fffffff</span>, <span class="number">0x1fffffff</span>, <span class="number">0x1fffffff</span>, <span class="number">0x1fffffff</span>, <span class="number">0x1fffffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x3fffffff</span>, <span class="number">0x3fffffff</span>, <span class="number">0x3fffffff</span>, <span class="number">0x3fffffff</span>, <span class="number">0x3fffffff</span>, <span class="number">0x3fffffff</span>&#125;, </span><br><span class="line">  &#123;<span class="number">0x7fffffff</span>, <span class="number">0x7fffffff</span>, <span class="number">0x7fffffff</span>, <span class="number">0x7fffffff</span>, <span class="number">0x7fffffff</span>, <span class="number">0x7fffffff</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> n;       <span class="comment">// numerator</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> s; <span class="comment">// s &gt; 0</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> d = (<span class="number">1</span> &lt;&lt; s) - <span class="number">1</span>; <span class="comment">// so d is either 1, 3, 7, 15, 31, ...).</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> m;       <span class="comment">// n % d goes here.</span></span><br><span class="line"></span><br><span class="line">m = (n &amp; M[s]) + ((n &gt;&gt; s) &amp; M[s]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> * q = &amp;Q[s][<span class="number">0</span>], * r = &amp;R[s][<span class="number">0</span>]; m &gt; d; q++, r++)</span><br><span class="line">&#123;</span><br><span class="line">  m = (m &gt;&gt; *q) + (m &amp; *r);</span><br><span class="line">&#125;</span><br><span class="line">m = m == d ? <span class="number">0</span> : m; <span class="comment">// OR, less portably: m = m &amp; -((signed)(m - d) &gt;&gt; s);</span></span><br></pre></td></tr></table></figure>
+
+<p>打表好啊(</p>
+<p>这种求模数除以小于2的幂的整数的方法最多花费 $O(\lg \lg n)$ 时间</p>
+<p>如果在编译时知道分母，表可能会被删除</p>
+<p>只需提取几个相关条目并展开循环。它可以很容易地扩展到更多位</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Shq 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Shq 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/位运算/" rel="tag"># 位运算</a>
+          
+            <a href="/tags/OI/" rel="tag"># OI</a>
+          
+            <a href="/tags/指令集/" rel="tag"># 指令集</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/zz/" rel="next" title="Shq's zz 错误汇总">
+                <i class="fa fa-chevron-left"></i> Shq's zz 错误汇总
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/Hello-World/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTIzMi8xNzc4MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Shq">
+            
+              <p class="site-author-name" itemprop="name">Shq</p>
+              <p class="site-description motion-element" itemprop="description">我不知道能否会成功，但我仍想试一试，哪怕只有一线希望</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Blog-Shq" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.luogu.org/space/show?uid=52556" target="_blank" title="洛谷"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/shq666" target="_blank" title="知乎"><i class="fa fa-fw fa-comment-o"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://ly.men.ci" target="_blank" title="LYOI"><i class="fa fa-fw fa-star"></i>LYOI</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://t.me/qwq_shq" target="_blank" title="telegram"><i class="fa fa-fw fa-telegram"></i>telegram</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#获取一个数的符号"><span class="nav-number">1.</span> <span class="nav-text">获取一个数的符号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检测两个整数是否有相反的符号"><span class="nav-number">2.</span> <span class="nav-text">检测两个整数是否有相反的符号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算数字的绝对值"><span class="nav-number">3.</span> <span class="nav-text">计算数字的绝对值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算两个整数的最小值或最大值"><span class="nav-number">4.</span> <span class="nav-text">计算两个整数的最小值或最大值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断是是否是-2-的整数次幂"><span class="nav-number">5.</span> <span class="nav-text">判断是是否是 2 的整数次幂</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二进制中-1-出现的奇偶性"><span class="nav-number">6.</span> <span class="nav-text">二进制中 1 出现的奇偶性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交换两个数字"><span class="nav-number">7.</span> <span class="nav-text">交换两个数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交换两个数字的单个位"><span class="nav-number">8.</span> <span class="nav-text">交换两个数字的单个位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将一个数的二进制翻转"><span class="nav-number">9.</span> <span class="nav-text">将一个数的二进制翻转</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力"><span class="nav-number">9.1.</span> <span class="nav-text">暴力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查表法"><span class="nav-number">9.2.</span> <span class="nav-text">查表法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-64-位乘法和取模来翻转-单字节"><span class="nav-number">9.3.</span> <span class="nav-text">使用 $64$ 位乘法和取模来翻转 (单字节)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不使用取模操作"><span class="nav-number">9.4.</span> <span class="nav-text">不使用取模操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不使用-64-位进行翻转"><span class="nav-number">9.5.</span> <span class="nav-text">不使用 $64$ 位进行翻转</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算以二为底的对数"><span class="nav-number">10.</span> <span class="nav-text">计算以二为底的对数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力计算"><span class="nav-number">10.1.</span> <span class="nav-text">暴力计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IEEE"><span class="nav-number">10.2.</span> <span class="nav-text">IEEE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查表法-1"><span class="nav-number">10.3.</span> <span class="nav-text">查表法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lg-的复杂度实现"><span class="nav-number">10.4.</span> <span class="nav-text">lg 的复杂度实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向上取到-2-的整数次幂"><span class="nav-number">11.</span> <span class="nav-text">向上取到 2 的整数次幂</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力-1"><span class="nav-number">11.1.</span> <span class="nav-text">暴力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分答案"><span class="nav-number">11.2.</span> <span class="nav-text">二分答案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点数"><span class="nav-number">11.3.</span> <span class="nav-text">浮点数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举"><span class="nav-number">11.4.</span> <span class="nav-text">枚举</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#确认一个字节是否有-0"><span class="nav-number">12.</span> <span class="nav-text">确认一个字节是否有 0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#确认一个字节是否等于-n"><span class="nav-number">13.</span> <span class="nav-text">确认一个字节是否等于 n</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#确认一个字节是否小于-n"><span class="nav-number">14.</span> <span class="nav-text">确认一个字节是否小于 n</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#确认一个字节是否大于-n"><span class="nav-number">15.</span> <span class="nav-text">确认一个字节是否大于 n</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#确认一个字节是否介于-m-n"><span class="nav-number">16.</span> <span class="nav-text">确认一个字节是否介于 m, n</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算余数"><span class="nav-number">17.</span> <span class="nav-text">计算余数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#计算除以-2-s-的余数"><span class="nav-number">17.1.</span> <span class="nav-text">计算除以 $2^s$ 的余数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算除以-2-s-1-的余数"><span class="nav-number">17.2.</span> <span class="nav-text">计算除以 $2^s-1$ 的余数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并行计算"><span class="nav-number">17.3.</span> <span class="nav-text">并行计算</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shq</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">不忘初心 继续前行 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: 'articles/Binary-in-OI/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.5.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.5.0"></script>
+
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+</body>
+</html>
