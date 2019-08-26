@@ -116,7 +116,7 @@
 <meta property="og:description" content="这里就是 Shq 在敲代码的时候犯的一些 zz 错误">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/12/01/5c01cde176b53.png">
-<meta property="og:updated_time" content="2019-07-29T11:04:57.854Z">
+<meta property="og:updated_time" content="2019-08-26T00:40:47.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shq&#39;s zz 错误汇总">
 <meta name="twitter:description" content="这里就是 Shq 在敲代码的时候犯的一些 zz 错误">
@@ -247,7 +247,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">44</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">47</span></a>
   </li>
         
         
@@ -263,7 +263,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">16</span></a>
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">17</span></a>
   </li>
         
         
@@ -402,7 +402,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="更新于：2019-07-29 19:04:57" itemprop="dateModified" datetime="2019-07-29T19:04:57+08:00">2019-07-29</time>
+                <time title="更新于：2019-08-26 08:40:47" itemprop="dateModified" datetime="2019-08-26T08:40:47+08:00">2019-08-26</time>
               
             
           </span>
@@ -514,7 +514,9 @@
 <h1 id="错误使用-unordered-map"><a href="#错误使用-unordered-map" class="headerlink" title="错误使用 unordered_map"></a>错误使用 unordered_map</h1>
 <p>下方代码第十行中的 <code>hash[t]</code> 应改为 <code>hash.count(t)</code></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比赛过世</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;ll, ll&gt; hash;</span><br><span class="line"><span class="function">ll <span class="title">BSGS</span><span class="params">(ll a, ll b, ll mod)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a % mod == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> (b % mod == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    a %= mod, b %= mod;</span><br><span class="line">    hash.clear();</span><br><span class="line">    ll q = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(mod));</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">0</span>, t = b; i &lt;= q; i++, t = (t * a) % mod) hash[t] = i;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>, f = <span class="built_in">pow</span>(a, q, mod), t = f; i &lt;= q; i++, t = (t * f) % mod)</span><br><span class="line">        <span class="keyword">if</span> (hash[t]) <span class="keyword">return</span> i * q - hash[t];</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* C++11 */</span></span><br></pre></td></tr></table></figure>
-
+<h1 id="最短路没有注意范围"><a href="#最短路没有注意范围" class="headerlink" title="最短路没有注意范围"></a>最短路没有注意范围</h1>
+<p>同余最短路题目中 <code>dist</code> 数组初始化时过小</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x; i++) &#123;</span><br><span class="line">        node[i].dist = <span class="number">0x3f3f3f</span>;</span><br><span class="line">        node[i].used = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -665,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -783,7 +785,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">44</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -855,7 +863,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">没加 mutable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交错语言"><span class="nav-number">2.</span> <span class="nav-text">交错语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与"><span class="nav-number">3.</span> <span class="nav-text">== 与 =</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#忘记取模"><span class="nav-number">4.</span> <span class="nav-text">忘记取模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#忘记调用初始化"><span class="nav-number">5.</span> <span class="nav-text">忘记调用初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化不完全"><span class="nav-number">6.</span> <span class="nav-text">初始化不完全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组开小"><span class="nav-number">7.</span> <span class="nav-text">数组开小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交代码没删调试"><span class="nav-number">8.</span> <span class="nav-text">提交代码没删调试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#倒序循环与-i"><span class="nav-number">9.</span> <span class="nav-text">倒序循环与 i++</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误使用-unordered-map"><span class="nav-number">10.</span> <span class="nav-text">错误使用 unordered_map</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">没加 mutable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交错语言"><span class="nav-number">2.</span> <span class="nav-text">交错语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与"><span class="nav-number">3.</span> <span class="nav-text">== 与 =</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#忘记取模"><span class="nav-number">4.</span> <span class="nav-text">忘记取模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#忘记调用初始化"><span class="nav-number">5.</span> <span class="nav-text">忘记调用初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化不完全"><span class="nav-number">6.</span> <span class="nav-text">初始化不完全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组开小"><span class="nav-number">7.</span> <span class="nav-text">数组开小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交代码没删调试"><span class="nav-number">8.</span> <span class="nav-text">提交代码没删调试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#倒序循环与-i"><span class="nav-number">9.</span> <span class="nav-text">倒序循环与 i++</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误使用-unordered-map"><span class="nav-number">10.</span> <span class="nav-text">错误使用 unordered_map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最短路没有注意范围"><span class="nav-number">11.</span> <span class="nav-text">最短路没有注意范围</span></a></li></ol></div>
             
 
           </div>
