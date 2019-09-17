@@ -107,16 +107,22 @@
 
 
 
-  <meta name="description" content="我不知道能否会成功，但我仍想试一试，哪怕只有一线希望">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shq&#39;s Blog">
-<meta property="og:url" content="https://blog.ishq.site/tags/欧拉函数/index.html">
+  <meta name="description" content="Foreword动态规划 动态规划（英语：Dynamic programming*，简称 *DP ）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法。–Wikipedia  通常 需要满足的条件:">
+<meta name="keywords" content="动态规划,DP,Floyd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「动态规划」动态规划基础笔记">
+<meta property="og:url" content="https://blog.ishq.site/articles/DynamicProgrammingBasicModels/index.html">
 <meta property="og:site_name" content="Shq&#39;s Blog">
-<meta property="og:description" content="我不知道能否会成功，但我仍想试一试，哪怕只有一线希望">
+<meta property="og:description" content="Foreword动态规划 动态规划（英语：Dynamic programming*，简称 *DP ）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法。–Wikipedia  通常 需要满足的条件:">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/09/17/iYjP5GwAcaKdUve.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/17/aUQWVnbB9sm6Riv.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/17/ywNAqitMGRzEsJI.png">
+<meta property="og:updated_time" content="2019-09-17T09:23:26.563Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shq&#39;s Blog">
-<meta name="twitter:description" content="我不知道能否会成功，但我仍想试一试，哪怕只有一线希望">
+<meta name="twitter:title" content="「动态规划」动态规划基础笔记">
+<meta name="twitter:description" content="Foreword动态规划 动态规划（英语：Dynamic programming*，简称 *DP ）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法。–Wikipedia  通常 需要满足的条件:">
+<meta name="twitter:image" content="https://i.loli.net/2019/09/17/iYjP5GwAcaKdUve.png">
 
 
 
@@ -125,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="https://blog.ishq.site/tags/欧拉函数/">
+  <link rel="canonical" href="https://blog.ishq.site/articles/DynamicProgrammingBasicModels/">
 
 
 
@@ -135,7 +141,7 @@
   };
 </script>
 
-  <title>标签: 欧拉函数 | Shq's Blog</title>
+  <title>「动态规划」动态规划基础笔记 | Shq's Blog</title>
   
 
 
@@ -184,7 +190,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -241,7 +247,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">58</span></a>
   </li>
@@ -314,91 +320,276 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>欧拉函数<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/DynamicProgrammingBasicModels/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shq">
+      <meta itemprop="description" content="我不知道能否会成功，但我仍想试一试，哪怕只有一线希望">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shq's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/articles/EazyMath/" itemprop="url">
-              
-                <span itemprop="name">「数论」数论基础笔记</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">「动态规划」动态规划基础笔记
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-29T19:13:17+08:00" content="2019-07-29">
-          07-29
-        </time>
-      </div>
+        <div class="post-meta">
+            
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2019-09-17 16:03:15 / 更新于：17:23:26" itemprop="dateCreated datePublished" datetime="2019-09-17T16:03:15+08:00">2019-09-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">属于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Foreword"><a href="#Foreword" class="headerlink" title="Foreword"></a>Foreword</h1><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><blockquote>
+<p><strong>动态规划</strong>（英语：<em>Dynamic programming*，简称 *DP</em> ）是一种在数学、管理科学、计算机科学、经济学和生物信息学中使用的，通过把原问题分解为相对简单的子问题的方式求解复杂问题的方法。<br>–Wikipedia</p>
+</blockquote>
+<p><em>通常</em> 需要满足的条件:</p>
+<a id="more"></a>
+
+<ul>
+<li><strong>最优子结构</strong> 性质。如果问题的最优解所包含的子问题的解也是最优的，我们就称该问题具有最优子结构性质（即满足最优化原理）</li>
+<li><strong>无后效性</strong>。即子问题的解一旦确定，就不再改变，不受在这之后、包含它的更大的问题的求解决策影响</li>
+</ul>
+<p>OI 中的动态规划问题主要分为两类</p>
+<ul>
+<li><strong>规划</strong> 问题：往往是求解⼀个具体的问题，比如给出⼀个 <strong>⽅案</strong></li>
+<li><strong>递推</strong> 问题：往往是求解⼀个 <strong>数值</strong>，比如统计⼀种 <strong>计数</strong></li>
+</ul>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>注: 下面代码查看不了的可以去下载整合版</p>
+<blockquote>
+<p>链接: <a href="https://pan.baidu.com/s/16TI8OooPgZG09xRSHlLtRg" target="_blank" rel="noopener">https://pan.baidu.com/s/16TI8OooPgZG09xRSHlLtRg</a> 提取码: 9efi</p>
+</blockquote>
+<h2 id="数字三角形"><a href="#数字三角形" class="headerlink" title="数字三角形"></a>数字三角形</h2><p>一个已经被用烂的题目</p>
+<blockquote>
+<p>有⼀个由 <em>非负整数</em> 组成的三角形，第⼀⾏只有⼀个数，除了最下<br>面⼀⾏之外，每个数的左下⽅和右下⽅各有⼀个数。</p>
+<p>从第⼀⾏的数开始，每次可以往左下或者往右下⾛⼀格，直到⾛<br>到最下⼀⾏，把沿途经过的数字全部加起来。</p>
+<p>如何⾛才能使这个和尽量⼤？</p>
+</blockquote>
+<h3 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h3><p>直接爆搜</p>
+<p><img src="https://i.loli.net/2019/09/17/iYjP5GwAcaKdUve.png" alt="Algorithm 1"></p>
+<h3 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h3><p>考虑DP</p>
+<p>令 $f_{i,j}$ 表示第 $i$ 行第 $j$ 列的时候得到的最大值. 注意到本问题中的一个数只能由上面两个数字得到, 同层的并不能影响决策, 于是就可以得到</p>
+<p>$$dp_{i, j} = \max(dp_{i - 1, j - 1}, dp_{i - 1, j}) + V_{i, j}$$</p>
+<p>对此递推下去就能得到每个位置的最大值</p>
+<h2 id="迷宫问题"><a href="#迷宫问题" class="headerlink" title="迷宫问题"></a>迷宫问题</h2><p>给定一个迷宫, 求 $S-T$ 的最短路</p>
+<p>直接上暴力</p>
+<p><img src="https://i.loli.net/2019/09/17/aUQWVnbB9sm6Riv.png" alt="Algorithm 2"></p>
+<p>注意到我们第一次到达点的时候就已经是最小值了, 就可以优化掉</p>
+<h2 id="Floyd"><a href="#Floyd" class="headerlink" title="Floyd"></a>Floyd</h2><p>Floyd 就是求图上多源最短路的算法</p>
+<p>令 $dp_{k,i,j}$ 表示只经过 $1\to k$ 这个集合的点, $i$ 到 $j$ 的最短路, 写出来 $dp$ 式子之后我们就会发现其中的 $k$ 是没有必要的, 就得出了</p>
+<p><img src="https://i.loli.net/2019/09/17/ywNAqitMGRzEsJI.png" alt="Algorithm 3"></p>
+<hr>
+<p>大概会持续更新(?)</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Shq 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Shq 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+          
+            <a href="/tags/DP/" rel="tag"># DP</a>
+          
+            <a href="/tags/Floyd/" rel="tag"># Floyd</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/CF600E/" rel="next" title="「CF600E」Lomsat gelral - 树上启发式合并">
+                <i class="fa fa-chevron-left"></i> 「CF600E」Lomsat gelral - 树上启发式合并
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTIzMi8xNzc4MA=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -419,8 +610,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -646,6 +846,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Foreword"><span class="nav-number">1.</span> <span class="nav-text">Foreword</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划"><span class="nav-number">1.1.</span> <span class="nav-text">动态规划</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数字三角形"><span class="nav-number">2.1.</span> <span class="nav-text">数字三角形</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#暴力"><span class="nav-number">2.1.1.</span> <span class="nav-text">暴力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DP"><span class="nav-number">2.1.2.</span> <span class="nav-text">DP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迷宫问题"><span class="nav-number">2.2.</span> <span class="nav-text">迷宫问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Floyd"><span class="nav-number">2.3.</span> <span class="nav-text">Floyd</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -806,6 +1022,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
@@ -818,6 +1038,20 @@
 
 
 
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: 'articles/DynamicProgrammingBasicModels/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
