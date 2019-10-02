@@ -462,128 +462,69 @@
       
         <p>这里就是 Shq 在敲代码的时候犯的一些 zz 错误</p>
 <a id="more"></a>
-<h1>没加 <code>mutable</code></h1>
-<p>这个是一个简单的 <code>ODT</code> （从 yijan 大爷那里学的</p>
+
+<h1 id="没加-mutable"><a href="#没加-mutable" class="headerlink" title="没加 mutable"></a>没加 <code>mutable</code></h1><p>这个是一个简单的 <code>ODT</code> （从 yijan 大爷那里学的</p>
 <p>（这里只粘出锅的代码了（</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r;</span><br><span class="line">    <span class="comment">// mutable int key;</span></span><br><span class="line">    <span class="keyword">int</span> key; <span class="comment">// wrong</span></span><br><span class="line">    </span><br><span class="line">    Node(<span class="keyword">int</span> l, <span class="keyword">int</span> r = <span class="number">-1</span>, <span class="keyword">int</span> key = <span class="number">0</span>) : l(l), r(r), key(key) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Node &amp; x) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> x.l &gt; l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span> <span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">set</span>&lt;Node&gt;::iterator R = split(r + <span class="number">1</span>), L = split(l);</span><br><span class="line">    <span class="keyword">for</span>(; L != R; ++ L) L-&gt;key ^= <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>然后</p>
 <p><img src="https://i.loli.net/2018/12/01/5c01cde176b53.png" alt="img"></p>
 <p>？？？ 黑人问号</p>
-<p>发现自己没加 <code>mutable</code> 关键字（
-顺便赶紧学习了一波 <code>mutable</code> 的用法 （</p>
-<h1 id="交错语言"><a href="#交错语言" class="headerlink" title="交错语言"></a>交错语言</h1>
-<p>在快乐使用 <code>python</code> 爆掉几个高精题之后没有切换语言，递交 <code>C++</code> 代码导致 <code>CE</code></p>
+<p>发现自己没加 <code>mutable</code> 关键字（<br>顺便赶紧学习了一波 <code>mutable</code> 的用法 （</p>
+<h1 id="交错语言"><a href="#交错语言" class="headerlink" title="交错语言"></a>交错语言</h1><p>在快乐使用 <code>python</code> 爆掉几个高精题之后没有切换语言，递交 <code>C++</code> 代码导致 <code>CE</code></p>
 <p>在比赛即将结束时容易自闭</p>
-<h1 id="与"><a href="#与" class="headerlink" title="== 与 ="></a>== 与 =</h1>
-<ol>
+<h1 id="与"><a href="#与" class="headerlink" title="== 与 ="></a>== 与 =</h1><ol>
 <li>并查集初始化</li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= len; i++) siz[fa[i] == i] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
 <ol start="2">
 <li><code>if</code> 语句判读相等</li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x = <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<h1 id="忘记取模"><a href="#忘记取模" class="headerlink" title="忘记取模"></a>忘记取模</h1>
-<ol>
+
+<h1 id="忘记取模"><a href="#忘记取模" class="headerlink" title="忘记取模"></a>忘记取模</h1><ol>
 <li>错排没有取模</li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= len; i++) F[i] = (i - <span class="number">1</span>) * (F[i - <span class="number">1</span>] + F[i - <span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>阶乘没有取模</li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= len; i++) fac[i] = fac[i - <span class="number">1</span>] * i;</span><br></pre></td></tr></table></figure>
+
 <p>输出负数自闭..</p>
-<h1 id="忘记调用初始化"><a href="#忘记调用初始化" class="headerlink" title="忘记调用初始化"></a>忘记调用初始化</h1>
-<p>将初始化各种结构的代码放在 <code>init(args)</code> 中，然后忘了调用 <code>init(args);</code></p>
+<h1 id="忘记调用初始化"><a href="#忘记调用初始化" class="headerlink" title="忘记调用初始化"></a>忘记调用初始化</h1><p>将初始化各种结构的代码放在 <code>init(args)</code> 中，然后忘了调用 <code>init(args);</code></p>
 <p>常见于各种 <code>dp</code>，并查集，数论代码中</p>
-<h1 id="初始化不完全"><a href="#初始化不完全" class="headerlink" title="初始化不完全"></a>初始化不完全</h1>
-<ol>
+<h1 id="初始化不完全"><a href="#初始化不完全" class="headerlink" title="初始化不完全"></a>初始化不完全</h1><ol>
 <li>错排没有只初始化了 <code>D[1]</code> ，<code>D[2]</code> 然后算 <code>D[0]</code> 就自闭</li>
 </ol>
-<h1 id="数组开小"><a href="#数组开小" class="headerlink" title="数组开小"></a>数组开小</h1>
-<p>ZR比赛数组开小........当场暴毙</p>
-<h1 id="提交代码没删调试"><a href="#提交代码没删调试" class="headerlink" title="提交代码没删调试"></a>提交代码没删调试</h1>
-<p>调代码的时候在代码中留下了一堆 <code>printf</code> 调试信息.......提交的时候没删或者少删就直接自闭</p>
-<p>比较好的办法就是在交代码之前测一下样例或者使用其他方式调试</p>
-<h1 id="倒序循环与-i"><a href="#倒序循环与-i" class="headerlink" title="倒序循环与 i++"></a>倒序循环与 i++</h1>
-<ol>
+<h1 id="数组开小"><a href="#数组开小" class="headerlink" title="数组开小"></a>数组开小</h1><p>ZR比赛数组开小……..当场暴毙</p>
+<h1 id="提交代码没删调试"><a href="#提交代码没删调试" class="headerlink" title="提交代码没删调试"></a>提交代码没删调试</h1><p>调代码的时候在代码中留下了一堆 <code>printf</code> 调试信息…….提交的时候没删或者少删就直接自闭</p>
+<p>比较好的办法就是在交代码之前测一下样例或者使用其他方式调试    </p>
+<h1 id="倒序循环与-i"><a href="#倒序循环与-i" class="headerlink" title="倒序循环与 i++"></a>倒序循环与 i++</h1><ol>
 <li>乘法逆元</li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">2</span>; i++) inv[i] = ((i + <span class="number">1</span>) * inv[i + <span class="number">1</span>]) % MOD;</span><br></pre></td></tr></table></figure>
-<p>⑧说了，康代码吧.....令人智熄</p>
-<h1 id="错误使用-unordered-map"><a href="#错误使用-unordered-map" class="headerlink" title="错误使用 unordered_map"></a>错误使用 unordered_map</h1>
-<p>下方代码第十行中的 <code>hash[t]</code> 应改为 <code>hash.count(t)</code></p>
+
+<p>⑧说了，康代码吧…..令人智熄</p>
+<h1 id="错误使用-unordered-map"><a href="#错误使用-unordered-map" class="headerlink" title="错误使用 unordered_map"></a>错误使用 unordered_map</h1><p>下方代码第十行中的 <code>hash[t]</code> 应改为 <code>hash.count(t)</code></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比赛过世</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;ll, ll&gt; hash;</span><br><span class="line"><span class="function">ll <span class="title">BSGS</span><span class="params">(ll a, ll b, ll mod)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a % mod == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> (b % mod == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    a %= mod, b %= mod;</span><br><span class="line">    hash.clear();</span><br><span class="line">    ll q = <span class="built_in">ceil</span>(<span class="built_in">sqrt</span>(mod));</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">0</span>, t = b; i &lt;= q; i++, t = (t * a) % mod) hash[t] = i;</span><br><span class="line">    <span class="keyword">for</span> (ll i = <span class="number">1</span>, f = <span class="built_in">pow</span>(a, q, mod), t = f; i &lt;= q; i++, t = (t * f) % mod)</span><br><span class="line">        <span class="keyword">if</span> (hash[t]) <span class="keyword">return</span> i * q - hash[t];</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* C++11 */</span></span><br></pre></td></tr></table></figure>
-<h1 id="最短路没有注意范围"><a href="#最短路没有注意范围" class="headerlink" title="最短路没有注意范围"></a>最短路没有注意范围</h1>
-<p>同余最短路题目中 <code>dist</code> 数组初始化时过小</p>
+
+<h1 id="最短路没有注意范围"><a href="#最短路没有注意范围" class="headerlink" title="最短路没有注意范围"></a>最短路没有注意范围</h1><p>同余最短路题目中 <code>dist</code> 数组初始化时过小</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x; i++) &#123;</span><br><span class="line">        node[i].dist = <span class="number">0x3f3f3f</span>;</span><br><span class="line">        node[i].used = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="高维数组传参没有传范围"><a href="#高维数组传参没有传范围" class="headerlink" title="高维数组传参没有传范围"></a>高维数组传参没有传范围</h1>
-<p>显然下面是错的:</p>
+
+<h1 id="高维数组传参没有传范围"><a href="#高维数组传参没有传范围" class="headerlink" title="高维数组传参没有传范围"></a>高维数组传参没有传范围</h1><p>显然下面是错的:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">times</span> <span class="params">(<span class="keyword">int</span> **t, <span class="keyword">const</span> <span class="keyword">int</span> **y)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>这两个也是错的:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">times</span> <span class="params">(<span class="keyword">int</span> *t[], <span class="keyword">const</span> <span class="keyword">int</span> *y[])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">times</span> <span class="params">(<span class="keyword">int</span> t[][], <span class="keyword">const</span> <span class="keyword">int</span> y[][])</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>这个才是对的:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">times</span> <span class="params">(<span class="keyword">int</span> t[N][N], <span class="keyword">const</span> <span class="keyword">int</span> y[N][N])</span></span>;</span><br></pre></td></tr></table></figure>
-<p>大概是 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 600.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">n</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E2-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E2-MJMATHI-6E" x="0" y="0"/>
-</g>
-</svg></span> 维数组传参要固定后 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.398ex" height="2.343ex" style="vertical-align: -0.505ex;" viewbox="0 -791.3 2323.9 1008.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
-<title id="MathJax-SVG-3-Title">n-1</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E3-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
-<path stroke-width="1" id="E3-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
-<path stroke-width="1" id="E3-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E3-MJMATHI-6E" x="0" y="0"/>
- <use xlink:href="#E3-MJMAIN-2212" x="822" y="0"/>
- <use xlink:href="#E3-MJMAIN-31" x="1823" y="0"/>
-</g>
-</svg></span> 维的大小, 便于寻址</p>
-<h1 id="模数写错"><a href="#模数写错" class="headerlink" title="模数写错"></a>模数写错</h1>
-<p><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="7.382ex" height="2.843ex" style="vertical-align: -0.505ex;" viewbox="0 -1006.6 3178.4 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
-<title id="MathJax-SVG-4-Title">10^9+7</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E4-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E4-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
-<path stroke-width="1" id="E4-MJMAIN-39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z"/>
-<path stroke-width="1" id="E4-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
-<path stroke-width="1" id="E4-MJMAIN-37" d="M55 458Q56 460 72 567L88 674Q88 676 108 676H128V672Q128 662 143 655T195 646T364 644H485V605L417 512Q408 500 387 472T360 435T339 403T319 367T305 330T292 284T284 230T278 162T275 80Q275 66 275 52T274 28V19Q270 2 255 -10T221 -22Q210 -22 200 -19T179 0T168 40Q168 198 265 368Q285 400 349 489L395 552H302Q128 552 119 546Q113 543 108 522T98 479L95 458V455H55V458Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E4-MJMAIN-31"/>
- <use xlink:href="#E4-MJMAIN-30" x="500" y="0"/>
- <use transform="scale(0.707)" xlink:href="#E4-MJMAIN-39" x="1415" y="557"/>
- <use xlink:href="#E4-MJMAIN-2B" x="1677" y="0"/>
- <use xlink:href="#E4-MJMAIN-37" x="2677" y="0"/>
-</g>
-</svg></span> 与 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="10.462ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 4504.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-5-Title">
-<title id="MathJax-SVG-5-Title">998244353</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E5-MJMAIN-39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z"/>
-<path stroke-width="1" id="E5-MJMAIN-38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"/>
-<path stroke-width="1" id="E5-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E5-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/>
-<path stroke-width="1" id="E5-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/>
-<path stroke-width="1" id="E5-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E5-MJMAIN-39"/>
- <use xlink:href="#E5-MJMAIN-39" x="500" y="0"/>
- <use xlink:href="#E5-MJMAIN-38" x="1001" y="0"/>
- <use xlink:href="#E5-MJMAIN-32" x="1501" y="0"/>
- <use xlink:href="#E5-MJMAIN-34" x="2002" y="0"/>
- <use xlink:href="#E5-MJMAIN-34" x="2502" y="0"/>
- <use xlink:href="#E5-MJMAIN-33" x="3003" y="0"/>
- <use xlink:href="#E5-MJMAIN-35" x="3503" y="0"/>
- <use xlink:href="#E5-MJMAIN-33" x="4004" y="0"/>
-</g>
-</svg></span></p>
+
+<p>大概是 $n$ 维数组传参要固定后 $n-1$ 维的大小, 便于寻址</p>
+<h1 id="模数写错"><a href="#模数写错" class="headerlink" title="模数写错"></a>模数写错</h1><p>$10^9+7$ 与 $998244353$</p>
 
       
     </div>
@@ -963,7 +904,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">没加 mutable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交错语言"><span class="nav-number">2.</span> <span class="nav-text">交错语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与"><span class="nav-number">3.</span> <span class="nav-text">== 与 =</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#忘记取模"><span class="nav-number">4.</span> <span class="nav-text">忘记取模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#忘记调用初始化"><span class="nav-number">5.</span> <span class="nav-text">忘记调用初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化不完全"><span class="nav-number">6.</span> <span class="nav-text">初始化不完全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组开小"><span class="nav-number">7.</span> <span class="nav-text">数组开小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交代码没删调试"><span class="nav-number">8.</span> <span class="nav-text">提交代码没删调试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#倒序循环与-i"><span class="nav-number">9.</span> <span class="nav-text">倒序循环与 i++</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误使用-unordered-map"><span class="nav-number">10.</span> <span class="nav-text">错误使用 unordered_map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最短路没有注意范围"><span class="nav-number">11.</span> <span class="nav-text">最短路没有注意范围</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高维数组传参没有传范围"><span class="nav-number">12.</span> <span class="nav-text">高维数组传参没有传范围</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模数写错"><span class="nav-number">13.</span> <span class="nav-text">模数写错</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#没加-mutable"><span class="nav-number">1.</span> <span class="nav-text">没加 mutable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交错语言"><span class="nav-number">2.</span> <span class="nav-text">交错语言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与"><span class="nav-number">3.</span> <span class="nav-text">== 与 =</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#忘记取模"><span class="nav-number">4.</span> <span class="nav-text">忘记取模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#忘记调用初始化"><span class="nav-number">5.</span> <span class="nav-text">忘记调用初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化不完全"><span class="nav-number">6.</span> <span class="nav-text">初始化不完全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组开小"><span class="nav-number">7.</span> <span class="nav-text">数组开小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提交代码没删调试"><span class="nav-number">8.</span> <span class="nav-text">提交代码没删调试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#倒序循环与-i"><span class="nav-number">9.</span> <span class="nav-text">倒序循环与 i++</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误使用-unordered-map"><span class="nav-number">10.</span> <span class="nav-text">错误使用 unordered_map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最短路没有注意范围"><span class="nav-number">11.</span> <span class="nav-text">最短路没有注意范围</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高维数组传参没有传范围"><span class="nav-number">12.</span> <span class="nav-text">高维数组传参没有传范围</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模数写错"><span class="nav-number">13.</span> <span class="nav-text">模数写错</span></a></li></ol></div>
             
 
           </div>
