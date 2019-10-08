@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+<link href="//cdn.staticfile.org/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<link href="//cdn.staticfile.org/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.png?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Kruskal 重构树 Kruskal 重构树的过程就是在 Kruskal 算法 merge 的时候新建一颗数, 比如对于枚举到的边 (A, B):  我们新建一个点与其相连:">
+<meta name="keywords" content="Kruskal,Kruskal重构树,LCA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「重构树」Kruskal重构树入门笔记">
+<meta property="og:url" content="https://blog.ishq.site/articles/KruskalTree/index.html">
+<meta property="og:site_name" content="Shq&#39;s Blog">
+<meta property="og:description" content="Kruskal 重构树 Kruskal 重构树的过程就是在 Kruskal 算法 merge 的时候新建一颗数, 比如对于枚举到的边 (A, B):  我们新建一个点与其相连:">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/10/08/SAs2x5EieW1qmaN.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/08/abICOKs6g8UDdBA.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/08/zQbrkZmpoP3yUEJ.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/08/lNQBDI5WzSZcsUk.png">
+<meta property="og:updated_time" content="2019-10-08T11:50:25.242Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「重构树」Kruskal重构树入门笔记">
+<meta name="twitter:description" content="Kruskal 重构树 Kruskal 重构树的过程就是在 Kruskal 算法 merge 的时候新建一颗数, 比如对于枚举到的边 (A, B):  我们新建一个点与其相连:">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/08/SAs2x5EieW1qmaN.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Shq's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://blog.ishq.site/articles/KruskalTree/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>「重构树」Kruskal重构树入门笔记 | Shq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Real Artists simplify</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-bandcamp"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-id-card"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">66</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>系列<span class="badge">3</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">28</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-frlink">
+    <a href="/frlink/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-link"></i> <br>友链</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+    <a href="/comments/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-comments"></i> <br>留言板</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-remittance">
+    <a href="/remittance/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-bitcoin"></i> <br>给本站投食</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/KruskalTree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shq">
+      <meta itemprop="description" content="我不知道能否会成功，但我仍想试一试，哪怕只有一线希望">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shq's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「重构树」Kruskal重构树入门笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2019-10-08 17:00:57 / 更新于：19:50:25" itemprop="dateCreated datePublished" datetime="2019-10-08T17:00:57+08:00">2019-10-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">属于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Kruskal-重构树"><a href="#Kruskal-重构树" class="headerlink" title="Kruskal 重构树"></a>Kruskal 重构树</h1>
+<p>Kruskal 重构树的过程就是在 Kruskal 算法 merge 的时候新建一颗数, 比如对于枚举到的边 (A, B):</p>
+<p><img src="https://i.loli.net/2019/10/08/SAs2x5EieW1qmaN.png" alt="image.png"></p>
+<p>我们新建一个点与其相连:</p>
+<a id="more"></a>
+<p><img src="https://i.loli.net/2019/10/08/abICOKs6g8UDdBA.png" alt="image.png"></p>
+<p>若边有边权, 则把 T 的 <strong>点权</strong> 设为其边权</p>
+<hr>
+<p>我们来看看这样做的好处, 比如对于下面这个在最小生成树上的两个边:</p>
+<p><img src="https://i.loli.net/2019/10/08/zQbrkZmpoP3yUEJ.png" alt="image.png"></p>
+<p>经过上面的加点连边, 就可以得到:</p>
+<p><img src="https://i.loli.net/2019/10/08/lNQBDI5WzSZcsUk.png" alt="image.png"></p>
+<p>其中 P 的点权为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.162ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 500.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<title id="MathJax-SVG-2-Title">3</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E2-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E2-MJMAIN-33" x="0" y="0"/>
+</g>
+</svg></span>, Q 的点权为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.162ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 500.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
+<title id="MathJax-SVG-3-Title">4</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E3-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E3-MJMAIN-34" x="0" y="0"/>
+</g>
+</svg></span></p>
+<p>注意到Kruskal枚举的边的边权都是单调递增的, 所以按照上面的过程(最小生成树)构建的Kruskal重构树一定是个 <strong>大跟堆</strong></p>
+<p>由于这是一棵树, 考虑这个树有什么特殊性质.</p>
+<p>对于树上两点的 LCA, 在原图中的意义就是 <strong>两点间所有路径的最小边权的最大值</strong></p>
+<hr>
+<p>代码也很好写:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ncnt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kruskal</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::sort(data + <span class="number">1</span>, data + m + <span class="number">1</span>, [] (<span class="keyword">const</span> E &amp;a, <span class="keyword">const</span> E &amp;b) -&gt; <span class="keyword">bool</span> &#123; <span class="keyword">return</span> a.w &lt; b.w; &#125;);</span><br><span class="line">    ncnt = n;</span><br><span class="line">    up (i, <span class="number">1</span>, m) &#123;</span><br><span class="line">        <span class="keyword">int</span> _u = find(data[i].u), _v = find(data[i].v);</span><br><span class="line">        <span class="keyword">if</span> (_u == _v) <span class="keyword">continue</span>;</span><br><span class="line">        val[++ncnt] = data[i].w; <span class="comment">// 点权</span></span><br><span class="line">        fa[_u] = fa[_v] = fa[ncnt] = ncnt;</span><br><span class="line">        add(_u, ncnt); add(ncnt, _u); <span class="comment">// 加边</span></span><br><span class="line">        add(_v, ncnt); add(ncnt, _v); <span class="comment">// 加边</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面来看一个简单的例题:</p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1>
+<h2 id="「NOIP2013」货车运输"><a href="#「NOIP2013」货车运输" class="headerlink" title="「NOIP2013」货车运输"></a>「NOIP2013」货车运输</h2>
+<p>暂且就不放题面了, <s>因为太常见了</s></p>
+<p>题面中求的是最大边权的最小值, 不过不影响重构树的使用</p>
+<p>代码:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">200000</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">200000</span> + <span class="number">10</span>; </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">E</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> u, v, w;</span><br><span class="line">    E () &#123;&#125;</span><br><span class="line">    E (<span class="keyword">int</span> _u, <span class="keyword">int</span> _v, <span class="keyword">int</span> _w) : u(_u) , v(_v) , w(_w) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    <span class="keyword">int</span> next;</span><br><span class="line">    Edge () &#123;&#125;</span><br><span class="line">    Edge (<span class="keyword">int</span> _v, <span class="keyword">int</span> _n) : v(_v) , next(_n) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">E data[M];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tot;</span><br><span class="line"><span class="keyword">int</span> hd[N];</span><br><span class="line">Edge e[M &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> val[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span> <span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123; e[++tot] = Edge(v, hd[u]); hd[u] = tot;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> fa[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123; up (i, <span class="number">1</span>, n) fa[i] = i; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> fa[x] == x ? x : fa[x] = find(fa[x]); &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> siz[N], vis[N];</span><br><span class="line"><span class="keyword">int</span> top[N], son[N];</span><br><span class="line"><span class="keyword">int</span> dep[N];</span><br><span class="line"><span class="keyword">int</span> Fa[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span> <span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">    siz[u] = vis[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = hd[u]; i; i = e[i].next) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e[i].v;</span><br><span class="line">        <span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        Fa[v] = u;</span><br><span class="line">        dep[v] = dep[u] + <span class="number">1</span>;</span><br><span class="line">        dfs1(v, u);</span><br><span class="line">        siz[u] += siz[v];</span><br><span class="line">        <span class="keyword">if</span> (siz[v] &gt; siz[son[u]]) son[u] = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span> <span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> ctop = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">    top[u] = ctop;</span><br><span class="line">    <span class="keyword">if</span> (son[u]) dfs2(son[u], ctop);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = hd[u]; i; i = e[i].next) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e[i].v;</span><br><span class="line">        <span class="keyword">if</span> (v == Fa[u]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (v ^ son[u]) dfs2(v, v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> ncnt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kruskal</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::sort(data + <span class="number">1</span>, data + m + <span class="number">1</span>, [] (<span class="keyword">const</span> E &amp;a, <span class="keyword">const</span> E &amp;b) -&gt; <span class="keyword">bool</span> &#123; <span class="keyword">return</span> a.w &gt; b.w; &#125;);</span><br><span class="line">    ncnt = n;</span><br><span class="line">    up (i, <span class="number">1</span>, m) &#123;</span><br><span class="line">        <span class="keyword">int</span> _u = find(data[i].u), _v = find(data[i].v);</span><br><span class="line">        <span class="keyword">if</span> (_u == _v) <span class="keyword">continue</span>;</span><br><span class="line">        val[++ncnt] = data[i].w;</span><br><span class="line">        fa[_u] = fa[_v] = fa[ncnt] = ncnt;</span><br><span class="line">        add(_u, ncnt); add(ncnt, _u);</span><br><span class="line">        add(_v, ncnt); add(ncnt, _v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pre</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    up (i, <span class="number">1</span>, ncnt) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vis[i]) <span class="keyword">continue</span>;</span><br><span class="line">        dfs1(find(i)); dfs2(find(i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span> <span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (top[u] != top[v]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dep[top[u]] &gt; dep[top[v]]) u = Fa[top[u]];</span><br><span class="line">        <span class="keyword">else</span> v = Fa[top[v]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dep[u] &lt; dep[v] ? u : v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    n = read(); m = read();</span><br><span class="line">    <span class="keyword">int</span> u, v, w;</span><br><span class="line">    up (i, <span class="number">1</span>, m) &#123;</span><br><span class="line">        u = read(); v = read(); w = read();</span><br><span class="line">        data[i] = E(u, v, w);</span><br><span class="line">    &#125;</span><br><span class="line">    init();</span><br><span class="line">    kruskal();</span><br><span class="line">    pre();</span><br><span class="line">    <span class="keyword">int</span> q = read();</span><br><span class="line">    <span class="keyword">while</span> (q --&gt; <span class="number">0</span>) &#123;</span><br><span class="line">        u = read(); v = read();</span><br><span class="line">        <span class="keyword">if</span> (find(u) != find(v)) <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, val[lca(u, v)]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="「NOI2018」归程"><a href="#「NOI2018」归程" class="headerlink" title="「NOI2018」归程"></a>「NOI2018」归程</h2>
+<p>题面仍然略了(</p>
+<p>大概这类边权不好处理的就可以考虑转化为点权能不能做(</p>
+<p>也是直接重构树</p>
+<p>(Luogu数据好氵....建议去 <a href="http://uoj.ac/problem/393" target="_blank" rel="noopener">uoj</a> 交一下)</p>
+<p>代码:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">500000</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">1000000</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> logN = <span class="number">20</span> + <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">E</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> u, v, w;</span><br><span class="line">    E () &#123;&#125;</span><br><span class="line">    E (<span class="keyword">int</span> _u, <span class="keyword">int</span> _v, <span class="keyword">int</span> _w) : u(_u) , v(_v) , w(_w) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> v, w;</span><br><span class="line">    <span class="keyword">int</span> next;</span><br><span class="line">    Edge () &#123;&#125;</span><br><span class="line">    Edge (<span class="keyword">int</span> _v, <span class="keyword">int</span> _w, <span class="keyword">int</span> _n) : v(_v), w(_w), next(_n) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">E data[M];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> tot;</span><br><span class="line"><span class="keyword">int</span> hd[N];</span><br><span class="line">Edge e[M];</span><br><span class="line"><span class="keyword">int</span> val[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span> <span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123; e[++tot] = Edge(v, w, hd[u]); hd[u] = tot;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> fa[N];</span><br><span class="line"><span class="keyword">int</span> f[N][logN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span> <span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> fa[x] == x ? x : fa[x] = find(fa[x]); &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> d[N];</span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dij</span> <span class="params">(<span class="keyword">int</span> S)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span> (d, <span class="number">0x3f</span>, <span class="keyword">sizeof</span> d); mem(vis);</span><br><span class="line">    <span class="built_in">std</span>::priority_queue &lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; q;</span><br><span class="line">    q.push(mp(<span class="number">0</span>, S)); d[S] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> u = q.top().second; q.pop();</span><br><span class="line">        <span class="keyword">if</span> (vis[u]) <span class="keyword">continue</span>;</span><br><span class="line">        vis[u] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = hd[u]; i; i = e[i].next) &#123;</span><br><span class="line">            <span class="keyword">int</span> v = e[i].v;</span><br><span class="line">            <span class="keyword">if</span> (d[v] &gt; d[u] + e[i].w) &#123;</span><br><span class="line">                d[v] = d[u] + e[i].w;</span><br><span class="line">                q.push(mp(-d[v], v));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kru</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::sort (data + <span class="number">1</span>, data + m + <span class="number">1</span>, [] (<span class="keyword">const</span> E &amp;a, <span class="keyword">const</span> E &amp;b) -&gt; <span class="keyword">bool</span> &#123; <span class="keyword">return</span> a.w &gt; b.w; &#125;);</span><br><span class="line">    <span class="keyword">int</span> cnt = n;</span><br><span class="line">    up (i, <span class="number">1</span>, m) &#123;</span><br><span class="line">        <span class="keyword">int</span> _u = find(data[i].u), _v = find(data[i].v);</span><br><span class="line">        <span class="keyword">if</span> (_u == _v) <span class="keyword">continue</span>;</span><br><span class="line">        val[++cnt] = data[i].w;</span><br><span class="line">        fa[_u] = fa[_v] = f[_u][<span class="number">0</span>] = f[_v][<span class="number">0</span>] = cnt;</span><br><span class="line">        d[cnt] = <span class="built_in">std</span>::min(d[_u], d[_v]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; (<span class="number">1</span> &lt;&lt; i) &lt;= cnt; i++)</span><br><span class="line">        up (j, <span class="number">1</span>, cnt) f[j][i] = f[f[j][i - <span class="number">1</span>]][i - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">solve</span> <span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    down(i, <span class="number">19</span>, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> (f[x][i] &amp;&amp; val[f[x][i]] &gt; y) x = f[x][i];</span><br><span class="line">    <span class="keyword">return</span> d[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    tot = <span class="number">0</span>; mem(hd);</span><br><span class="line">    up (i, <span class="number">1</span>, <span class="number">2</span> * n) fa[i] = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T = read();</span><br><span class="line">    <span class="keyword">while</span> (T --&gt; <span class="number">0</span>) &#123;</span><br><span class="line">        n = read(); m = read();</span><br><span class="line">        init();</span><br><span class="line">        <span class="keyword">int</span> u, v, w, h;</span><br><span class="line">        up (i, <span class="number">1</span>, m) &#123;</span><br><span class="line">            u = read(); v = read(); w = read(); h = read();</span><br><span class="line">            add (u, v, w); add(v, u, w);</span><br><span class="line">            data[i] = E(u, v, h);</span><br><span class="line">        &#125;</span><br><span class="line">        dij(<span class="number">1</span>);</span><br><span class="line">        kru();</span><br><span class="line">        <span class="keyword">int</span> lst = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> q, k, s, x, y;</span><br><span class="line">        q = read(); k = read(); s = read();</span><br><span class="line">        <span class="keyword">while</span> (q --&gt; <span class="number">0</span>) &#123;</span><br><span class="line">            x = read(); y = read();</span><br><span class="line">            x = (x + k * lst - <span class="number">1</span>) % n + <span class="number">1</span>;</span><br><span class="line">            y = (y + k * lst) % (s + <span class="number">1</span>);</span><br><span class="line">            lst = solve(x, y);</span><br><span class="line">            print(lst); <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Shq 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Shq 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kruskal/" rel="tag"># Kruskal</a>
+          
+            <a href="/tags/Kruskal重构树/" rel="tag"># Kruskal重构树</a>
+          
+            <a href="/tags/LCA/" rel="tag"># LCA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/CF936D/" rel="next" title="「CF938D」Buy a Ticket - 最短路">
+                <i class="fa fa-chevron-left"></i> 「CF938D」Buy a Ticket - 最短路
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTIzMi8xNzc4MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Shq">
+            
+              <p class="site-author-name" itemprop="name">Shq</p>
+              <p class="site-description motion-element" itemprop="description">我不知道能否会成功，但我仍想试一试，哪怕只有一线希望</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Blog-Shq" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.luogu.org/space/show?uid=52556" target="_blank" title="洛谷"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/shq666" target="_blank" title="知乎"><i class="fa fa-fw fa-comment-o"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://ly.men.ci" target="_blank" title="LYOI"><i class="fa fa-fw fa-star"></i>LYOI</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://t.me/qwq_shq" target="_blank" title="telegram"><i class="fa fa-fw fa-telegram"></i>telegram</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kruskal-重构树"><span class="nav-number">1.</span> <span class="nav-text">Kruskal 重构树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例题"><span class="nav-number">2.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#「NOIP2013」货车运输"><span class="nav-number">2.1.</span> <span class="nav-text">「NOIP2013」货车运输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#「NOI2018」归程"><span class="nav-number">2.2.</span> <span class="nav-text">「NOI2018」归程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shq</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">不忘初心 继续前行 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: 'articles/KruskalTree/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.5.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.5.0"></script>
+
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+</body>
+</html>
