@@ -2019,7 +2019,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c862c9;
+  background: #60e7ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3140,34 +3140,6 @@ ul.breadcrumb li+li:last-child {
   margin: 0.35em 0.9em 0 0;
   text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
 }
-@media screen and (min-width: 767px) {
-  body {
-    background-image: url("/images/background.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100%;
-  }
-  #footer a {
-    color: #eee;
-  }
-}
-@media screen and (max-width: 767px) {
-  body {
-    background-image: url("/images/m-bg.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100%;
-  }
-  #footer a {
-    color: #eee;
-  }
-}
-.main-inner {
-  opacity: 0.789;
-}
-.header-inner {
-  opacity: 0.789;
-}
 .heimu {
   background-color: Black;
   color: Black;
@@ -3191,12 +3163,6 @@ ul.breadcrumb li+li:last-child {
 .posts-expand .post-title {
   font-size: 26px;
   font-weight: 700;
-}
-.content-wrap {
-  margin-bottom: 50px;
-  padding: 45px 36px 36px 36px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-  background-color: #fff;
 }
 .menu .menu-item a:hover {
   border-bottom-color: rgba(161,102,171,0);
