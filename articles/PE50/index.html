@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="Shq&#39;s Blog">
 <meta property="og:description" content="PE 氵题 Link: Problem 50 - Project Euler 简要题意 求一个小于  10^6               的能表示为最多连续质数的和的质数 比如  41 = 2 + 3 + 5 + 7 + 11 + 13                                                  是  10^2               以内能表示为最多连">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-09T08:37:42.265Z">
+<meta property="og:updated_time" content="2019-10-09T08:38:16.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「PE#50」Consecutive prime sum - 双指针">
 <meta name="twitter:description" content="PE 氵题 Link: Problem 50 - Project Euler 简要题意 求一个小于  10^6               的能表示为最多连续质数的和的质数 比如  41 = 2 + 3 + 5 + 7 + 11 + 13                                                  是  10^2               以内能表示为最多连">
@@ -245,7 +245,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">72</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">73</span></a>
   </li>
         
         
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">31</span></a>
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">32</span></a>
   </li>
         
         
@@ -379,7 +379,7 @@
                 
               
 
-              <time title="创建于：2019-10-09 16:27:52 / 更新于：16:37:42" itemprop="dateCreated datePublished" datetime="2019-10-09T16:27:52+08:00">2019-10-09</time>
+              <time title="创建于：2019-10-09 16:27:52 / 更新于：16:38:16" itemprop="dateCreated datePublished" datetime="2019-10-09T16:27:52+08:00">2019-10-09</time>
             
 
             
@@ -579,34 +579,7 @@
 <p>Which prime, below one-million, can be written as the sum of the most consecutive primes?</p>
 <hr>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1>
-<p>可以直接暴力 (</p>
-<p>注意到 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 600.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-9-Title">
-<title id="MathJax-SVG-9-Title">n</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E9-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E9-MJMATHI-6E" x="0" y="0"/>
-</g>
-</svg></span> 以内的素数是 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.581ex" height="3.343ex" style="vertical-align: -1.338ex;" viewbox="0 -863.1 1541.7 1439.2" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-10-Title">
-<title id="MathJax-SVG-10-Title">n\over\ln n</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E10-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
-<path stroke-width="1" id="E10-MJMAIN-6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"/>
-<path stroke-width="1" id="E10-MJMAIN-6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
-<g transform="translate(120,0)">
-<rect stroke="none" width="1301" height="60" x="0" y="220"/>
- <use transform="scale(0.707)" xlink:href="#E10-MJMATHI-6E" x="620" y="640"/>
-<g transform="translate(60,-437)">
- <use transform="scale(0.707)" xlink:href="#E10-MJMAIN-6C"/>
- <use transform="scale(0.707)" xlink:href="#E10-MJMAIN-6E" x="278" y="0"/>
- <use transform="scale(0.707)" xlink:href="#E10-MJMATHI-6E" x="1070" y="0"/>
-</g>
-</g>
-</g>
-</svg></span> 的, 可能要挂着跑很长时间, 由于素数是单调的, 所以考虑双指针即可</p>
+<p>由于素数是单调的, 所以考虑双指针即可</p>
 <p>下面这个程序本地跑了10s就过了(((</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"><span class="keyword">int</span> pri[N];</span><br><span class="line"><span class="keyword">bool</span> vis[N + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pre</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!vis[i]) pri[++cnt] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= cnt &amp;&amp; i * pri[j] &lt;= N; j++) &#123;</span><br><span class="line">            vis[i * pri[j]] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (i % pri[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    pre();</span><br><span class="line">    <span class="keyword">int</span> sum, fl;</span><br><span class="line">    <span class="keyword">int</span> ansl = <span class="number">1</span>, ansr = <span class="number">0</span>, ans = pri[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">1</span>, right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> _l = <span class="number">1</span>, _r = <span class="number">0</span>;</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt;= i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (right &lt; cnt &amp;&amp; sum &lt; pri[i]) sum += pri[++right];</span><br><span class="line">            <span class="keyword">if</span> (sum == pri[i] &amp;&amp; right - left &gt; _r - _l) _r = right, _l = left;</span><br><span class="line">            sum -= pri[left++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (_r - _l &gt;= ansr - ansl) &#123;</span><br><span class="line">            ansr = _r, ansl = _l;</span><br><span class="line">            ans = pri[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[%lld, %lld] =&gt; %lld\n"</span>, ansl, ansr, ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -685,6 +658,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/articles/PE193/" rel="prev" title="「PE193」Squarefree Numbers - 莫比乌斯函数">
+                「PE193」Squarefree Numbers - 莫比乌斯函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -760,7 +737,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -936,7 +913,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">72</span>
+                      
+                    
+                    <span class="site-state-item-count">73</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
