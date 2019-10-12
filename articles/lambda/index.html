@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+<link href="//cdn.staticfile.org/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<link href="//cdn.staticfile.org/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.png?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="这里就用一个关于 C++11 的简单的问题作为本篇的开头: 下面哪一行代码会CE? 123456int main () &amp;#123;    []&amp;#123;&amp;#125;;    []()&amp;#123;&amp;#125;;    []&amp;#123;&amp;#125;();    []()&amp;#123;&amp;#125;();&amp;#125;">
+<meta name="keywords" content="lambda,C++11,STL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「C++11」lambda 表达式的基础使用">
+<meta property="og:url" content="https://blog.ishq.site/articles/lambda/index.html">
+<meta property="og:site_name" content="Shq&#39;s Blog">
+<meta property="og:description" content="这里就用一个关于 C++11 的简单的问题作为本篇的开头: 下面哪一行代码会CE? 123456int main () &amp;#123;    []&amp;#123;&amp;#125;;    []()&amp;#123;&amp;#125;;    []&amp;#123;&amp;#125;();    []()&amp;#123;&amp;#125;();&amp;#125;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-12T08:57:55.328Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「C++11」lambda 表达式的基础使用">
+<meta name="twitter:description" content="这里就用一个关于 C++11 的简单的问题作为本篇的开头: 下面哪一行代码会CE? 123456int main () &amp;#123;    []&amp;#123;&amp;#125;;    []()&amp;#123;&amp;#125;;    []&amp;#123;&amp;#125;();    []()&amp;#123;&amp;#125;();&amp;#125;">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Shq's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://blog.ishq.site/articles/lambda/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>「C++11」lambda 表达式的基础使用 | Shq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">迷途漫漫，终有一归。</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-bandcamp"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-id-card"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">78</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>系列<span class="badge">3</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">38</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-frlink">
+    <a href="/frlink/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-link"></i> <br>友链</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+    <a href="/comments/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-comments"></i> <br>留言板</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-remittance">
+    <a href="/remittance/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-bitcoin"></i> <br>给本站投食</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/lambda/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shq">
+      <meta itemprop="description" content="生活在阴沟里，依然有仰望星空的权利。">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shq's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「C++11」lambda 表达式的基础使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2019-10-12 14:47:18 / 更新于：16:57:55" itemprop="dateCreated datePublished" datetime="2019-10-12T14:47:18+08:00">2019-10-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">属于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这里就用一个关于 C++11 的简单的问题作为本篇的开头: 下面哪一行代码会CE?</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    []&#123;&#125;;</span><br><span class="line">    []()&#123;&#125;;</span><br><span class="line">    []&#123;&#125;();</span><br><span class="line">    []()&#123;&#125;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>在解决上面那个问题前, 我们先来学习 lambda 表达式相关知识</p>
+<h1 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h1><blockquote>
+<p>Lambda:<br>Constructs a closure: an unnamed function object capable of capturing variables in scope.</p>
+</blockquote>
+<p><strong>Lambda 表达式</strong> 是一个能够捕获作用域中变量的 <strong>未命名</strong> 函数对象。</p>
+<p>首先给出函数原型:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ capture ] ( params ) <span class="keyword">mutable</span> exception attribute -&gt; <span class="keyword">return</span>-type &#123; body &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>[ capture ]</code> : 捕捉列表. 是lambda的开始标志</p>
+<p><code>( params )</code> : 参数列表. 如果不需要进行参数传递时, 可以连同括号一起省略掉</p>
+<p><code>mutable exception attribute</code> : 修饰符, 默认 <code>const</code>, 可以加 <code>mutable</code>. 当填入 <code>mutable</code> 时 <strong>必须</strong> 要有参数列表</p>
+<p><code>-&gt; return-type</code> : 函数的返回值类型, 下面有详细介绍</p>
+<p><code>{body}</code> : 函数体</p>
+<p>现在我们逐一分析开头时提到的语句:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>合法, 一个参数列表为空并省略, 返回 <code>void</code> 的 lambda 表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]()&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>合法, 一个参数列表为空, 返回 <code>void</code> 的 lambda 表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]&#123;&#125;();</span><br></pre></td></tr></table></figure>
+
+<p>合法, <code>[]{}</code> 表示一个参数列表为空并省略, 返回 <code>void</code> 的 lambda 表达式, 后面加括号表示调用这个函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]()&#123;&#125;();</span><br></pre></td></tr></table></figure>
+
+<p>合法, <code>[]{}</code> 表示一个参数列表为空, 返回 <code>void</code> 的 lambda 表达式, 后面加括号表示调用这个函数</p>
+<p>所以开头的几个语句都是正确的qwq</p>
+<p>看完几个特殊的, 我们来介绍 <code>[ capture ]</code></p>
+<h2 id="capture"><a href="#capture" class="headerlink" title="[ capture ]"></a>[ capture ]</h2><p>一般有下面几种方式:</p>
+<ol>
+<li><p><code>[]</code> 不捕获任何外部变量</p>
+<p>这时候, 使用外部变量就会CE</p>
+</li>
+<li><p><code>[=]</code> 以值的形式捕获所有外部变量</p>
+<p>可以使用外部变量, 但是不能更改(也就是 <code>const</code> )</p>
+</li>
+<li><p><code>[&amp;]</code> 以引用形式捕获所有外部变量</p>
+<p>可以更改外部变量的值</p>
+</li>
+</ol>
+<p>下面是混合形式:</p>
+<ol>
+<li><p><code>[x, &amp;y]</code> x 以传值形式捕获，y 以引用形式捕获</p>
+</li>
+<li><p><code>[=, &amp;z]</code> z 以引用形式捕获，其余变量以传值形式捕获</p>
+</li>
+<li><p><code>[&amp;, x]</code> x 以值的形式捕获，其余变量以引用形式捕获</p>
+</li>
+<li><p>对于 <code>[=]</code> 或 <code>[&amp;]</code> 的形式，lambda 表达式可以直接使用 <code>this</code> 指针。但是，对于 <code>[]</code> 的形式，如果要使用 <code>this</code> 指针，必须显式传入, 比如:</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Shq</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">vegetable</span> <span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Shq is vegetable\n"</span>); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">lambda_</span> <span class="params">()</span> </span>&#123; [<span class="keyword">this</span>] &#123; <span class="keyword">this</span>-&gt;vegetable(); &#125; (); &#125;</span><br><span class="line">&#125; _;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123; _.lambda_(); &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="gt-return-type"><a href="#gt-return-type" class="headerlink" title="-&gt; return-type"></a>-&gt; return-type</h2><p>这里的 <code>-&gt; return-type</code> 是 <strong>尾置返回类型</strong>, 其实在 C++11 中的任意函数都可以这样写, 同时函数名前的类型名就可以变为 <code>auto</code> 了, 比如对于一个常规的函数:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">Sort</span> <span class="params">(<span class="keyword">int</span> *v, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::sort (v + <span class="number">1</span>, v + n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就可以写为:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">auto Sort (int *v, int n) -&gt; int * &#123;</span><br><span class="line">    <span class="built_in">std</span>::sort (v + <span class="number">1</span>, v + n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然, lambda 表达式也是如此</p>
+<h2 id="lambda-表达式的返回值"><a href="#lambda-表达式的返回值" class="headerlink" title="lambda 表达式的返回值"></a>lambda 表达式的返回值</h2><p>lambda 表达式的返回值是一个函数, 比如对于下列 lambda 表达式的返回值就是 <code>std::function &lt;bool(int, int)&gt;</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) &#123; <span class="keyword">return</span> a &lt; b; &#125;;</span><br><span class="line">[] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) -&gt; <span class="keyword">bool</span> &#123; <span class="keyword">return</span> a &lt; b; &#125;;</span><br><span class="line">[] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) -&gt; <span class="keyword">bool</span> &#123; <span class="keyword">return</span> a; &#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>大概 STL 中的 <code>std::sort()</code>, 函数模型是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template&lt; class RandomIt, class Compare &gt;</span><br><span class="line">constexpr void sort( RandomIt first, RandomIt last, Compare comp );</span><br></pre></td></tr></table></figure>
+
+<p>后面的 <code>Compare comp</code> 可以使用 lambda 来代替:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::sort (v + <span class="number">1</span>, v + n + <span class="number">1</span>, [] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>也可以</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> cmp = [] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">std</span>::sort (v + <span class="number">1</span>, v + n + <span class="number">1</span>, cmp);</span><br></pre></td></tr></table></figure>
+
+<h3 id="std-set"><a href="#std-set" class="headerlink" title="std::set"></a>std::set</h3><p>set 也可以通过 lambda 表达式来定义相对顺序, 首先是 <code>std::set</code> 的函数原型:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Key</span>,</span></span><br><span class="line"><span class="class">    <span class="title">class</span> <span class="title">Compare</span> = <span class="title">std</span>:</span>:less&lt;Key&gt;,</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Allocator</span> = <span class="title">std</span>:</span>:allocator&lt;Key&gt;</span><br><span class="line">&gt; <span class="class"><span class="keyword">class</span> <span class="title">set</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>第二个参数 <code>Compare</code> 也是可以代替的, 下面是一个不使用 lambda 表达式的方法:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cmp</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp; a, <span class="keyword">const</span> <span class="keyword">int</span>&amp; b)</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> a &lt; b; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">set</span> &lt;<span class="keyword">int</span>, cmp&gt; s;</span><br></pre></td></tr></table></figure>
+
+<p>现在来写一个使用 lambda 表达式的 <code>set</code>, 仿照上面的例子, 我们写出了这样的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::set &lt;int, [] (const int &amp;a, const int &amp;b) &#123; return a &gt; b; &#125; &gt; s;</span><br></pre></td></tr></table></figure>
+
+<p>这样并不是可以的, 而是要是用关键字 (<code>decltype</code>) 来进行获取 <code>cmp</code> 的类型再放入第二位……就像这样:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> cmp = [] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) -&gt; <span class="keyword">bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a &gt; b;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">set</span> &lt;<span class="keyword">int</span>, <span class="keyword">decltype</span>(cmp)&gt; s(cmp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 lambda 表达式要是 <strong>静态</strong> 或 <strong>全局无状态</strong> 的才能使用 <code>decltype</code></p>
+<p>其中 <strong>大部分</strong> STL 容器都可以使用这种方式写比较函数</p>
+<h3 id="std-for-each"><a href="#std-for-each" class="headerlink" title="std::for_each"></a>std::for_each</h3><p>新版本 C++ 的函数, 大概是用于遍历, 先放上函数原型:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">InputIt</span>, <span class="title">class</span> <span class="title">UnaryFunction</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">UnaryFunction</span> <span class="title">for_each</span>( <span class="title">InputIt</span> <span class="title">first</span>, <span class="title">InputIt</span> <span class="title">last</span>, <span class="title">UnaryFunction</span> <span class="title">f</span> );</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">InputIt</span>, <span class="title">class</span> <span class="title">UnaryFunction</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">constexpr</span> <span class="title">UnaryFunction</span> <span class="title">for_each</span>( <span class="title">InputIt</span> <span class="title">first</span>, <span class="title">InputIt</span> <span class="title">last</span>, <span class="title">UnaryFunction</span> <span class="title">f</span> );</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">ExecutionPolicy</span>, <span class="title">class</span> <span class="title">ForwardIt</span>, <span class="title">class</span> <span class="title">UnaryFunction2</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">for_each</span>( <span class="title">ExecutionPolicy</span>&amp;&amp; <span class="title">policy</span>, <span class="title">ForwardIt</span> <span class="title">first</span>, <span class="title">ForwardIt</span> <span class="title">last</span>, <span class="title">UnaryFunction2</span> <span class="title">f</span> );</span></span><br></pre></td></tr></table></figure>
+
+<p>大概原理是这样的:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">InputIt</span>, <span class="title">class</span> <span class="title">UnaryFunction</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">constexpr</span> <span class="title">UnaryFunction</span> <span class="title">for_each</span>(<span class="title">InputIt</span> <span class="title">first</span>, <span class="title">InputIt</span> <span class="title">last</span>, <span class="title">UnaryFunction</span> <span class="title">f</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">for</span> (; first != last; ++first) &#123;</span><br><span class="line">        f(*first);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f; <span class="comment">// implicit move since C++11</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>f</code> 自然就随便填 lambda 了, 比如输出 <code>vector</code> 内容:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> print = [](<span class="keyword">const</span> <span class="keyword">int</span>&amp; n) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; n; &#125;;</span><br><span class="line"><span class="built_in">std</span>::for_each(v.begin(), v.end(), print);</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以执行操作:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::for_each(nums.begin(), nums.end(), [] (<span class="keyword">int</span> &amp;n) &#123; n++; &#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Shq 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Shq 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/lambda/" rel="tag"># lambda</a>
+          
+            <a href="/tags/C-11/" rel="tag"># C++11</a>
+          
+            <a href="/tags/STL/" rel="tag"># STL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/bzoj3209/" rel="next" title="「BZOJ3209」花神的数论题 - 数位DP">
+                <i class="fa fa-chevron-left"></i> 「BZOJ3209」花神的数论题 - 数位DP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTIzMi8xNzc4MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Shq">
+            
+              <p class="site-author-name" itemprop="name">Shq</p>
+              <p class="site-description motion-element" itemprop="description">生活在阴沟里，依然有仰望星空的权利。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">78</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Blog-Shq" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.luogu.org/space/show?uid=52556" target="_blank" title="洛谷"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/shq666" target="_blank" title="知乎"><i class="fa fa-fw fa-comment-o"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://ly.men.ci" target="_blank" title="LYOI"><i class="fa fa-fw fa-star"></i>LYOI</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://t.me/qwq_shq" target="_blank" title="telegram"><i class="fa fa-fw fa-telegram"></i>telegram</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda-表达式"><span class="nav-number">1.</span> <span class="nav-text">lambda 表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#capture"><span class="nav-number">1.1.</span> <span class="nav-text">[ capture ]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-return-type"><span class="nav-number">1.2.</span> <span class="nav-text">-&gt; return-type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda-表达式的返回值"><span class="nav-number">1.3.</span> <span class="nav-text">lambda 表达式的返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">1.4.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.4.1.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-set"><span class="nav-number">1.4.2.</span> <span class="nav-text">std::set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-for-each"><span class="nav-number">1.4.3.</span> <span class="nav-text">std::for_each</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shq</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">不忘初心 继续前行 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: 'articles/lambda/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.5.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.5.0"></script>
+
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+</body>
+</html>

@@ -107,18 +107,18 @@
 
 
 
-  <meta name="description" content="指令集是什么 指令集 是存储在CPU内部，对CPU运算进行指导和 优化 的硬程序 常用指令集有 MMX, SSE, SSE2, SSE3, SSSSE3, SSE4.1, SSE4.2, AVX, AVX2 等 由于博主不会汇编, 本文只介绍被封装好的指令集及用于操作指令集的函数 指令集能用来干什么">
+  <meta name="description" content="指令集是什么指令集 是存储在CPU内部，对CPU运算进行指导和 优化 的硬程序 常用指令集有 MMX, SSE, SSE2, SSE3, SSSSE3, SSE4.1, SSE4.2, AVX, AVX2 等 由于博主不会汇编, 本文只介绍被封装好的指令集及用于操作指令集的函数 指令集能用来干什么">
 <meta name="keywords" content="指令集,卡常,优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「指令集」常用指令集优化技巧">
 <meta property="og:url" content="https://blog.ishq.site/articles/IntrinsicsGuide/index.html">
 <meta property="og:site_name" content="Shq&#39;s Blog">
-<meta property="og:description" content="指令集是什么 指令集 是存储在CPU内部，对CPU运算进行指导和 优化 的硬程序 常用指令集有 MMX, SSE, SSE2, SSE3, SSSSE3, SSE4.1, SSE4.2, AVX, AVX2 等 由于博主不会汇编, 本文只介绍被封装好的指令集及用于操作指令集的函数 指令集能用来干什么">
+<meta property="og:description" content="指令集是什么指令集 是存储在CPU内部，对CPU运算进行指导和 优化 的硬程序 常用指令集有 MMX, SSE, SSE2, SSE3, SSSSE3, SSE4.1, SSE4.2, AVX, AVX2 等 由于博主不会汇编, 本文只介绍被封装好的指令集及用于操作指令集的函数 指令集能用来干什么">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-08-11T12:14:44.859Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「指令集」常用指令集优化技巧">
-<meta name="twitter:description" content="指令集是什么 指令集 是存储在CPU内部，对CPU运算进行指导和 优化 的硬程序 常用指令集有 MMX, SSE, SSE2, SSE3, SSSSE3, SSE4.1, SSE4.2, AVX, AVX2 等 由于博主不会汇编, 本文只介绍被封装好的指令集及用于操作指令集的函数 指令集能用来干什么">
+<meta name="twitter:description" content="指令集是什么指令集 是存储在CPU内部，对CPU运算进行指导和 优化 的硬程序 常用指令集有 MMX, SSE, SSE2, SSE3, SSSSE3, SSE4.1, SSE4.2, AVX, AVX2 等 由于博主不会汇编, 本文只介绍被封装好的指令集及用于操作指令集的函数 指令集能用来干什么">
 
 
 
@@ -245,7 +245,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">75</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">78</span></a>
   </li>
         
         
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">37</span></a>
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">38</span></a>
   </li>
         
         
@@ -471,309 +471,74 @@
       
 
       
-        <h1 id="指令集是什么"><a href="#指令集是什么" class="headerlink" title="指令集是什么"></a>指令集是什么</h1>
-<p><strong>指令集</strong> 是存储在CPU内部，对CPU运算进行指导和 <strong>优化</strong> 的硬程序</p>
+        <h1 id="指令集是什么"><a href="#指令集是什么" class="headerlink" title="指令集是什么"></a>指令集是什么</h1><p><strong>指令集</strong> 是存储在CPU内部，对CPU运算进行指导和 <strong>优化</strong> 的硬程序</p>
 <p>常用指令集有 <code>MMX</code>, <code>SSE</code>, <code>SSE2</code>, <code>SSE3</code>, <code>SSSSE3</code>, <code>SSE4.1</code>, <code>SSE4.2</code>, <code>AVX</code>, <code>AVX2</code> 等</p>
 <p>由于博主不会汇编, 本文只介绍被封装好的指令集及用于操作指令集的函数</p>
-<h1 id="指令集能用来干什么"><a href="#指令集能用来干什么" class="headerlink" title="指令集能用来干什么"></a>指令集能用来干什么</h1>
-<a id="more"></a>
-<p>优化程序运行速度(其实就是卡常), 并没有什么用处, 因为大部分算法竞赛 <strong>禁止</strong> 使用以下划线开头的函数, 指令集通常是以 <code>__</code> 开头的....</p>
+<h1 id="指令集能用来干什么"><a href="#指令集能用来干什么" class="headerlink" title="指令集能用来干什么"></a>指令集能用来干什么</h1><a id="more"></a>
+
+<p>优化程序运行速度(其实就是卡常), 并没有什么用处, 因为大部分算法竞赛 <strong>禁止</strong> 使用以下划线开头的函数, 指令集通常是以 <code>__</code> 开头的….</p>
 <p><strong>不要在算法竞赛(特指某竞赛)中使用指令集 / 内嵌汇编</strong></p>
 <p>指令集有许多优秀的函数, 可以通过一条语句对指令集进行操作</p>
-<h1 id="指令集详-lue-解"><a href="#指令集详-lue-解" class="headerlink" title="指令集详(lue)解"></a>指令集详(lue)解</h1>
-<p>指令集可以被 <em>片面地</em> 理解为分块, 通过提供的函数可以统一对这些指令集进行操作</p>
-<h2 id="前备"><a href="#前备" class="headerlink" title="前备"></a>前备</h2>
-<p>使用指令集首先要使用预编译命令, 比如</p>
+<h1 id="指令集详-lue-解"><a href="#指令集详-lue-解" class="headerlink" title="指令集详(lue)解"></a>指令集详(lue)解</h1><p>指令集可以被 <em>片面地</em> 理解为分块, 通过提供的函数可以统一对这些指令集进行操作</p>
+<h2 id="前备"><a href="#前备" class="headerlink" title="前备"></a>前备</h2><p>使用指令集首先要使用预编译命令, 比如</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC target(<span class="meta-string">"sse,sse2,sse3,ssse3,sse4.1,sse4.2,avx,avx2,popcnt,tune=native"</span>)</span></span><br></pre></td></tr></table></figure>
-<p>除此之外, 还要加入</p>
+
+<p>除此之外, 还要加入 </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;immintrin.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;emmintrin.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
 <p>因为 <code>Intrinsics</code> 是对 <code>MMX</code> 、<code>SSE</code> 等指令集的指令的一种封装，以函数的形式提供，使得程序员更容易编写和使用这些高级指令，在编译的时候，这些函数会被内联为汇编，不会产生函数调用的开销</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2>
-<p>扯了那么多, 先来讲一下如何定义指令集</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>扯了那么多, 先来讲一下如何定义指令集</p>
 <ul>
-<li><code>__m64</code>：<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.325ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1001 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">64</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E2-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-<path stroke-width="1" id="E2-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E2-MJMAIN-36"/>
- <use xlink:href="#E2-MJMAIN-34" x="500" y="0"/>
-</g>
-</svg></span> 位 <em>整数</em> 指令集（<code>MMX</code>）</li>
-<li><code>__m128</code>：<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
-<title id="MathJax-SVG-3-Title">128</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E3-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E3-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E3-MJMAIN-38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E3-MJMAIN-31"/>
- <use xlink:href="#E3-MJMAIN-32" x="500" y="0"/>
- <use xlink:href="#E3-MJMAIN-38" x="1001" y="0"/>
-</g>
-</svg></span> 位 <em>单精度</em> 指令集（<code>SSE</code>）</li>
-<li><code>__m128d</code>：<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
-<title id="MathJax-SVG-4-Title">128</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E4-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E4-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E4-MJMAIN-38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E4-MJMAIN-31"/>
- <use xlink:href="#E4-MJMAIN-32" x="500" y="0"/>
- <use xlink:href="#E4-MJMAIN-38" x="1001" y="0"/>
-</g>
-</svg></span> 位 <em>双精度</em> 指令集（<code>SSE2</code>）</li>
-<li><code>__m128i</code>：<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-5-Title">
-<title id="MathJax-SVG-5-Title">128</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E5-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E5-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E5-MJMAIN-38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E5-MJMAIN-31"/>
- <use xlink:href="#E5-MJMAIN-32" x="500" y="0"/>
- <use xlink:href="#E5-MJMAIN-38" x="1001" y="0"/>
-</g>
-</svg></span> 位 <em>整数</em> 指令集（<code>SSE2</code>）</li>
-<li><code>__m256</code>：<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-6-Title">
-<title id="MathJax-SVG-6-Title">256</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E6-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E6-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E6-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E6-MJMAIN-32"/>
- <use xlink:href="#E6-MJMAIN-35" x="500" y="0"/>
- <use xlink:href="#E6-MJMAIN-36" x="1001" y="0"/>
-</g>
-</svg></span> 位 <em>单精度</em> 指令集（<code>AVX</code>）</li>
-<li><code>__m256d</code>：<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-7-Title">
-<title id="MathJax-SVG-7-Title">256</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E7-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E7-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E7-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E7-MJMAIN-32"/>
- <use xlink:href="#E7-MJMAIN-35" x="500" y="0"/>
- <use xlink:href="#E7-MJMAIN-36" x="1001" y="0"/>
-</g>
-</svg></span> 位 <em>双精度</em> 指令集（<code>AVX</code>）</li>
-<li><code>__m256i</code>：<span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-8-Title">
-<title id="MathJax-SVG-8-Title">256</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E8-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E8-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E8-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E8-MJMAIN-32"/>
- <use xlink:href="#E8-MJMAIN-35" x="500" y="0"/>
- <use xlink:href="#E8-MJMAIN-36" x="1001" y="0"/>
-</g>
-</svg></span> 位 <em>整数</em> 指令集（<code>AVX</code>）</li>
+<li><code>__m64</code>：$64$ 位 <em>整数</em> 指令集（<code>MMX</code>）</li>
+<li><code>__m128</code>：$128$ 位 <em>单精度</em> 指令集（<code>SSE</code>）</li>
+<li><code>__m128d</code>：$128$ 位 <em>双精度</em> 指令集（<code>SSE2</code>）</li>
+<li><code>__m128i</code>：$128$ 位 <em>整数</em> 指令集（<code>SSE2</code>）</li>
+<li><code>__m256</code>：$256$ 位 <em>单精度</em> 指令集（<code>AVX</code>）</li>
+<li><code>__m256d</code>：$256$ 位 <em>双精度</em> 指令集（<code>AVX</code>）</li>
+<li><code>__m256i</code>：$256$ 位 <em>整数</em> 指令集（<code>AVX</code>）</li>
 </ul>
 <p>这些数据类型与寄存器的对应关系:</p>
-<p><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.325ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1001 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-9-Title">
-<title id="MathJax-SVG-9-Title">64</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E9-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-<path stroke-width="1" id="E9-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E9-MJMAIN-36"/>
- <use xlink:href="#E9-MJMAIN-34" x="500" y="0"/>
-</g>
-</svg></span> 位 <code>MM</code> 寄存器（<code>MM0</code> ~ <code>MM7</code>）：<code>__m64</code></p>
-<p><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-10-Title">
-<title id="MathJax-SVG-10-Title">128</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E10-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E10-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E10-MJMAIN-38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E10-MJMAIN-31"/>
- <use xlink:href="#E10-MJMAIN-32" x="500" y="0"/>
- <use xlink:href="#E10-MJMAIN-38" x="1001" y="0"/>
-</g>
-</svg></span> 位 <code>SSE</code> 寄存器（<code>XMM0</code> ~ <code>XMM15</code>）：<code>__m128</code>、<code>__m128d</code>、<code>__m128i</code></p>
-<p><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-11-Title">
-<title id="MathJax-SVG-11-Title">256</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E11-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E11-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E11-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E11-MJMAIN-32"/>
- <use xlink:href="#E11-MJMAIN-35" x="500" y="0"/>
- <use xlink:href="#E11-MJMAIN-36" x="1001" y="0"/>
-</g>
-</svg></span> 位 <code>AVX</code> 寄存器（<code>YMM0</code> ~ <code>YMM15</code>）：<code>__m256</code>、<code>__m256d</code>、<code>__m256i</code></p>
-<p><strong>下面都是以 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-12-Title">
-<title id="MathJax-SVG-12-Title">256</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E12-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E12-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E12-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E12-MJMAIN-32"/>
- <use xlink:href="#E12-MJMAIN-35" x="500" y="0"/>
- <use xlink:href="#E12-MJMAIN-36" x="1001" y="0"/>
-</g>
-</svg></span> 位 <code>AVX</code> 指令集为例子</strong></p>
-<h2 id="基础函数"><a href="#基础函数" class="headerlink" title="基础函数"></a>基础函数</h2>
-<p>下面是关于上面的一些函数</p>
-<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3>
-<p>对于 <code>__m256i</code> 是 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-13-Title">
-<title id="MathJax-SVG-13-Title">256</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E13-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E13-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E13-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E13-MJMAIN-32"/>
- <use xlink:href="#E13-MJMAIN-35" x="500" y="0"/>
- <use xlink:href="#E13-MJMAIN-36" x="1001" y="0"/>
-</g>
-</svg></span> 位的, 也就是 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.325ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1001 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-14-Title">
-<title id="MathJax-SVG-14-Title">32</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E14-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/>
-<path stroke-width="1" id="E14-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E14-MJMAIN-33"/>
- <use xlink:href="#E14-MJMAIN-32" x="500" y="0"/>
-</g>
-</svg></span> 个字节, 所以可以放 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.162ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 500.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-15-Title">
-<title id="MathJax-SVG-15-Title">4</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E15-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E15-MJMAIN-34" x="0" y="0"/>
-</g>
-</svg></span> 个 <code>long long int</code> 或 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.162ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 500.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-16-Title">
-<title id="MathJax-SVG-16-Title">8</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E16-MJMAIN-38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E16-MJMAIN-38" x="0" y="0"/>
-</g>
-</svg></span> 个 <code>int</code> 或 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.325ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1001 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-17-Title">
-<title id="MathJax-SVG-17-Title">16</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E17-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E17-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E17-MJMAIN-31"/>
- <use xlink:href="#E17-MJMAIN-36" x="500" y="0"/>
-</g>
-</svg></span> 个 <code>short</code> 或 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.325ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1001 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-18-Title">
-<title id="MathJax-SVG-18-Title">32</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E18-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/>
-<path stroke-width="1" id="E18-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E18-MJMAIN-33"/>
- <use xlink:href="#E18-MJMAIN-32" x="500" y="0"/>
-</g>
-</svg></span> 个字节 (<code>char</code>)</p>
+<p>$64$ 位 <code>MM</code> 寄存器（<code>MM0</code> ~ <code>MM7</code>）：<code>__m64</code></p>
+<p>$128$ 位 <code>SSE</code> 寄存器（<code>XMM0</code> ~ <code>XMM15</code>）：<code>__m128</code>、<code>__m128d</code>、<code>__m128i</code></p>
+<p>$256$ 位 <code>AVX</code> 寄存器（<code>YMM0</code> ~ <code>YMM15</code>）：<code>__m256</code>、<code>__m256d</code>、<code>__m256i</code></p>
+<p><strong>下面都是以 $256$ 位 <code>AVX</code> 指令集为例子</strong></p>
+<h2 id="基础函数"><a href="#基础函数" class="headerlink" title="基础函数"></a>基础函数</h2><p>下面是关于上面的一些函数</p>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>对于 <code>__m256i</code> 是 $256$ 位的, 也就是 $32$ 个字节, 所以可以放 $4$ 个 <code>long long int</code> 或 $8$ 个 <code>int</code> 或 $16$ 个 <code>short</code> 或 $32$ 个字节 (<code>char</code>)</p>
 <p>赋值有自带的函数, 下面是函数原型:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字节(char)</span></span><br><span class="line">__m256i _mm256_set_epi8 (<span class="keyword">char</span> e31, <span class="keyword">char</span> e30, <span class="keyword">char</span> e29, <span class="keyword">char</span> e28, <span class="keyword">char</span> e27, <span class="keyword">char</span> e26, <span class="keyword">char</span> e25, <span class="keyword">char</span> e24, <span class="keyword">char</span> e23, <span class="keyword">char</span> e22, <span class="keyword">char</span> e21, <span class="keyword">char</span> e20, <span class="keyword">char</span> e19, <span class="keyword">char</span> e18, <span class="keyword">char</span> e17, <span class="keyword">char</span> e16, <span class="keyword">char</span> e15, <span class="keyword">char</span> e14, <span class="keyword">char</span> e13, <span class="keyword">char</span> e12, <span class="keyword">char</span> e11, <span class="keyword">char</span> e10, <span class="keyword">char</span> e9, <span class="keyword">char</span> e8, <span class="keyword">char</span> e7, <span class="keyword">char</span> e6, <span class="keyword">char</span> e5, <span class="keyword">char</span> e4, <span class="keyword">char</span> e3, <span class="keyword">char</span> e2, <span class="keyword">char</span> e1, <span class="keyword">char</span> e0)</span><br><span class="line"></span><br><span class="line"><span class="comment">// short</span></span><br><span class="line">__m256i _mm256_set_epi16 (<span class="keyword">short</span> e15, <span class="keyword">short</span> e14, <span class="keyword">short</span> e13, <span class="keyword">short</span> e12, <span class="keyword">short</span> e11, <span class="keyword">short</span> e10, <span class="keyword">short</span> e9, <span class="keyword">short</span> e8, <span class="keyword">short</span> e7, <span class="keyword">short</span> e6, <span class="keyword">short</span> e5, <span class="keyword">short</span> e4, <span class="keyword">short</span> e3, <span class="keyword">short</span> e2, <span class="keyword">short</span> e1, <span class="keyword">short</span> e0)</span><br><span class="line"></span><br><span class="line"><span class="comment">// int</span></span><br><span class="line">__m256i _mm256_set_epi32 (<span class="keyword">int</span> e7, <span class="keyword">int</span> e6, <span class="keyword">int</span> e5, <span class="keyword">int</span> e4, <span class="keyword">int</span> e3, <span class="keyword">int</span> e2, <span class="keyword">int</span> e1, <span class="keyword">int</span> e0)</span><br><span class="line"></span><br><span class="line"><span class="comment">// long long int</span></span><br><span class="line">__m256i _mm256_set_epi64x (<span class="keyword">long</span> <span class="keyword">long</span> e3, <span class="keyword">long</span> <span class="keyword">long</span> e2, <span class="keyword">long</span> <span class="keyword">long</span> e1, <span class="keyword">long</span> <span class="keyword">long</span> e0)</span><br><span class="line"></span><br><span class="line"><span class="comment">// __int128</span></span><br><span class="line">__m256i _mm256_set_m128i (__m128i hi, __m128i lo)</span><br></pre></td></tr></table></figure>
+
 <p>注意! 对于指令集存储的数字是 <strong>倒序</strong> 的</p>
 <p>除此之外, 指令集由函数资瓷全部赋值为一个数, 下面是两个例子, 其他的仿照上面就好啦</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__m256i _mm256_set1_epi64x (<span class="keyword">long</span> <span class="keyword">long</span> a)</span><br><span class="line">__m256i _mm256_set1_epi32 (<span class="keyword">int</span> a)</span><br></pre></td></tr></table></figure>
-<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3>
-<p>下面只给出 <code>__int32</code>(<code>int</code>) 和 <code>__int64</code>(<code>long long</code>) 的实例</p>
+
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><p>下面只给出 <code>__int32</code>(<code>int</code>) 和 <code>__int64</code>(<code>long long</code>) 的实例</p>
 <p><strong>判断两指令集是否相等</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__m256i _mm256_cmpeq_epi32 (__m256i a, __m256i b)</span><br><span class="line">__m256i _mm256_cmpeq_epi64 (__m256i a, __m256i b)</span><br></pre></td></tr></table></figure>
-<p>返回一个指令集, 对于第 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0.802ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 345.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-19-Title">
-<title id="MathJax-SVG-19-Title">i</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E19-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E19-MJMATHI-69" x="0" y="0"/>
-</g>
-</svg></span> 位, 若 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="7.295ex" height="2.009ex" style="vertical-align: -0.671ex;" viewbox="0 -576.1 3141.1 865.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-20-Title">
-<title id="MathJax-SVG-20-Title">a_i=a_b</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E20-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"/>
-<path stroke-width="1" id="E20-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
-<path stroke-width="1" id="E20-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
-<path stroke-width="1" id="E20-MJMATHI-62" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E20-MJMATHI-61" x="0" y="0"/>
- <use transform="scale(0.707)" xlink:href="#E20-MJMATHI-69" x="748" y="-213"/>
- <use xlink:href="#E20-MJMAIN-3D" x="1151" y="0"/>
-<g transform="translate(2207,0)">
- <use xlink:href="#E20-MJMATHI-61" x="0" y="0"/>
- <use transform="scale(0.707)" xlink:href="#E20-MJMATHI-62" x="748" y="-213"/>
-</g>
-</g>
-</svg></span>, 则值为 <code>0xFFFFFFFFFFFFFFFF</code> 否则就是 <code>0</code></p>
+
+<p>返回一个指令集, 对于第 $i$ 位, 若 $a_i=a_b$, 则值为 <code>0xFFFFFFFFFFFFFFFF</code> 否则就是 <code>0</code></p>
 <p><strong>判断两指令集的大小</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__m256i _mm256_cmpgt_epi32 (__m256i a, __m256i b)</span><br><span class="line">__m256i _mm256_cmpgt_epi64 (__m256i a, __m256i b)</span><br></pre></td></tr></table></figure>
-<p>返回一个指令集, 对于第 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0.802ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 345.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-21-Title">
-<title id="MathJax-SVG-21-Title">i</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E21-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E21-MJMATHI-69" x="0" y="0"/>
-</g>
-</svg></span> 位, 若 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="7.295ex" height="2.176ex" style="vertical-align: -0.671ex;" viewbox="0 -647.8 3141.1 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-22-Title">
-<title id="MathJax-SVG-22-Title">a_i&gt;a_b</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E22-MJMATHI-61" d="M33 157Q33 258 109 349T280 441Q331 441 370 392Q386 422 416 422Q429 422 439 414T449 394Q449 381 412 234T374 68Q374 43 381 35T402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487Q506 153 506 144Q506 138 501 117T481 63T449 13Q436 0 417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157ZM351 328Q351 334 346 350T323 385T277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q217 26 254 59T298 110Q300 114 325 217T351 328Z"/>
-<path stroke-width="1" id="E22-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
-<path stroke-width="1" id="E22-MJMAIN-3E" d="M84 520Q84 528 88 533T96 539L99 540Q106 540 253 471T544 334L687 265Q694 260 694 250T687 235Q685 233 395 96L107 -40H101Q83 -38 83 -20Q83 -19 83 -17Q82 -10 98 -1Q117 9 248 71Q326 108 378 132L626 250L378 368Q90 504 86 509Q84 513 84 520Z"/>
-<path stroke-width="1" id="E22-MJMATHI-62" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E22-MJMATHI-61" x="0" y="0"/>
- <use transform="scale(0.707)" xlink:href="#E22-MJMATHI-69" x="748" y="-213"/>
- <use xlink:href="#E22-MJMAIN-3E" x="1151" y="0"/>
-<g transform="translate(2207,0)">
- <use xlink:href="#E22-MJMATHI-61" x="0" y="0"/>
- <use transform="scale(0.707)" xlink:href="#E22-MJMATHI-62" x="748" y="-213"/>
-</g>
-</g>
-</svg></span>, 则值为 <code>0xFFFFFFFFFFFFFFFF</code> 否则就是 <code>0</code></p>
+
+<p>返回一个指令集, 对于第 $i$ 位, 若 $a_i&gt;a_b$, 则值为 <code>0xFFFFFFFFFFFFFFFF</code> 否则就是 <code>0</code></p>
 <p><strong>位运算合辑</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按位与</span></span><br><span class="line">__m256i _mm256_and_si256 (__m256i a, __m256i b)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按位或</span></span><br><span class="line">__m256i _mm256_or_si256 (__m256i a, __m256i b)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按位异或</span></span><br><span class="line">__m256i _mm256_xor_si256 (__m256i a, __m256i b)</span><br></pre></td></tr></table></figure>
+
 <p><strong>开根</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__m256d _mm256_sqrt_pd (__m256d a)</span><br><span class="line">__m256 _mm256_sqrt_ps (__m256 a)</span><br></pre></td></tr></table></figure>
+
 <p>这个只资瓷 <em>单精度</em> 和 <em>双精度</em> 的指令集(不是废话吗</p>
 <p><strong>上/下取整</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 向下取整</span><br><span class="line">__m256d _mm256_floor_pd (__m256d a)</span><br><span class="line">__m256 _mm256_floor_ps (__m256 a)</span><br><span class="line"></span><br><span class="line">// 向上取整</span><br><span class="line">__m256d _mm256_ceil_pd (__m256d a)</span><br><span class="line">__m256 _mm256_ceil_ps (__m256 a)</span><br></pre></td></tr></table></figure>
+
 <p>有了小数和整数, 也就有了取整</p>
 <p>更多指令集, 可以看 <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#" target="_blank" rel="noopener">这里</a></p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2>
-<h3 id="1"><a href="#1" class="headerlink" title="#1"></a>#1</h3>
-<p>下面是一个读入一个序列, 对序列中的每个数开根的程序</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="1"><a href="#1" class="headerlink" title="#1"></a>#1</h3><p>下面是一个读入一个序列, 对序列中的每个数开根的程序</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100010</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"><span class="keyword">float</span> ans[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, a + i);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) ans[i] = <span class="built_in">sqrt</span>(a[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">printf</span>(<span class="string">"%f "</span>, ans[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>可以使用指令集:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC target(<span class="meta-string">"sse,sse2,sse3,ssse3,sse4.1,sse4.2,avx,avx2,popcnt,tune=native"</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;immintrin.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;emmintrin.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100010</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line">__m256 t[MAXN / <span class="number">8</span>];</span><br><span class="line"><span class="keyword">float</span> *a = (<span class="keyword">float</span> *)&amp;t;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">"%f"</span>, a + i);</span><br><span class="line">	<span class="keyword">int</span> siz = n / <span class="number">8</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= siz; i++) t[i] = _mm256_sqrt_ps(t[i]);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">printf</span>(<span class="string">"%f "</span>, a[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2"><a href="#2" class="headerlink" title="#2"></a>#2</h3>
-<p>区间开根 区间求和</p>
+
+<h3 id="2"><a href="#2" class="headerlink" title="#2"></a>#2</h3><p>区间开根 区间求和</p>
 <p>大概是我实现丑了, 只能做 <code>float</code> 范围内的(?)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC target(<span class="meta-string">"sse,sse2,sse3,ssse3,sse4.1,sse4.2,avx,avx2,popcnt,tune=native"</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;immintrin.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;emmintrin.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">100000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line">__m256 a[MAXN &gt;&gt; <span class="number">3</span>];</span><br><span class="line"><span class="keyword">float</span> t[<span class="number">9</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (((l - <span class="number">1</span>) &amp; <span class="number">7</span>) &amp;&amp; l &lt;= r)</span><br><span class="line">        ((<span class="keyword">float</span>*)(a + (l &gt;&gt; <span class="number">3</span>) + <span class="number">1</span>))[(l &amp; <span class="number">7</span>) - <span class="number">1</span>] =</span><br><span class="line">            <span class="built_in">floor</span>(<span class="built_in">sqrt</span>(((<span class="keyword">float</span>*)(a + (l &gt;&gt; <span class="number">3</span>) + <span class="number">1</span>))[(l &amp; <span class="number">7</span>) - <span class="number">1</span>])),</span><br><span class="line">                                               ++l;</span><br><span class="line">    <span class="keyword">if</span> (l == r + <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">while</span> ((r &amp; <span class="number">7</span>) &amp;&amp; l &lt;= r)</span><br><span class="line">        ((<span class="keyword">float</span>*)(a + (r &gt;&gt; <span class="number">3</span>) + <span class="number">1</span>))[(r &amp; <span class="number">7</span>) - <span class="number">1</span>] =</span><br><span class="line">            <span class="built_in">floor</span>(<span class="built_in">sqrt</span>(((<span class="keyword">float</span>*)(a + (r &gt;&gt; <span class="number">3</span>) + <span class="number">1</span>))[(r &amp; <span class="number">7</span>) - <span class="number">1</span>])),</span><br><span class="line">                                               --r;</span><br><span class="line">    <span class="keyword">if</span> (l == r + <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    l = (l &gt;&gt; <span class="number">3</span>) + <span class="number">1</span>, r &gt;&gt;= <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt;= r) a[l] = _mm256_floor_ps(_mm256_sqrt_ps(a[l])), ++l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (r &lt; l) l ^= r ^= l ^= r;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (((l - <span class="number">1</span>) &amp; <span class="number">7</span>) &amp;&amp; l &lt;= r)</span><br><span class="line">        ans += <span class="built_in">floor</span>(((<span class="keyword">float</span>*)(a + (l &gt;&gt; <span class="number">3</span>) + <span class="number">1</span>))[(l &amp; <span class="number">7</span>) - <span class="number">1</span>]), ++l;</span><br><span class="line">    <span class="keyword">if</span> (l == r + <span class="number">1</span>) <span class="keyword">return</span> ans;</span><br><span class="line">    <span class="keyword">while</span> ((r &amp; <span class="number">7</span>) &amp;&amp; l &lt;= r)</span><br><span class="line">        ans += <span class="built_in">floor</span>(((<span class="keyword">float</span>*)(a + (r &gt;&gt; <span class="number">3</span>) + <span class="number">1</span>))[(r &amp; <span class="number">7</span>) - <span class="number">1</span>]), --r;</span><br><span class="line">    <span class="keyword">if</span> (l == r + <span class="number">1</span>) <span class="keyword">return</span> ans;</span><br><span class="line">    l = (l &gt;&gt; <span class="number">3</span>) + <span class="number">1</span>, r &gt;&gt;= <span class="number">3</span>;</span><br><span class="line">    __m256 s = _mm256_set_ps(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">while</span> (l &lt;= r) s = _mm256_add_ps(a[l], s), ++l;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; ++i) ans += <span class="built_in">floor</span>(((<span class="keyword">float</span>*)&amp;s)[i]);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">int</span> num = n &gt;&gt; <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= num; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= <span class="number">8</span>; ++j) <span class="built_in">scanf</span>(<span class="string">"%f"</span>, t + j);</span><br><span class="line">        a[i] = _mm256_set_ps(t[<span class="number">8</span>], t[<span class="number">7</span>], t[<span class="number">6</span>], t[<span class="number">5</span>], t[<span class="number">4</span>], t[<span class="number">3</span>], t[<span class="number">2</span>], t[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= (n &amp; <span class="number">7</span>); ++i) <span class="built_in">scanf</span>(<span class="string">"%f"</span>, t + i);</span><br><span class="line">    a[++num] = _mm256_set_ps(t[<span class="number">8</span>], t[<span class="number">7</span>], t[<span class="number">6</span>], t[<span class="number">5</span>], t[<span class="number">4</span>], t[<span class="number">3</span>], t[<span class="number">2</span>], t[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m);</span><br><span class="line">    <span class="keyword">int</span> opt, p, q;</span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;opt, &amp;p, &amp;q);</span><br><span class="line">        <span class="keyword">if</span> (!opt)</span><br><span class="line">            modify(p, q);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, (<span class="keyword">long</span> <span class="keyword">long</span>)<span class="built_in">floor</span>(query(p, q)));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -930,7 +695,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1112,7 +877,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">78</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

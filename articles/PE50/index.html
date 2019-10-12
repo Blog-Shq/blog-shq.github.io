@@ -107,18 +107,18 @@
 
 
 
-  <meta name="description" content="PE 氵题 Link: Problem 50 - Project Euler 简要题意 求一个小于  10^6               的能表示为最多连续质数的和的质数 比如  41 = 2 + 3 + 5 + 7 + 11 + 13                                                  是  10^2               以内能表示为最多连">
+  <meta name="description" content="PE 氵题 Link: Problem 50 - Project Euler 简要题意求一个小于 $10^6$ 的能表示为最多连续质数的和的质数 比如 $41 = 2 + 3 + 5 + 7 + 11 + 13$ 是 $10^2$ 以内能表示为最多连续质数和的质数">
 <meta name="keywords" content="欧拉计划,双指针,线性筛">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「PE#50」Consecutive prime sum - 双指针">
 <meta property="og:url" content="https://blog.ishq.site/articles/PE50/index.html">
 <meta property="og:site_name" content="Shq&#39;s Blog">
-<meta property="og:description" content="PE 氵题 Link: Problem 50 - Project Euler 简要题意 求一个小于  10^6               的能表示为最多连续质数的和的质数 比如  41 = 2 + 3 + 5 + 7 + 11 + 13                                                  是  10^2               以内能表示为最多连">
+<meta property="og:description" content="PE 氵题 Link: Problem 50 - Project Euler 简要题意求一个小于 $10^6$ 的能表示为最多连续质数的和的质数 比如 $41 = 2 + 3 + 5 + 7 + 11 + 13$ 是 $10^2$ 以内能表示为最多连续质数和的质数">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-10-09T08:38:16.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「PE#50」Consecutive prime sum - 双指针">
-<meta name="twitter:description" content="PE 氵题 Link: Problem 50 - Project Euler 简要题意 求一个小于  10^6               的能表示为最多连续质数的和的质数 比如  41 = 2 + 3 + 5 + 7 + 11 + 13                                                  是  10^2               以内能表示为最多连">
+<meta name="twitter:description" content="PE 氵题 Link: Problem 50 - Project Euler 简要题意求一个小于 $10^6$ 的能表示为最多连续质数的和的质数 比如 $41 = 2 + 3 + 5 + 7 + 11 + 13$ 是 $10^2$ 以内能表示为最多连续质数和的质数">
 
 
 
@@ -245,7 +245,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">75</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">78</span></a>
   </li>
         
         
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">37</span></a>
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">38</span></a>
   </li>
         
         
@@ -472,145 +472,20 @@
 
       
         <p>PE 氵题 Link: <a href>Problem 50 - Project Euler</a></p>
-<h1 id="简要题意"><a href="#简要题意" class="headerlink" title="简要题意"></a>简要题意</h1>
-<p>求一个小于 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.379ex" height="2.676ex" style="vertical-align: -0.338ex;" viewbox="0 -1006.6 1454.9 1152.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">10^6</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E2-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E2-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
-<path stroke-width="1" id="E2-MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E2-MJMAIN-31"/>
- <use xlink:href="#E2-MJMAIN-30" x="500" y="0"/>
- <use transform="scale(0.707)" xlink:href="#E2-MJMAIN-36" x="1415" y="557"/>
-</g>
-</svg></span> 的能表示为最多连续质数的和的质数</p>
-<p>比如 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="28.925ex" height="2.343ex" style="vertical-align: -0.505ex;" viewbox="0 -791.3 12453.8 1008.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
-<title id="MathJax-SVG-3-Title">41 = 2 + 3 + 5 + 7 + 11 + 13</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E3-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/>
-<path stroke-width="1" id="E3-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E3-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
-<path stroke-width="1" id="E3-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E3-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
-<path stroke-width="1" id="E3-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/>
-<path stroke-width="1" id="E3-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E3-MJMAIN-37" d="M55 458Q56 460 72 567L88 674Q88 676 108 676H128V672Q128 662 143 655T195 646T364 644H485V605L417 512Q408 500 387 472T360 435T339 403T319 367T305 330T292 284T284 230T278 162T275 80Q275 66 275 52T274 28V19Q270 2 255 -10T221 -22Q210 -22 200 -19T179 0T168 40Q168 198 265 368Q285 400 349 489L395 552H302Q128 552 119 546Q113 543 108 522T98 479L95 458V455H55V458Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E3-MJMAIN-34"/>
- <use xlink:href="#E3-MJMAIN-31" x="500" y="0"/>
- <use xlink:href="#E3-MJMAIN-3D" x="1278" y="0"/>
- <use xlink:href="#E3-MJMAIN-32" x="2335" y="0"/>
- <use xlink:href="#E3-MJMAIN-2B" x="3057" y="0"/>
- <use xlink:href="#E3-MJMAIN-33" x="4058" y="0"/>
- <use xlink:href="#E3-MJMAIN-2B" x="4781" y="0"/>
- <use xlink:href="#E3-MJMAIN-35" x="5781" y="0"/>
- <use xlink:href="#E3-MJMAIN-2B" x="6504" y="0"/>
- <use xlink:href="#E3-MJMAIN-37" x="7505" y="0"/>
- <use xlink:href="#E3-MJMAIN-2B" x="8228" y="0"/>
-<g transform="translate(9228,0)">
- <use xlink:href="#E3-MJMAIN-31"/>
- <use xlink:href="#E3-MJMAIN-31" x="500" y="0"/>
-</g>
- <use xlink:href="#E3-MJMAIN-2B" x="10452" y="0"/>
-<g transform="translate(11452,0)">
- <use xlink:href="#E3-MJMAIN-31"/>
- <use xlink:href="#E3-MJMAIN-33" x="500" y="0"/>
-</g>
-</g>
-</svg></span> 是 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.379ex" height="2.676ex" style="vertical-align: -0.338ex;" viewbox="0 -1006.6 1454.9 1152.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
-<title id="MathJax-SVG-4-Title">10^2</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E4-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E4-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
-<path stroke-width="1" id="E4-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E4-MJMAIN-31"/>
- <use xlink:href="#E4-MJMAIN-30" x="500" y="0"/>
- <use transform="scale(0.707)" xlink:href="#E4-MJMAIN-32" x="1415" y="557"/>
-</g>
-</svg></span> 以内能表示为最多连续质数和的质数</p>
+<h1 id="简要题意"><a href="#简要题意" class="headerlink" title="简要题意"></a>简要题意</h1><p>求一个小于 $10^6$ 的能表示为最多连续质数的和的质数</p>
+<p>比如 $41 = 2 + 3 + 5 + 7 + 11 + 13$ 是 $10^2$ 以内能表示为最多连续质数和的质数</p>
 <a id="more"></a>
-<h1 id="Consecutive-prime-sum"><a href="#Consecutive-prime-sum" class="headerlink" title="Consecutive prime sum"></a>Consecutive prime sum</h1>
-<p>The prime <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.325ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1001 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-5-Title">
-<title id="MathJax-SVG-5-Title">41</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E5-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/>
-<path stroke-width="1" id="E5-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E5-MJMAIN-34"/>
- <use xlink:href="#E5-MJMAIN-31" x="500" y="0"/>
-</g>
-</svg></span>, can be written as the sum of six consecutive primes:</p>
-<p><span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="28.925ex" height="2.343ex" style="vertical-align: -0.505ex;" viewbox="0 -791.3 12453.8 1008.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-6-Title">
-<title id="MathJax-SVG-6-Title">41 = 2 + 3 + 5 + 7 + 11 + 13</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E6-MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"/>
-<path stroke-width="1" id="E6-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E6-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
-<path stroke-width="1" id="E6-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E6-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
-<path stroke-width="1" id="E6-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/>
-<path stroke-width="1" id="E6-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E6-MJMAIN-37" d="M55 458Q56 460 72 567L88 674Q88 676 108 676H128V672Q128 662 143 655T195 646T364 644H485V605L417 512Q408 500 387 472T360 435T339 403T319 367T305 330T292 284T284 230T278 162T275 80Q275 66 275 52T274 28V19Q270 2 255 -10T221 -22Q210 -22 200 -19T179 0T168 40Q168 198 265 368Q285 400 349 489L395 552H302Q128 552 119 546Q113 543 108 522T98 479L95 458V455H55V458Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E6-MJMAIN-34"/>
- <use xlink:href="#E6-MJMAIN-31" x="500" y="0"/>
- <use xlink:href="#E6-MJMAIN-3D" x="1278" y="0"/>
- <use xlink:href="#E6-MJMAIN-32" x="2335" y="0"/>
- <use xlink:href="#E6-MJMAIN-2B" x="3057" y="0"/>
- <use xlink:href="#E6-MJMAIN-33" x="4058" y="0"/>
- <use xlink:href="#E6-MJMAIN-2B" x="4781" y="0"/>
- <use xlink:href="#E6-MJMAIN-35" x="5781" y="0"/>
- <use xlink:href="#E6-MJMAIN-2B" x="6504" y="0"/>
- <use xlink:href="#E6-MJMAIN-37" x="7505" y="0"/>
- <use xlink:href="#E6-MJMAIN-2B" x="8228" y="0"/>
-<g transform="translate(9228,0)">
- <use xlink:href="#E6-MJMAIN-31"/>
- <use xlink:href="#E6-MJMAIN-31" x="500" y="0"/>
-</g>
- <use xlink:href="#E6-MJMAIN-2B" x="10452" y="0"/>
-<g transform="translate(11452,0)">
- <use xlink:href="#E6-MJMAIN-31"/>
- <use xlink:href="#E6-MJMAIN-33" x="500" y="0"/>
-</g>
-</g>
-</svg></span></p>
+
+<h1 id="Consecutive-prime-sum"><a href="#Consecutive-prime-sum" class="headerlink" title="Consecutive prime sum"></a>Consecutive prime sum</h1><p>The prime $41$, can be written as the sum of six consecutive primes:</p>
+<p>$41 = 2 + 3 + 5 + 7 + 11 + 13$</p>
 <p>This is the longest sum of consecutive primes that adds to a prime below one-hundred.</p>
-<p>The longest sum of consecutive primes below one-thousand that adds to a prime, contains <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.325ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1001 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-7-Title">
-<title id="MathJax-SVG-7-Title">21</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E7-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
-<path stroke-width="1" id="E7-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E7-MJMAIN-32"/>
- <use xlink:href="#E7-MJMAIN-31" x="500" y="0"/>
-</g>
-</svg></span> terms, and is equal to <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 1501.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-8-Title">
-<title id="MathJax-SVG-8-Title">953</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E8-MJMAIN-39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z"/>
-<path stroke-width="1" id="E8-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E8-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E8-MJMAIN-39"/>
- <use xlink:href="#E8-MJMAIN-35" x="500" y="0"/>
- <use xlink:href="#E8-MJMAIN-33" x="1001" y="0"/>
-</g>
-</svg></span>.</p>
+<p>The longest sum of consecutive primes below one-thousand that adds to a prime, contains $21$ terms, and is equal to $953$.</p>
 <p>Which prime, below one-million, can be written as the sum of the most consecutive primes?</p>
 <hr>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1>
-<p>由于素数是单调的, 所以考虑双指针即可</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>由于素数是单调的, 所以考虑双指针即可</p>
 <p>下面这个程序本地跑了10s就过了(((</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"><span class="keyword">int</span> pri[N];</span><br><span class="line"><span class="keyword">bool</span> vis[N + <span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pre</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!vis[i]) pri[++cnt] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= cnt &amp;&amp; i * pri[j] &lt;= N; j++) &#123;</span><br><span class="line">            vis[i * pri[j]] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (i % pri[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    pre();</span><br><span class="line">    <span class="keyword">int</span> sum, fl;</span><br><span class="line">    <span class="keyword">int</span> ansl = <span class="number">1</span>, ansr = <span class="number">0</span>, ans = pri[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">1</span>, right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> _l = <span class="number">1</span>, _r = <span class="number">0</span>;</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt;= i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (right &lt; cnt &amp;&amp; sum &lt; pri[i]) sum += pri[++right];</span><br><span class="line">            <span class="keyword">if</span> (sum == pri[i] &amp;&amp; right - left &gt; _r - _l) _r = right, _l = left;</span><br><span class="line">            sum -= pri[left++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (_r - _l &gt;= ansr - ansl) &#123;</span><br><span class="line">            ansr = _r, ansl = _l;</span><br><span class="line">            ans = pri[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"[%lld, %lld] =&gt; %lld\n"</span>, ansl, ansr, ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -766,7 +641,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -948,7 +823,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">78</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

@@ -245,7 +245,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">75</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">78</span></a>
   </li>
         
         
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">37</span></a>
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">38</span></a>
   </li>
         
         
@@ -476,9 +476,9 @@
 </blockquote>
 <p>大概是数位DP入门基础笔记</p>
 <a id="more"></a>
-<h1 id="数位DP"><a href="#数位DP" class="headerlink" title="数位DP"></a>数位DP</h1>
-<p>大概就是一种类型的DP, 通常应用于 答案在 <strong>限制/贡献</strong> 上与统计对象的 <strong>数位</strong> 之间有着密切的关系 (可能是数位间相互影响, 也可能是相对独立)</p>
-<p>通常需要记录的信息是:</p>
+
+<h1 id="数位DP"><a href="#数位DP" class="headerlink" title="数位DP"></a>数位DP</h1><p>大概就是一种类型的DP, 通常应用于 答案在 <strong>限制/贡献</strong> 上与统计对象的 <strong>数位</strong> 之间有着密切的关系 (可能是数位间相互影响, 也可能是相对独立)</p>
+<p>通常需要记录的信息是: </p>
 <ol>
 <li>位数</li>
 <li>上界</li>
@@ -486,46 +486,13 @@
 <li>其他要维护的信息</li>
 </ol>
 <p>有了这些, 我们就来看一个简单的板子题</p>
-<h2 id="某用烂的板子题"><a href="#某用烂的板子题" class="headerlink" title="某用烂的板子题"></a>某用烂的板子题</h2>
-<p>区间 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.07ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 1752.2 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">[l, r]</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E2-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
-<path stroke-width="1" id="E2-MJMATHI-6C" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"/>
-<path stroke-width="1" id="E2-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/>
-<path stroke-width="1" id="E2-MJMATHI-72" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
-<path stroke-width="1" id="E2-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E2-MJMAIN-5B" x="0" y="0"/>
- <use xlink:href="#E2-MJMATHI-6C" x="278" y="0"/>
- <use xlink:href="#E2-MJMAIN-2C" x="577" y="0"/>
- <use xlink:href="#E2-MJMATHI-72" x="1022" y="0"/>
- <use xlink:href="#E2-MJMAIN-5D" x="1473" y="0"/>
-</g>
-</svg></span> 中数位不含有4也不含有连续的62的数的个数</p>
+<h2 id="某用烂的板子题"><a href="#某用烂的板子题" class="headerlink" title="某用烂的板子题"></a>某用烂的板子题</h2><p>区间 $[l, r]$ 中数位不含有4也不含有连续的62的数的个数</p>
 <p>我不会数位DP, 但是我会剪枝 + 记忆化:</p>
 <p>细节以及注释大概都在代码里</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dp[n][1/0] : dp[n-digit, is 6], init with -1</span></span><br><span class="line"><span class="comment">// dfs(pos, pre, status, limit) - get [1, pos]'s answer</span></span><br><span class="line"><span class="comment">//     limit - first digit limit</span></span><br><span class="line"><span class="comment">//     status - is '6'</span></span><br><span class="line"><span class="comment">//     pos - for [1, pos]</span></span><br><span class="line"><span class="comment">//     pre - last digit</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span> <span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> pre, <span class="keyword">bool</span> status, <span class="keyword">bool</span> limit)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (!limit &amp;&amp; dp[pos][status] != <span class="number">-1</span>) <span class="keyword">return</span> dp[pos][status];</span><br><span class="line">    <span class="keyword">int</span> lim = limit ? v[pos] : <span class="number">9</span>;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= lim; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (pre == <span class="number">6</span> &amp;&amp; i == <span class="number">2</span>) <span class="keyword">continue</span>; <span class="comment">// limit #1</span></span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">4</span>) <span class="keyword">continue</span>; <span class="comment">// limit #2</span></span><br><span class="line">        ret += dfs (pos - <span class="number">1</span>, i, i == <span class="number">6</span>, limit &amp; (i == v[pos]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!limit) dp[pos][status] = ret;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">split</span> <span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x) &#123;</span><br><span class="line">        v[++pos] = x % <span class="number">10</span>;</span><br><span class="line">        x = x / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dfs(pos, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>相信你已经对数位DP了如指掌了, 下面一道题也是板子题, 快来把这个sb博主爆掉吧</p>
-<h2 id="某用烂的板子题-II"><a href="#某用烂的板子题-II" class="headerlink" title="某用烂的板子题 II"></a>某用烂的板子题 II</h2>
-<p>区间 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.07ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 1752.2 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
-<title id="MathJax-SVG-3-Title">[l, r]</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E3-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
-<path stroke-width="1" id="E3-MJMATHI-6C" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"/>
-<path stroke-width="1" id="E3-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/>
-<path stroke-width="1" id="E3-MJMATHI-72" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
-<path stroke-width="1" id="E3-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E3-MJMAIN-5B" x="0" y="0"/>
- <use xlink:href="#E3-MJMATHI-6C" x="278" y="0"/>
- <use xlink:href="#E3-MJMAIN-2C" x="577" y="0"/>
- <use xlink:href="#E3-MJMATHI-72" x="1022" y="0"/>
- <use xlink:href="#E3-MJMAIN-5D" x="1473" y="0"/>
-</g>
-</svg></span> 中不含前导零且相邻两个数字之差至少为2的数的个数</p>
+<h2 id="某用烂的板子题-II"><a href="#某用烂的板子题-II" class="headerlink" title="某用烂的板子题 II"></a>某用烂的板子题 II</h2><p>区间 $[l, r]$ 中不含前导零且相邻两个数字之差至少为2的数的个数</p>
 <p>我不会数位DP, 但是我会剪枝 + 记忆化:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dp[n][p] : dp[n-digit, last number is p], init with -1</span></span><br><span class="line"><span class="comment">// dfs(pos, pre, status, limit) - get [1, pos]'s answer</span></span><br><span class="line"><span class="comment">//     limit - first digit limit</span></span><br><span class="line"><span class="comment">//     status - start with 0</span></span><br><span class="line"><span class="comment">//     pos - for [1, pos]</span></span><br><span class="line"><span class="comment">//     pre - last digit</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span> <span class="params">(<span class="keyword">int</span> pos, <span class="keyword">int</span> pre, <span class="keyword">bool</span> status, <span class="keyword">bool</span> limit)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (!limit &amp;&amp; !status &amp;&amp; dp[pos][pre] != <span class="number">-1</span>) <span class="keyword">return</span> dp[pos][pre];</span><br><span class="line">    <span class="keyword">int</span> lim = limit ? v[pos] : <span class="number">9</span>;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>, fl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= lim; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">abs</span>(i - pre) &lt; <span class="number">2</span>) <span class="keyword">continue</span>;</span><br><span class="line">        fl = i;</span><br><span class="line">        <span class="keyword">if</span> (status &amp;&amp; i == <span class="number">0</span>) fl = <span class="number">11</span>; <span class="comment">// 11 - 9 &gt;= 2, then we can choose number in [0, 9]</span></span><br><span class="line">        ret += dfs (pos - <span class="number">1</span>, fl, fl == <span class="number">11</span>, limit &amp; (i == v[pos]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!limit &amp;&amp; !status) dp[pos][pre] = ret;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">split</span> <span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x) &#123;</span><br><span class="line">        v[++pos] = x % <span class="number">10</span>;</span><br><span class="line">        x = x / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dfs(pos, <span class="number">11</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -680,7 +647,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -862,7 +829,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">75</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">78</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
