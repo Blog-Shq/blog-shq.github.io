@@ -107,20 +107,20 @@
 
 
 
-  <meta name="description" content="本文大概是关于构造递推序列的矩阵 绪言算法竞赛中经常会遇到快速求一类 $k$ 阶递推序列的第 $n$ 项的题目, 可以通过 $O(k^3 \log_2 n)$ 的时间复杂度的 矩阵快速幂 来解决, 即通过构造出矩阵并对矩阵快速幂来快速解决 比如对于斐波那契数列 $f_0 = f_1 = 1, f _ i = f _ {i - 1} + f _ {i - 2}, i\geq 2$, 可以通过构造下面">
+  <meta name="description" content="本文大概是关于构造递推序列的矩阵 绪言 算法竞赛中经常会遇到快速求一类  k         阶递推序列的第  n         项的题目, 可以通过  O(k^3 \log_2 n)                                        的时间复杂度的 矩阵快速幂 来解决, 即通过构造出矩阵并对矩阵快速幂来快速解决 比如对于斐波那契数列  f_0 = f_1 = 1,">
 <meta name="keywords" content="数学,矩阵快速幂,矩阵">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「递推式」关于一类递推序列的矩阵构造">
 <meta property="og:url" content="https://blog.ishq.site/articles/Construction-matrix/index.html">
 <meta property="og:site_name" content="Shq&#39;s Blog">
-<meta property="og:description" content="本文大概是关于构造递推序列的矩阵 绪言算法竞赛中经常会遇到快速求一类 $k$ 阶递推序列的第 $n$ 项的题目, 可以通过 $O(k^3 \log_2 n)$ 的时间复杂度的 矩阵快速幂 来解决, 即通过构造出矩阵并对矩阵快速幂来快速解决 比如对于斐波那契数列 $f_0 = f_1 = 1, f _ i = f _ {i - 1} + f _ {i - 2}, i\geq 2$, 可以通过构造下面">
+<meta property="og:description" content="本文大概是关于构造递推序列的矩阵 绪言 算法竞赛中经常会遇到快速求一类  k         阶递推序列的第  n         项的题目, 可以通过  O(k^3 \log_2 n)                                        的时间复杂度的 矩阵快速幂 来解决, 即通过构造出矩阵并对矩阵快速幂来快速解决 比如对于斐波那契数列  f_0 = f_1 = 1,">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/10/01/OoZTQBa6HieuAd4.png">
 <meta property="og:image" content="https://i.loli.net/2019/10/01/QyXvtLlqmdNURYg.png">
 <meta property="og:updated_time" content="2019-10-01T11:14:16.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「递推式」关于一类递推序列的矩阵构造">
-<meta name="twitter:description" content="本文大概是关于构造递推序列的矩阵 绪言算法竞赛中经常会遇到快速求一类 $k$ 阶递推序列的第 $n$ 项的题目, 可以通过 $O(k^3 \log_2 n)$ 的时间复杂度的 矩阵快速幂 来解决, 即通过构造出矩阵并对矩阵快速幂来快速解决 比如对于斐波那契数列 $f_0 = f_1 = 1, f _ i = f _ {i - 1} + f _ {i - 2}, i\geq 2$, 可以通过构造下面">
+<meta name="twitter:description" content="本文大概是关于构造递推序列的矩阵 绪言 算法竞赛中经常会遇到快速求一类  k         阶递推序列的第  n         项的题目, 可以通过  O(k^3 \log_2 n)                                        的时间复杂度的 矩阵快速幂 来解决, 即通过构造出矩阵并对矩阵快速幂来快速解决 比如对于斐波那契数列  f_0 = f_1 = 1,">
 <meta name="twitter:image" content="https://i.loli.net/2019/10/01/OoZTQBa6HieuAd4.png">
 
 
@@ -475,37 +475,934 @@
 
       
         <p>本文大概是关于构造递推序列的矩阵</p>
-<h1 id="绪言"><a href="#绪言" class="headerlink" title="绪言"></a>绪言</h1><p>算法竞赛中经常会遇到快速求一类 $k$ 阶递推序列的第 $n$ 项的题目, 可以通过 $O(k^3 \log_2 n)$ 的时间复杂度的 <em>矩阵快速幂</em> 来解决, 即通过构造出矩阵并对矩阵快速幂来快速解决</p>
-<p>比如对于斐波那契数列 $f_0 = f_1 = 1, f _ i = f _ {i - 1} + f _ {i - 2}, i\geq 2$, 可以通过构造下面的矩阵来解决</p>
+<h1 id="绪言"><a href="#绪言" class="headerlink" title="绪言"></a>绪言</h1>
+<p>算法竞赛中经常会遇到快速求一类 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.211ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 521.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<title id="MathJax-SVG-2-Title">k</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E2-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E2-MJMATHI-6B" x="0" y="0"/>
+</g>
+</svg></span> 阶递推序列的第 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 600.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
+<title id="MathJax-SVG-3-Title">n</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E3-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E3-MJMATHI-6E" x="0" y="0"/>
+</g>
+</svg></span> 项的题目, 可以通过 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="12.043ex" height="3.009ex" style="vertical-align: -0.838ex;" viewbox="0 -934.9 5185.1 1295.7" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
+<title id="MathJax-SVG-4-Title">O(k^3 \log_2 n)</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E4-MJMATHI-4F" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"/>
+<path stroke-width="1" id="E4-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/>
+<path stroke-width="1" id="E4-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/>
+<path stroke-width="1" id="E4-MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"/>
+<path stroke-width="1" id="E4-MJMAIN-6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"/>
+<path stroke-width="1" id="E4-MJMAIN-6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"/>
+<path stroke-width="1" id="E4-MJMAIN-67" d="M329 409Q373 453 429 453Q459 453 472 434T485 396Q485 382 476 371T449 360Q416 360 412 390Q410 404 415 411Q415 412 416 414V415Q388 412 363 393Q355 388 355 386Q355 385 359 381T368 369T379 351T388 325T392 292Q392 230 343 187T222 143Q172 143 123 171Q112 153 112 133Q112 98 138 81Q147 75 155 75T227 73Q311 72 335 67Q396 58 431 26Q470 -13 470 -72Q470 -139 392 -175Q332 -206 250 -206Q167 -206 107 -175Q29 -140 29 -75Q29 -39 50 -15T92 18L103 24Q67 55 67 108Q67 155 96 193Q52 237 52 292Q52 355 102 398T223 442Q274 442 318 416L329 409ZM299 343Q294 371 273 387T221 404Q192 404 171 388T145 343Q142 326 142 292Q142 248 149 227T179 192Q196 182 222 182Q244 182 260 189T283 207T294 227T299 242Q302 258 302 292T299 343ZM403 -75Q403 -50 389 -34T348 -11T299 -2T245 0H218Q151 0 138 -6Q118 -15 107 -34T95 -74Q95 -84 101 -97T122 -127T170 -155T250 -167Q319 -167 361 -139T403 -75Z"/>
+<path stroke-width="1" id="E4-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
+<path stroke-width="1" id="E4-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E4-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E4-MJMATHI-4F" x="0" y="0"/>
+ <use xlink:href="#E4-MJMAIN-28" x="763" y="0"/>
+<g transform="translate(1153,0)">
+ <use xlink:href="#E4-MJMATHI-6B" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E4-MJMAIN-33" x="737" y="513"/>
+</g>
+<g transform="translate(2295,0)">
+ <use xlink:href="#E4-MJMAIN-6C"/>
+ <use xlink:href="#E4-MJMAIN-6F" x="278" y="0"/>
+ <use xlink:href="#E4-MJMAIN-67" x="779" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E4-MJMAIN-32" x="1809" y="-343"/>
+</g>
+ <use xlink:href="#E4-MJMATHI-6E" x="4195" y="0"/>
+ <use xlink:href="#E4-MJMAIN-29" x="4795" y="0"/>
+</g>
+</svg></span> 的时间复杂度的 <em>矩阵快速幂</em> 来解决, 即通过构造出矩阵并对矩阵快速幂来快速解决</p>
+<p>比如对于斐波那契数列 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="34.834ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 14998 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-5-Title">
+<title id="MathJax-SVG-5-Title">f_0 = f_1 = 1, f _ i = f _ {i - 1} + f _ {i - 2}, i\geq 2</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E5-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E5-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
+<path stroke-width="1" id="E5-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E5-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E5-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/>
+<path stroke-width="1" id="E5-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E5-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E5-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+<path stroke-width="1" id="E5-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
+<path stroke-width="1" id="E5-MJMAIN-2265" d="M83 616Q83 624 89 630T99 636Q107 636 253 568T543 431T687 361Q694 356 694 346T687 331Q685 329 395 192L107 56H101Q83 58 83 76Q83 77 83 79Q82 86 98 95Q117 105 248 167Q326 204 378 228L626 346L360 472Q291 505 200 548Q112 589 98 597T83 616ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E5-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMAIN-30" x="693" y="-213"/>
+ <use xlink:href="#E5-MJMAIN-3D" x="1222" y="0"/>
+<g transform="translate(2278,0)">
+ <use xlink:href="#E5-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMAIN-31" x="693" y="-213"/>
+</g>
+ <use xlink:href="#E5-MJMAIN-3D" x="3500" y="0"/>
+ <use xlink:href="#E5-MJMAIN-31" x="4556" y="0"/>
+ <use xlink:href="#E5-MJMAIN-2C" x="5057" y="0"/>
+<g transform="translate(5502,0)">
+ <use xlink:href="#E5-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-69" x="693" y="-213"/>
+</g>
+ <use xlink:href="#E5-MJMAIN-3D" x="6615" y="0"/>
+<g transform="translate(7671,0)">
+ <use xlink:href="#E5-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+ <use xlink:href="#E5-MJMAIN-2B" x="9632" y="0"/>
+<g transform="translate(10633,0)">
+ <use xlink:href="#E5-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E5-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E5-MJMAIN-32" x="1124" y="0"/>
+</g>
+</g>
+ <use xlink:href="#E5-MJMAIN-2C" x="12372" y="0"/>
+ <use xlink:href="#E5-MJMATHI-69" x="12817" y="0"/>
+ <use xlink:href="#E5-MJMAIN-2265" x="13441" y="0"/>
+ <use xlink:href="#E5-MJMAIN-32" x="14497" y="0"/>
+</g>
+</svg></span>, 可以通过构造下面的矩阵来解决</p>
 <a id="more"></a>
-
-<p>$$\begin{bmatrix} 1 &amp; 1 \ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} f _ {i} \ f _ {i - 1} \end{bmatrix} = \begin{bmatrix} f _ {i + 1} \ f _ {i} \end{bmatrix}$$</p>
-<p>所以说对于求第 $n$ 项就变成了</p>
-<p>$$\begin{bmatrix} 1 &amp; 1 \ 1 &amp; 0 \end{bmatrix} ^ {n - 1} \begin{bmatrix} f _ {1} \ f _ {0} \end{bmatrix} = \begin{bmatrix} f _ {n} \ f _ {n - 1} \end{bmatrix}$$</p>
+<p style="text-align: center; "><span class="mjpage mjpage__block"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="25.831ex" height="6.176ex" style="vertical-align: -2.224ex; margin-bottom: -0.281ex;" viewbox="0 -1580.7 11121.8 2659.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-6-Title">
+<title id="MathJax-SVG-6-Title">\begin{bmatrix} 1 &amp; 1 \\ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} f _ {i} \\ f _ {i - 1} \end{bmatrix} = \begin{bmatrix} f _ {i + 1} \\ f _ {i} \end{bmatrix}
+</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E6-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
+<path stroke-width="1" id="E6-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E6-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
+<path stroke-width="1" id="E6-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
+<path stroke-width="1" id="E6-MJSZ3-5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"/>
+<path stroke-width="1" id="E6-MJSZ3-5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"/>
+<path stroke-width="1" id="E6-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E6-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E6-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E6-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E6-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E6-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+ <use xlink:href="#E6-MJMAIN-31" x="0" y="650"/>
+ <use xlink:href="#E6-MJMAIN-31" x="0" y="-750"/>
+</g>
+<g transform="translate(1490,0)">
+ <use xlink:href="#E6-MJMAIN-31" x="0" y="650"/>
+ <use xlink:href="#E6-MJMAIN-30" x="0" y="-750"/>
+</g>
+</g>
+ <use xlink:href="#E6-MJSZ3-5D" x="2853" y="-1"/>
+<g transform="translate(3548,0)">
+ <use xlink:href="#E6-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(452,657)">
+ <use xlink:href="#E6-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E6-MJMATHI-69" x="693" y="-213"/>
+</g>
+<g transform="translate(0,-749)">
+ <use xlink:href="#E6-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E6-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E6-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E6-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+</g>
+</g>
+ <use xlink:href="#E6-MJSZ3-5D" x="2591" y="-1"/>
+</g>
+ <use xlink:href="#E6-MJMAIN-3D" x="6945" y="0"/>
+<g transform="translate(8002,0)">
+ <use xlink:href="#E6-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(0,657)">
+ <use xlink:href="#E6-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E6-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E6-MJMAIN-2B" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E6-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+<g transform="translate(452,-752)">
+ <use xlink:href="#E6-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E6-MJMATHI-69" x="693" y="-213"/>
+</g>
+</g>
+</g>
+ <use xlink:href="#E6-MJSZ3-5D" x="2591" y="-1"/>
+</g>
+</g>
+</svg></span></p>
+<p>所以说对于求第 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 600.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-7-Title">
+<title id="MathJax-SVG-7-Title">n</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E7-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E7-MJMATHI-6E" x="0" y="0"/>
+</g>
+</svg></span> 项就变成了</p>
+<p style="text-align: center; "><span class="mjpage mjpage__block"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="27.723ex" height="6.509ex" style="vertical-align: -2.224ex; margin-bottom: -0.281ex;" viewbox="0 -1724.2 11936.3 2802.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-8-Title">
+<title id="MathJax-SVG-8-Title">\begin{bmatrix} 1 &amp; 1 \\ 1 &amp; 0 \end{bmatrix} ^ {n - 1} \begin{bmatrix} f _ {1} \\ f _ {0} \end{bmatrix} = \begin{bmatrix} f _ {n} \\ f _ {n - 1} \end{bmatrix}
+</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E8-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
+<path stroke-width="1" id="E8-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E8-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
+<path stroke-width="1" id="E8-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
+<path stroke-width="1" id="E8-MJSZ3-5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"/>
+<path stroke-width="1" id="E8-MJSZ3-5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"/>
+<path stroke-width="1" id="E8-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E8-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E8-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E8-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E8-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+ <use xlink:href="#E8-MJMAIN-31" x="0" y="650"/>
+ <use xlink:href="#E8-MJMAIN-31" x="0" y="-750"/>
+</g>
+<g transform="translate(1490,0)">
+ <use xlink:href="#E8-MJMAIN-31" x="0" y="650"/>
+ <use xlink:href="#E8-MJMAIN-30" x="0" y="-750"/>
+</g>
+</g>
+ <use xlink:href="#E8-MJSZ3-5D" x="2853" y="-1"/>
+<g transform="translate(3381,1177)">
+ <use transform="scale(0.707)" xlink:href="#E8-MJMATHI-6E" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E8-MJMAIN-2212" x="600" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E8-MJMAIN-31" x="1379" y="0"/>
+</g>
+<g transform="translate(4977,0)">
+ <use xlink:href="#E8-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(0,656)">
+ <use xlink:href="#E8-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E8-MJMAIN-31" x="693" y="-213"/>
+</g>
+<g transform="translate(0,-750)">
+ <use xlink:href="#E8-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E8-MJMAIN-30" x="693" y="-213"/>
+</g>
+</g>
+</g>
+ <use xlink:href="#E8-MJSZ3-5D" x="1796" y="-1"/>
+</g>
+ <use xlink:href="#E8-MJMAIN-3D" x="7579" y="0"/>
+<g transform="translate(8636,0)">
+ <use xlink:href="#E8-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(452,657)">
+ <use xlink:href="#E8-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E8-MJMATHI-6E" x="693" y="-213"/>
+</g>
+<g transform="translate(0,-749)">
+ <use xlink:href="#E8-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E8-MJMATHI-6E" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E8-MJMAIN-2212" x="600" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E8-MJMAIN-31" x="1379" y="0"/>
+</g>
+</g>
+</g>
+</g>
+ <use xlink:href="#E8-MJSZ3-5D" x="2771" y="-1"/>
+</g>
+</g>
+</svg></span></p>
 <p>然后矩阵可以通过快速幂求, 答案就取最后向量的第一维就好了. 但是为什么矩阵内的数字是这个以及是如何构造出来的, 就要了解矩阵构造相关知识了</p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>首先 递推式要求是 <strong>线性</strong> 且 <strong>已知</strong> 的, 这也是进行构造的基础</p>
-<p>本文中, 将需要进行矩阵快速幂的矩阵暂时叫做构造矩阵. 由于矩阵乘法的性质, 对于 $k$ 阶线性递推式的构造矩阵的大小为 $k\times k$</p>
-<h1 id="矩阵构造"><a href="#矩阵构造" class="headerlink" title="矩阵构造"></a>矩阵构造</h1><p>由特殊向一般, 由具体向抽象, 考虑较为简单的二阶递推式的构造矩阵(可以尝试自己推导一阶递推式), 也就是 $f _ i = \alpha f _ {i - 1} + \beta f _ {i - 2}$, 先写出形式:</p>
-<p>$$\begin{bmatrix} ? &amp; ? \ ? &amp; ? \end{bmatrix} \begin{bmatrix} f _ {i} \ f _ {i - 1} \end{bmatrix} = \begin{bmatrix} f _ {i + 1} \ f _ {i} \end{bmatrix}$$</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1>
+<p>首先 递推式要求是 <strong>线性</strong> 且 <strong>已知</strong> 的, 这也是进行构造的基础</p>
+<p>本文中, 将需要进行矩阵快速幂的矩阵暂时叫做构造矩阵. 由于矩阵乘法的性质, 对于 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.211ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 521.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-9-Title">
+<title id="MathJax-SVG-9-Title">k</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E9-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E9-MJMATHI-6B" x="0" y="0"/>
+</g>
+</svg></span> 阶线性递推式的构造矩阵的大小为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.263ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 2265.9 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-10-Title">
+<title id="MathJax-SVG-10-Title">k\times k</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E10-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/>
+<path stroke-width="1" id="E10-MJMAIN-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E10-MJMATHI-6B" x="0" y="0"/>
+ <use xlink:href="#E10-MJMAIN-D7" x="743" y="0"/>
+ <use xlink:href="#E10-MJMATHI-6B" x="1744" y="0"/>
+</g>
+</svg></span></p>
+<h1 id="矩阵构造"><a href="#矩阵构造" class="headerlink" title="矩阵构造"></a>矩阵构造</h1>
+<p>由特殊向一般, 由具体向抽象, 考虑较为简单的二阶递推式的构造矩阵(可以尝试自己推导一阶递推式), 也就是 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="18.776ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 8084.2 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-11-Title">
+<title id="MathJax-SVG-11-Title">f _ i = \alpha f _ {i - 1} + \beta f _ {i - 2}</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E11-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E11-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E11-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E11-MJMATHI-3B1" d="M34 156Q34 270 120 356T309 442Q379 442 421 402T478 304Q484 275 485 237V208Q534 282 560 374Q564 388 566 390T582 393Q603 393 603 385Q603 376 594 346T558 261T497 161L486 147L487 123Q489 67 495 47T514 26Q528 28 540 37T557 60Q559 67 562 68T577 70Q597 70 597 62Q597 56 591 43Q579 19 556 5T512 -10H505Q438 -10 414 62L411 69L400 61Q390 53 370 41T325 18T267 -2T203 -11Q124 -11 79 39T34 156ZM208 26Q257 26 306 47T379 90L403 112Q401 255 396 290Q382 405 304 405Q235 405 183 332Q156 292 139 224T121 120Q121 71 146 49T208 26Z"/>
+<path stroke-width="1" id="E11-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E11-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E11-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+<path stroke-width="1" id="E11-MJMATHI-3B2" d="M29 -194Q23 -188 23 -186Q23 -183 102 134T186 465Q208 533 243 584T309 658Q365 705 429 705H431Q493 705 533 667T573 570Q573 465 469 396L482 383Q533 332 533 252Q533 139 448 65T257 -10Q227 -10 203 -2T165 17T143 40T131 59T126 65L62 -188Q60 -194 42 -194H29ZM353 431Q392 431 427 419L432 422Q436 426 439 429T449 439T461 453T472 471T484 495T493 524T501 560Q503 569 503 593Q503 611 502 616Q487 667 426 667Q384 667 347 643T286 582T247 514T224 455Q219 439 186 308T152 168Q151 163 151 147Q151 99 173 68Q204 26 260 26Q302 26 349 51T425 137Q441 171 449 214T457 279Q457 337 422 372Q380 358 347 358H337Q258 358 258 389Q258 396 261 403Q275 431 353 431Z"/>
+<path stroke-width="1" id="E11-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E11-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E11-MJMATHI-69" x="693" y="-213"/>
+ <use xlink:href="#E11-MJMAIN-3D" x="1112" y="0"/>
+ <use xlink:href="#E11-MJMATHI-3B1" x="2168" y="0"/>
+<g transform="translate(2809,0)">
+ <use xlink:href="#E11-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E11-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E11-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E11-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+ <use xlink:href="#E11-MJMAIN-2B" x="4770" y="0"/>
+ <use xlink:href="#E11-MJMATHI-3B2" x="5771" y="0"/>
+<g transform="translate(6345,0)">
+ <use xlink:href="#E11-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E11-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E11-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E11-MJMAIN-32" x="1124" y="0"/>
+</g>
+</g>
+</g>
+</svg></span>, 先写出形式:</p>
+<p style="text-align: center; "><span class="mjpage mjpage__block"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="25.701ex" height="6.176ex" style="vertical-align: -2.224ex; margin-bottom: -0.281ex;" viewbox="0 -1580.7 11065.8 2659.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-12-Title">
+<title id="MathJax-SVG-12-Title">\begin{bmatrix} ? &amp; ? \\ ? &amp; ? \end{bmatrix} \begin{bmatrix} f _ {i} \\ f _ {i - 1} \end{bmatrix} = \begin{bmatrix} f _ {i + 1} \\ f _ {i} \end{bmatrix}
+</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E12-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
+<path stroke-width="1" id="E12-MJMAIN-3F" d="M226 668Q190 668 162 656T124 632L114 621Q116 621 119 620T130 616T145 607T157 591T162 567Q162 544 147 529T109 514T71 528T55 566Q55 625 100 661T199 704Q201 704 210 704T224 705H228Q281 705 320 692T378 656T407 612T416 567Q416 503 361 462Q267 395 247 303Q242 279 242 241V224Q242 205 239 202T222 198T205 201T202 218V249Q204 320 220 371T255 445T292 491T315 537Q317 546 317 574V587Q317 604 315 615T304 640T277 661T226 668ZM162 61Q162 89 180 105T224 121Q247 119 264 104T281 61Q281 31 264 16T222 1Q197 1 180 16T162 61Z"/>
+<path stroke-width="1" id="E12-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
+<path stroke-width="1" id="E12-MJSZ3-5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"/>
+<path stroke-width="1" id="E12-MJSZ3-5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"/>
+<path stroke-width="1" id="E12-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E12-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E12-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E12-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E12-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E12-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E12-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+ <use xlink:href="#E12-MJMAIN-3F" x="0" y="650"/>
+ <use xlink:href="#E12-MJMAIN-3F" x="0" y="-750"/>
+</g>
+<g transform="translate(1462,0)">
+ <use xlink:href="#E12-MJMAIN-3F" x="0" y="650"/>
+ <use xlink:href="#E12-MJMAIN-3F" x="0" y="-750"/>
+</g>
+</g>
+ <use xlink:href="#E12-MJSZ3-5D" x="2797" y="-1"/>
+<g transform="translate(3492,0)">
+ <use xlink:href="#E12-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(452,657)">
+ <use xlink:href="#E12-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E12-MJMATHI-69" x="693" y="-213"/>
+</g>
+<g transform="translate(0,-749)">
+ <use xlink:href="#E12-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E12-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E12-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E12-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+</g>
+</g>
+ <use xlink:href="#E12-MJSZ3-5D" x="2591" y="-1"/>
+</g>
+ <use xlink:href="#E12-MJMAIN-3D" x="6889" y="0"/>
+<g transform="translate(7946,0)">
+ <use xlink:href="#E12-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(0,657)">
+ <use xlink:href="#E12-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E12-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E12-MJMAIN-2B" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E12-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+<g transform="translate(452,-752)">
+ <use xlink:href="#E12-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E12-MJMATHI-69" x="693" y="-213"/>
+</g>
+</g>
+</g>
+ <use xlink:href="#E12-MJSZ3-5D" x="2591" y="-1"/>
+</g>
+</g>
+</svg></span></p>
 <p>也就是</p>
-<p>$$\begin{bmatrix} ? &amp; ? \ ? &amp; ? \end{bmatrix} \begin{bmatrix} f _ {i} \ f _ {i - 1} \end{bmatrix} = \begin{bmatrix} f _ {i + 1} \ f _ {i} \end{bmatrix} = \begin{bmatrix} \alpha f _ {i} + \beta f _ {i - 1} \ f _ {i} \end{bmatrix}$$</p>
-<p>所以可以得到第一列为 $\begin{bmatrix} \alpha , \beta \end{bmatrix}$, 从而可以简单地推出来:</p>
-<p>$$\begin{bmatrix} \alpha &amp; \beta \ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} f _ {i} \ f _ {i - 1} \end{bmatrix} = \begin{bmatrix} f _ {i + 1} \ f _ {i} \end{bmatrix} = \begin{bmatrix} \alpha f _ {i} + \beta f _ {i - 1} \ f _ {i} \end{bmatrix}$$</p>
+<p style="text-align: center; "><span class="mjpage mjpage__block"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="43.644ex" height="6.176ex" style="vertical-align: -2.224ex; margin-bottom: -0.281ex;" viewbox="0 -1580.7 18791.3 2659.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-13-Title">
+<title id="MathJax-SVG-13-Title">\begin{bmatrix} ? &amp; ? \\ ? &amp; ? \end{bmatrix} \begin{bmatrix} f _ {i} \\ f _ {i - 1} \end{bmatrix} = \begin{bmatrix} f _ {i + 1} \\ f _ {i} \end{bmatrix} = \begin{bmatrix} \alpha f _ {i} + \beta f _ {i - 1} \\ f _ {i} \end{bmatrix}
+</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E13-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
+<path stroke-width="1" id="E13-MJMAIN-3F" d="M226 668Q190 668 162 656T124 632L114 621Q116 621 119 620T130 616T145 607T157 591T162 567Q162 544 147 529T109 514T71 528T55 566Q55 625 100 661T199 704Q201 704 210 704T224 705H228Q281 705 320 692T378 656T407 612T416 567Q416 503 361 462Q267 395 247 303Q242 279 242 241V224Q242 205 239 202T222 198T205 201T202 218V249Q204 320 220 371T255 445T292 491T315 537Q317 546 317 574V587Q317 604 315 615T304 640T277 661T226 668ZM162 61Q162 89 180 105T224 121Q247 119 264 104T281 61Q281 31 264 16T222 1Q197 1 180 16T162 61Z"/>
+<path stroke-width="1" id="E13-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
+<path stroke-width="1" id="E13-MJSZ3-5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"/>
+<path stroke-width="1" id="E13-MJSZ3-5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"/>
+<path stroke-width="1" id="E13-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E13-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E13-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E13-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E13-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E13-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+<path stroke-width="1" id="E13-MJMATHI-3B1" d="M34 156Q34 270 120 356T309 442Q379 442 421 402T478 304Q484 275 485 237V208Q534 282 560 374Q564 388 566 390T582 393Q603 393 603 385Q603 376 594 346T558 261T497 161L486 147L487 123Q489 67 495 47T514 26Q528 28 540 37T557 60Q559 67 562 68T577 70Q597 70 597 62Q597 56 591 43Q579 19 556 5T512 -10H505Q438 -10 414 62L411 69L400 61Q390 53 370 41T325 18T267 -2T203 -11Q124 -11 79 39T34 156ZM208 26Q257 26 306 47T379 90L403 112Q401 255 396 290Q382 405 304 405Q235 405 183 332Q156 292 139 224T121 120Q121 71 146 49T208 26Z"/>
+<path stroke-width="1" id="E13-MJMATHI-3B2" d="M29 -194Q23 -188 23 -186Q23 -183 102 134T186 465Q208 533 243 584T309 658Q365 705 429 705H431Q493 705 533 667T573 570Q573 465 469 396L482 383Q533 332 533 252Q533 139 448 65T257 -10Q227 -10 203 -2T165 17T143 40T131 59T126 65L62 -188Q60 -194 42 -194H29ZM353 431Q392 431 427 419L432 422Q436 426 439 429T449 439T461 453T472 471T484 495T493 524T501 560Q503 569 503 593Q503 611 502 616Q487 667 426 667Q384 667 347 643T286 582T247 514T224 455Q219 439 186 308T152 168Q151 163 151 147Q151 99 173 68Q204 26 260 26Q302 26 349 51T425 137Q441 171 449 214T457 279Q457 337 422 372Q380 358 347 358H337Q258 358 258 389Q258 396 261 403Q275 431 353 431Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E13-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+ <use xlink:href="#E13-MJMAIN-3F" x="0" y="650"/>
+ <use xlink:href="#E13-MJMAIN-3F" x="0" y="-750"/>
+</g>
+<g transform="translate(1462,0)">
+ <use xlink:href="#E13-MJMAIN-3F" x="0" y="650"/>
+ <use xlink:href="#E13-MJMAIN-3F" x="0" y="-750"/>
+</g>
+</g>
+ <use xlink:href="#E13-MJSZ3-5D" x="2797" y="-1"/>
+<g transform="translate(3492,0)">
+ <use xlink:href="#E13-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(452,657)">
+ <use xlink:href="#E13-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMATHI-69" x="693" y="-213"/>
+</g>
+<g transform="translate(0,-749)">
+ <use xlink:href="#E13-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E13-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+</g>
+</g>
+ <use xlink:href="#E13-MJSZ3-5D" x="2591" y="-1"/>
+</g>
+ <use xlink:href="#E13-MJMAIN-3D" x="6889" y="0"/>
+<g transform="translate(7946,0)">
+ <use xlink:href="#E13-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(0,657)">
+ <use xlink:href="#E13-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E13-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMAIN-2B" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+<g transform="translate(452,-752)">
+ <use xlink:href="#E13-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMATHI-69" x="693" y="-213"/>
+</g>
+</g>
+</g>
+ <use xlink:href="#E13-MJSZ3-5D" x="2591" y="-1"/>
+</g>
+ <use xlink:href="#E13-MJMAIN-3D" x="11343" y="0"/>
+<g transform="translate(12399,0)">
+ <use xlink:href="#E13-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(0,657)">
+ <use xlink:href="#E13-MJMATHI-3B1" x="0" y="0"/>
+<g transform="translate(640,0)">
+ <use xlink:href="#E13-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMATHI-69" x="693" y="-213"/>
+</g>
+ <use xlink:href="#E13-MJMAIN-2B" x="1697" y="0"/>
+ <use xlink:href="#E13-MJMATHI-3B2" x="2698" y="0"/>
+<g transform="translate(3271,0)">
+ <use xlink:href="#E13-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E13-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+</g>
+<g transform="translate(2088,-752)">
+ <use xlink:href="#E13-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E13-MJMATHI-69" x="693" y="-213"/>
+</g>
+</g>
+</g>
+ <use xlink:href="#E13-MJSZ3-5D" x="5862" y="-1"/>
+</g>
+</g>
+</svg></span></p>
+<p>所以可以得到第一列为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.899ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 2539.7 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-14-Title">
+<title id="MathJax-SVG-14-Title">\begin{bmatrix} \alpha , \beta \end{bmatrix}</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E14-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
+<path stroke-width="1" id="E14-MJMATHI-3B1" d="M34 156Q34 270 120 356T309 442Q379 442 421 402T478 304Q484 275 485 237V208Q534 282 560 374Q564 388 566 390T582 393Q603 393 603 385Q603 376 594 346T558 261T497 161L486 147L487 123Q489 67 495 47T514 26Q528 28 540 37T557 60Q559 67 562 68T577 70Q597 70 597 62Q597 56 591 43Q579 19 556 5T512 -10H505Q438 -10 414 62L411 69L400 61Q390 53 370 41T325 18T267 -2T203 -11Q124 -11 79 39T34 156ZM208 26Q257 26 306 47T379 90L403 112Q401 255 396 290Q382 405 304 405Q235 405 183 332Q156 292 139 224T121 120Q121 71 146 49T208 26Z"/>
+<path stroke-width="1" id="E14-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/>
+<path stroke-width="1" id="E14-MJMATHI-3B2" d="M29 -194Q23 -188 23 -186Q23 -183 102 134T186 465Q208 533 243 584T309 658Q365 705 429 705H431Q493 705 533 667T573 570Q573 465 469 396L482 383Q533 332 533 252Q533 139 448 65T257 -10Q227 -10 203 -2T165 17T143 40T131 59T126 65L62 -188Q60 -194 42 -194H29ZM353 431Q392 431 427 419L432 422Q436 426 439 429T449 439T461 453T472 471T484 495T493 524T501 560Q503 569 503 593Q503 611 502 616Q487 667 426 667Q384 667 347 643T286 582T247 514T224 455Q219 439 186 308T152 168Q151 163 151 147Q151 99 173 68Q204 26 260 26Q302 26 349 51T425 137Q441 171 449 214T457 279Q457 337 422 372Q380 358 347 358H337Q258 358 258 389Q258 396 261 403Q275 431 353 431Z"/>
+<path stroke-width="1" id="E14-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E14-MJMAIN-5B" x="0" y="0"/>
+<g transform="translate(445,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(0,-50)">
+ <use xlink:href="#E14-MJMATHI-3B1" x="0" y="0"/>
+ <use xlink:href="#E14-MJMAIN-2C" x="640" y="0"/>
+ <use xlink:href="#E14-MJMATHI-3B2" x="1085" y="0"/>
+</g>
+</g>
+</g>
+ <use xlink:href="#E14-MJMAIN-5D" x="2261" y="0"/>
+</g>
+</svg></span>, 从而可以简单地推出来:</p>
+<p style="text-align: center; "><span class="mjpage mjpage__block"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="44.269ex" height="6.176ex" style="vertical-align: -2.224ex; margin-bottom: -0.281ex;" viewbox="0 -1580.7 19060.3 2659.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-15-Title">
+<title id="MathJax-SVG-15-Title">\begin{bmatrix} \alpha &amp; \beta \\ 1 &amp; 0 \end{bmatrix} \begin{bmatrix} f _ {i} \\ f _ {i - 1} \end{bmatrix} = \begin{bmatrix} f _ {i + 1} \\ f _ {i} \end{bmatrix} = \begin{bmatrix} \alpha f _ {i} + \beta f _ {i - 1} \\ f _ {i} \end{bmatrix}
+</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E15-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
+<path stroke-width="1" id="E15-MJMATHI-3B1" d="M34 156Q34 270 120 356T309 442Q379 442 421 402T478 304Q484 275 485 237V208Q534 282 560 374Q564 388 566 390T582 393Q603 393 603 385Q603 376 594 346T558 261T497 161L486 147L487 123Q489 67 495 47T514 26Q528 28 540 37T557 60Q559 67 562 68T577 70Q597 70 597 62Q597 56 591 43Q579 19 556 5T512 -10H505Q438 -10 414 62L411 69L400 61Q390 53 370 41T325 18T267 -2T203 -11Q124 -11 79 39T34 156ZM208 26Q257 26 306 47T379 90L403 112Q401 255 396 290Q382 405 304 405Q235 405 183 332Q156 292 139 224T121 120Q121 71 146 49T208 26Z"/>
+<path stroke-width="1" id="E15-MJMATHI-3B2" d="M29 -194Q23 -188 23 -186Q23 -183 102 134T186 465Q208 533 243 584T309 658Q365 705 429 705H431Q493 705 533 667T573 570Q573 465 469 396L482 383Q533 332 533 252Q533 139 448 65T257 -10Q227 -10 203 -2T165 17T143 40T131 59T126 65L62 -188Q60 -194 42 -194H29ZM353 431Q392 431 427 419L432 422Q436 426 439 429T449 439T461 453T472 471T484 495T493 524T501 560Q503 569 503 593Q503 611 502 616Q487 667 426 667Q384 667 347 643T286 582T247 514T224 455Q219 439 186 308T152 168Q151 163 151 147Q151 99 173 68Q204 26 260 26Q302 26 349 51T425 137Q441 171 449 214T457 279Q457 337 422 372Q380 358 347 358H337Q258 358 258 389Q258 396 261 403Q275 431 353 431Z"/>
+<path stroke-width="1" id="E15-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E15-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
+<path stroke-width="1" id="E15-MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"/>
+<path stroke-width="1" id="E15-MJSZ3-5B" d="M247 -949V1450H516V1388H309V-887H516V-949H247Z"/>
+<path stroke-width="1" id="E15-MJSZ3-5D" d="M11 1388V1450H280V-949H11V-887H218V1388H11Z"/>
+<path stroke-width="1" id="E15-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E15-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E15-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E15-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E15-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E15-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+ <use xlink:href="#E15-MJMATHI-3B1" x="0" y="650"/>
+ <use xlink:href="#E15-MJMAIN-31" x="70" y="-750"/>
+</g>
+<g transform="translate(1630,0)">
+ <use xlink:href="#E15-MJMATHI-3B2" x="0" y="650"/>
+ <use xlink:href="#E15-MJMAIN-30" x="36" y="-750"/>
+</g>
+</g>
+ <use xlink:href="#E15-MJSZ3-5D" x="3066" y="-1"/>
+<g transform="translate(3761,0)">
+ <use xlink:href="#E15-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(452,657)">
+ <use xlink:href="#E15-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMATHI-69" x="693" y="-213"/>
+</g>
+<g transform="translate(0,-749)">
+ <use xlink:href="#E15-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E15-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+</g>
+</g>
+ <use xlink:href="#E15-MJSZ3-5D" x="2591" y="-1"/>
+</g>
+ <use xlink:href="#E15-MJMAIN-3D" x="7158" y="0"/>
+<g transform="translate(8215,0)">
+ <use xlink:href="#E15-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(0,657)">
+ <use xlink:href="#E15-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E15-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMAIN-2B" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+<g transform="translate(452,-752)">
+ <use xlink:href="#E15-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMATHI-69" x="693" y="-213"/>
+</g>
+</g>
+</g>
+ <use xlink:href="#E15-MJSZ3-5D" x="2591" y="-1"/>
+</g>
+ <use xlink:href="#E15-MJMAIN-3D" x="11612" y="0"/>
+<g transform="translate(12668,0)">
+ <use xlink:href="#E15-MJSZ3-5B"/>
+<g transform="translate(695,0)">
+<g transform="translate(-11,0)">
+<g transform="translate(0,657)">
+ <use xlink:href="#E15-MJMATHI-3B1" x="0" y="0"/>
+<g transform="translate(640,0)">
+ <use xlink:href="#E15-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMATHI-69" x="693" y="-213"/>
+</g>
+ <use xlink:href="#E15-MJMAIN-2B" x="1697" y="0"/>
+ <use xlink:href="#E15-MJMATHI-3B2" x="2698" y="0"/>
+<g transform="translate(3271,0)">
+ <use xlink:href="#E15-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E15-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+</g>
+<g transform="translate(2088,-752)">
+ <use xlink:href="#E15-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E15-MJMATHI-69" x="693" y="-213"/>
+</g>
+</g>
+</g>
+ <use xlink:href="#E15-MJSZ3-5D" x="5862" y="-1"/>
+</g>
+</g>
+</svg></span></p>
 <p>至此, 就豁然明朗了</p>
-<p>相信你对于简单的普通递推式了如指掌了, 接下来可以尝试自己推一下 $k$ 阶的证明, 可以参照上面的步骤进行简单的类比.</p>
+<p>相信你对于简单的普通递推式了如指掌了, 接下来可以尝试自己推一下 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.211ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 521.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-16-Title">
+<title id="MathJax-SVG-16-Title">k</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E16-MJMATHI-6B" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E16-MJMATHI-6B" x="0" y="0"/>
+</g>
+</svg></span> 阶的证明, 可以参照上面的步骤进行简单的类比.</p>
 <p>接下来考虑一个 <em>复合</em> 的递推式:</p>
-<p>序列 ${f_i}$ 为斐波那契数列(形式在上文中已给出), 序列 $F _ i = F _ {i - 1} + F _ {i - 2} + f _ i$, 求 $F$ 的构造矩阵</p>
-<p>这个还是仿照上面的证明, 这里由于公式写起来 $\LaTeX$ 代码会极其复杂, 于是手写推导过程了qwqwq</p>
+<p>序列 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.264ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 1835.8 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-17-Title">
+<title id="MathJax-SVG-17-Title">\{f_i\}</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E17-MJMAIN-7B" d="M434 -231Q434 -244 428 -250H410Q281 -250 230 -184Q225 -177 222 -172T217 -161T213 -148T211 -133T210 -111T209 -84T209 -47T209 0Q209 21 209 53Q208 142 204 153Q203 154 203 155Q189 191 153 211T82 231Q71 231 68 234T65 250T68 266T82 269Q116 269 152 289T203 345Q208 356 208 377T209 529V579Q209 634 215 656T244 698Q270 724 324 740Q361 748 377 749Q379 749 390 749T408 750H428Q434 744 434 732Q434 719 431 716Q429 713 415 713Q362 710 332 689T296 647Q291 634 291 499V417Q291 370 288 353T271 314Q240 271 184 255L170 250L184 245Q202 239 220 230T262 196T290 137Q291 131 291 1Q291 -134 296 -147Q306 -174 339 -192T415 -213Q429 -213 431 -216Q434 -219 434 -231Z"/>
+<path stroke-width="1" id="E17-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E17-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E17-MJMAIN-7D" d="M65 731Q65 745 68 747T88 750Q171 750 216 725T279 670Q288 649 289 635T291 501Q292 362 293 357Q306 312 345 291T417 269Q428 269 431 266T434 250T431 234T417 231Q380 231 345 210T298 157Q293 143 292 121T291 -28V-79Q291 -134 285 -156T256 -198Q202 -250 89 -250Q71 -250 68 -247T65 -230Q65 -224 65 -223T66 -218T69 -214T77 -213Q91 -213 108 -210T146 -200T183 -177T207 -139Q208 -134 209 3L210 139Q223 196 280 230Q315 247 330 250Q305 257 280 270Q225 304 212 352L210 362L209 498Q208 635 207 640Q195 680 154 696T77 713Q68 713 67 716T65 731Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E17-MJMAIN-7B" x="0" y="0"/>
+<g transform="translate(500,0)">
+ <use xlink:href="#E17-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E17-MJMATHI-69" x="693" y="-213"/>
+</g>
+ <use xlink:href="#E17-MJMAIN-7D" x="1335" y="0"/>
+</g>
+</svg></span> 为斐波那契数列(形式在上文中已给出), 序列 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="21.802ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 9386.9 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-18-Title">
+<title id="MathJax-SVG-18-Title">F _ i = F _ {i - 1} + F _ {i - 2} + f _ i</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E18-MJMATHI-46" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/>
+<path stroke-width="1" id="E18-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E18-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E18-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E18-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E18-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+<path stroke-width="1" id="E18-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
+<path stroke-width="1" id="E18-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E18-MJMATHI-46" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E18-MJMATHI-69" x="910" y="-213"/>
+ <use xlink:href="#E18-MJMAIN-3D" x="1265" y="0"/>
+<g transform="translate(2321,0)">
+ <use xlink:href="#E18-MJMATHI-46" x="0" y="0"/>
+<g transform="translate(643,-150)">
+ <use transform="scale(0.707)" xlink:href="#E18-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E18-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E18-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+ <use xlink:href="#E18-MJMAIN-2B" x="4436" y="0"/>
+<g transform="translate(5437,0)">
+ <use xlink:href="#E18-MJMATHI-46" x="0" y="0"/>
+<g transform="translate(643,-150)">
+ <use transform="scale(0.707)" xlink:href="#E18-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E18-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E18-MJMAIN-32" x="1124" y="0"/>
+</g>
+</g>
+ <use xlink:href="#E18-MJMAIN-2B" x="7551" y="0"/>
+<g transform="translate(8552,0)">
+ <use xlink:href="#E18-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E18-MJMATHI-69" x="693" y="-213"/>
+</g>
+</g>
+</svg></span>, 求 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.741ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 749.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-19-Title">
+<title id="MathJax-SVG-19-Title">F</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E19-MJMATHI-46" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E19-MJMATHI-46" x="0" y="0"/>
+</g>
+</svg></span> 的构造矩阵</p>
+<p>这个还是仿照上面的证明, 这里由于公式写起来 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="6.465ex" height="2.676ex" style="vertical-align: -0.838ex;" viewbox="0 -791.3 2783.7 1152.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-20-Title">
+<title id="MathJax-SVG-20-Title">\LaTeX</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E20-MJMATHI-4C" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"/>
+<path stroke-width="1" id="E20-MJMATHI-41" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"/>
+<path stroke-width="1" id="E20-MJMATHI-54" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"/>
+<path stroke-width="1" id="E20-MJMATHI-45" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"/>
+<path stroke-width="1" id="E20-MJMATHI-58" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E20-MJMATHI-4C" x="0" y="0"/>
+<g transform="translate(356,0)">
+ <use transform="scale(0.707)" xlink:href="#E20-MJMATHI-41" x="0" y="296"/>
+</g>
+ <use xlink:href="#E20-MJMATHI-54" x="717" y="0"/>
+<g transform="translate(1281,0)">
+ <use xlink:href="#E20-MJMATHI-45" x="0" y="-216"/>
+</g>
+ <use xlink:href="#E20-MJMATHI-58" x="1931" y="0"/>
+</g>
+</svg></span> 代码会极其复杂, 于是手写推导过程了qwqwq</p>
 <p><img src="https://i.loli.net/2019/10/01/OoZTQBa6HieuAd4.png" alt="推导过程.png"></p>
 <p>(图片link: <a href="https://i.loli.net/2019/10/01/OoZTQBa6HieuAd4.png" target="_blank" rel="noopener">https://i.loli.net/2019/10/01/OoZTQBa6HieuAd4.png</a>)</p>
 <p>这样, 就可以解决部分复合递推式构造矩阵了. 现在仔细考虑上面的推导过程使用到了什么特别的东西. 注意到这个其实就是将两个斐波那契数列合在一起并修改第一行的递推和.</p>
-<h1 id="部分常用技巧"><a href="#部分常用技巧" class="headerlink" title="部分常用技巧"></a>部分常用技巧</h1><h2 id="求数列和"><a href="#求数列和" class="headerlink" title="求数列和"></a>求数列和</h2><p>继续上面的问题, 也就是求 $f _ i = \alpha f _ {i - 1} + \beta f _ {i - 2}$ 的递推矩阵, 已经比较简单了. 现在考虑对于 $f$ 求一个前缀和 $F _ i = \sum _ {i = 0} f_i$, 再求递推矩阵求解 $F$</p>
+<h1 id="部分常用技巧"><a href="#部分常用技巧" class="headerlink" title="部分常用技巧"></a>部分常用技巧</h1>
+<h2 id="求数列和"><a href="#求数列和" class="headerlink" title="求数列和"></a>求数列和</h2>
+<p>继续上面的问题, 也就是求 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="18.776ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 8084.2 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-21-Title">
+<title id="MathJax-SVG-21-Title">f _ i = \alpha f _ {i - 1} + \beta f _ {i - 2}</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E21-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E21-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E21-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E21-MJMATHI-3B1" d="M34 156Q34 270 120 356T309 442Q379 442 421 402T478 304Q484 275 485 237V208Q534 282 560 374Q564 388 566 390T582 393Q603 393 603 385Q603 376 594 346T558 261T497 161L486 147L487 123Q489 67 495 47T514 26Q528 28 540 37T557 60Q559 67 562 68T577 70Q597 70 597 62Q597 56 591 43Q579 19 556 5T512 -10H505Q438 -10 414 62L411 69L400 61Q390 53 370 41T325 18T267 -2T203 -11Q124 -11 79 39T34 156ZM208 26Q257 26 306 47T379 90L403 112Q401 255 396 290Q382 405 304 405Q235 405 183 332Q156 292 139 224T121 120Q121 71 146 49T208 26Z"/>
+<path stroke-width="1" id="E21-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E21-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E21-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+<path stroke-width="1" id="E21-MJMATHI-3B2" d="M29 -194Q23 -188 23 -186Q23 -183 102 134T186 465Q208 533 243 584T309 658Q365 705 429 705H431Q493 705 533 667T573 570Q573 465 469 396L482 383Q533 332 533 252Q533 139 448 65T257 -10Q227 -10 203 -2T165 17T143 40T131 59T126 65L62 -188Q60 -194 42 -194H29ZM353 431Q392 431 427 419L432 422Q436 426 439 429T449 439T461 453T472 471T484 495T493 524T501 560Q503 569 503 593Q503 611 502 616Q487 667 426 667Q384 667 347 643T286 582T247 514T224 455Q219 439 186 308T152 168Q151 163 151 147Q151 99 173 68Q204 26 260 26Q302 26 349 51T425 137Q441 171 449 214T457 279Q457 337 422 372Q380 358 347 358H337Q258 358 258 389Q258 396 261 403Q275 431 353 431Z"/>
+<path stroke-width="1" id="E21-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E21-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E21-MJMATHI-69" x="693" y="-213"/>
+ <use xlink:href="#E21-MJMAIN-3D" x="1112" y="0"/>
+ <use xlink:href="#E21-MJMATHI-3B1" x="2168" y="0"/>
+<g transform="translate(2809,0)">
+ <use xlink:href="#E21-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E21-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E21-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E21-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+ <use xlink:href="#E21-MJMAIN-2B" x="4770" y="0"/>
+ <use xlink:href="#E21-MJMATHI-3B2" x="5771" y="0"/>
+<g transform="translate(6345,0)">
+ <use xlink:href="#E21-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E21-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E21-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E21-MJMAIN-32" x="1124" y="0"/>
+</g>
+</g>
+</g>
+</svg></span> 的递推矩阵, 已经比较简单了. 现在考虑对于 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.279ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 550.5 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-22-Title">
+<title id="MathJax-SVG-22-Title">f</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E22-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E22-MJMATHI-66" x="0" y="0"/>
+</g>
+</svg></span> 求一个前缀和 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.073ex" height="3.009ex" style="vertical-align: -1.005ex;" viewbox="0 -863.1 5628.5 1295.7" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-23-Title">
+<title id="MathJax-SVG-23-Title">F _ i = \sum _ {i = 0} f_i</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E23-MJMATHI-46" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/>
+<path stroke-width="1" id="E23-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E23-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E23-MJSZ1-2211" d="M61 748Q64 750 489 750H913L954 640Q965 609 976 579T993 533T999 516H979L959 517Q936 579 886 621T777 682Q724 700 655 705T436 710H319Q183 710 183 709Q186 706 348 484T511 259Q517 250 513 244L490 216Q466 188 420 134T330 27L149 -187Q149 -188 362 -188Q388 -188 436 -188T506 -189Q679 -189 778 -162T936 -43Q946 -27 959 6H999L913 -249L489 -250Q65 -250 62 -248Q56 -246 56 -239Q56 -234 118 -161Q186 -81 245 -11L428 206Q428 207 242 462L57 717L56 728Q56 744 61 748Z"/>
+<path stroke-width="1" id="E23-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
+<path stroke-width="1" id="E23-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E23-MJMATHI-46" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E23-MJMATHI-69" x="910" y="-213"/>
+ <use xlink:href="#E23-MJMAIN-3D" x="1265" y="0"/>
+<g transform="translate(2321,0)">
+ <use xlink:href="#E23-MJSZ1-2211" x="0" y="0"/>
+<g transform="translate(1056,-287)">
+ <use transform="scale(0.707)" xlink:href="#E23-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E23-MJMAIN-3D" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E23-MJMAIN-30" x="1124" y="0"/>
+</g>
+</g>
+<g transform="translate(4793,0)">
+ <use xlink:href="#E23-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E23-MJMATHI-69" x="693" y="-213"/>
+</g>
+</g>
+</svg></span>, 再求递推矩阵求解 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.741ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 749.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-24-Title">
+<title id="MathJax-SVG-24-Title">F</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E24-MJMATHI-46" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E24-MJMATHI-46" x="0" y="0"/>
+</g>
+</svg></span></p>
 <p><img src="https://i.loli.net/2019/10/01/QyXvtLlqmdNURYg.png" alt="推导过程.png"></p>
 <p>(图片link: <a href="https://i.loli.net/2019/10/01/QyXvtLlqmdNURYg.png" target="_blank" rel="noopener">https://i.loli.net/2019/10/01/QyXvtLlqmdNURYg.png</a>)</p>
-<p>其实就是将第一列复制一份到最后一列, 并补成方阵的形式, 最后令右下角的值为 $1$ 即可</p>
-<h2 id="恒等变换"><a href="#恒等变换" class="headerlink" title="恒等变换"></a>恒等变换</h2><p>比如 $e ^ {\ln x} = x$</p>
-<p>对于 $f _ i = f _ {i - 1} \times f _ {i - 2}$ 之类的式子, 可以考虑两边同时取 $\ln$ 就变成了:</p>
-<p>$$\ln f _ i = \ln f _ {i - 1} + \ln f _ {i - 2}$$</p>
+<p>其实就是将第一列复制一份到最后一列, 并补成方阵的形式, 最后令右下角的值为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.162ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 500.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-25-Title">
+<title id="MathJax-SVG-25-Title">1</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E25-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E25-MJMAIN-31" x="0" y="0"/>
+</g>
+</svg></span> 即可</p>
+<h2 id="恒等变换"><a href="#恒等变换" class="headerlink" title="恒等变换"></a>恒等变换</h2>
+<p>比如 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="8.443ex" height="2.509ex" style="vertical-align: -0.338ex;" viewbox="0 -934.9 3635 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-26-Title">
+<title id="MathJax-SVG-26-Title">e ^ {\ln x} = x</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E26-MJMATHI-65" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"/>
+<path stroke-width="1" id="E26-MJMAIN-6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"/>
+<path stroke-width="1" id="E26-MJMAIN-6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"/>
+<path stroke-width="1" id="E26-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"/>
+<path stroke-width="1" id="E26-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E26-MJMATHI-65" x="0" y="0"/>
+<g transform="translate(466,362)">
+ <use transform="scale(0.707)" xlink:href="#E26-MJMAIN-6C"/>
+ <use transform="scale(0.707)" xlink:href="#E26-MJMAIN-6E" x="278" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E26-MJMATHI-78" x="1070" y="0"/>
+</g>
+ <use xlink:href="#E26-MJMAIN-3D" x="2006" y="0"/>
+ <use xlink:href="#E26-MJMATHI-78" x="3062" y="0"/>
+</g>
+</svg></span></p>
+<p>对于 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="15.957ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 6870.2 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-27-Title">
+<title id="MathJax-SVG-27-Title">f _ i = f _ {i - 1} \times f _ {i - 2}</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E27-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E27-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E27-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E27-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E27-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E27-MJMAIN-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"/>
+<path stroke-width="1" id="E27-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E27-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E27-MJMATHI-69" x="693" y="-213"/>
+ <use xlink:href="#E27-MJMAIN-3D" x="1112" y="0"/>
+<g transform="translate(2168,0)">
+ <use xlink:href="#E27-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E27-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E27-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E27-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+ <use xlink:href="#E27-MJMAIN-D7" x="4130" y="0"/>
+<g transform="translate(5131,0)">
+ <use xlink:href="#E27-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E27-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E27-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E27-MJMAIN-32" x="1124" y="0"/>
+</g>
+</g>
+</g>
+</svg></span> 之类的式子, 可以考虑两边同时取 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.939ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 835 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-28-Title">
+<title id="MathJax-SVG-28-Title">\ln</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E28-MJMAIN-6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"/>
+<path stroke-width="1" id="E28-MJMAIN-6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E28-MJMAIN-6C"/>
+ <use xlink:href="#E28-MJMAIN-6E" x="278" y="0"/>
+</g>
+</svg></span> 就变成了:</p>
+<p style="text-align: center; "><span class="mjpage mjpage__block"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="22.936ex" height="2.509ex" style="vertical-align: -0.671ex;" viewbox="0 -791.3 9875.2 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-29-Title">
+<title id="MathJax-SVG-29-Title">\ln f _ i = \ln f _ {i - 1} + \ln f _ {i - 2}
+</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E29-MJMAIN-6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"/>
+<path stroke-width="1" id="E29-MJMAIN-6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"/>
+<path stroke-width="1" id="E29-MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"/>
+<path stroke-width="1" id="E29-MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"/>
+<path stroke-width="1" id="E29-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/>
+<path stroke-width="1" id="E29-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/>
+<path stroke-width="1" id="E29-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E29-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/>
+<path stroke-width="1" id="E29-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E29-MJMAIN-6C"/>
+ <use xlink:href="#E29-MJMAIN-6E" x="278" y="0"/>
+<g transform="translate(1001,0)">
+ <use xlink:href="#E29-MJMATHI-66" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E29-MJMATHI-69" x="693" y="-213"/>
+</g>
+ <use xlink:href="#E29-MJMAIN-3D" x="2114" y="0"/>
+<g transform="translate(3170,0)">
+ <use xlink:href="#E29-MJMAIN-6C"/>
+ <use xlink:href="#E29-MJMAIN-6E" x="278" y="0"/>
+</g>
+<g transform="translate(4172,0)">
+ <use xlink:href="#E29-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E29-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E29-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E29-MJMAIN-31" x="1124" y="0"/>
+</g>
+</g>
+ <use xlink:href="#E29-MJMAIN-2B" x="6133" y="0"/>
+<g transform="translate(7134,0)">
+ <use xlink:href="#E29-MJMAIN-6C"/>
+ <use xlink:href="#E29-MJMAIN-6E" x="278" y="0"/>
+</g>
+<g transform="translate(8136,0)">
+ <use xlink:href="#E29-MJMATHI-66" x="0" y="0"/>
+<g transform="translate(490,-150)">
+ <use transform="scale(0.707)" xlink:href="#E29-MJMATHI-69" x="0" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E29-MJMAIN-2212" x="345" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E29-MJMAIN-32" x="1124" y="0"/>
+</g>
+</g>
+</g>
+</svg></span></p>
 
       
     </div>
