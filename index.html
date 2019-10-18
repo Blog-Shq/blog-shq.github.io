@@ -244,7 +244,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">87</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">90</span></a>
   </li>
         
         
@@ -260,7 +260,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">42</span></a>
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">43</span></a>
   </li>
         
         
@@ -432,7 +432,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="更新于：2019-10-17 11:10:32" itemprop="dateModified" datetime="2019-10-17T11:10:32+08:00">2019-10-17</time>
+                <time title="更新于：2019-10-18 11:06:22" itemprop="dateModified" datetime="2019-10-18T11:06:22+08:00">2019-10-18</time>
               
             
           </span>
@@ -545,6 +545,212 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/bzoj4184/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shq">
+      <meta itemprop="description" content="生活在阴沟里，依然有仰望星空的权利。">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shq's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/articles/bzoj4184/" itemprop="url">
+                  「BZOJ4184」shallot - 线段树分治 + 线性基
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2019-10-18 10:48:55 / 更新于：11:02:32" itemprop="dateCreated datePublished" datetime="2019-10-18T10:48:55+08:00">2019-10-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">属于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="简要题意"><a href="#简要题意" class="headerlink" title="简要题意"></a>简要题意</h1>
+<p>对一个可重集 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.743ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 750.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<title id="MathJax-SVG-2-Title">A</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E2-MJMATHI-41" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E2-MJMATHI-41" x="0" y="0"/>
+</g>
+</svg></span> 进行下列操作：</p>
+<ol>
+<li>插入一个数</li>
+<li>删除一个数</li>
+<li>询问 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.743ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 750.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
+<title id="MathJax-SVG-3-Title">A</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E3-MJMATHI-41" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E3-MJMATHI-41" x="0" y="0"/>
+</g>
+</svg></span> 的子集的最大异或和</li>
+</ol>
+<p>操作数为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="7.382ex" height="2.676ex" style="vertical-align: -0.338ex;" viewbox="0 -1006.6 3178.4 1152.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
+<title id="MathJax-SVG-4-Title">5\times 10^5</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E4-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
+<path stroke-width="1" id="E4-MJMAIN-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"/>
+<path stroke-width="1" id="E4-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+<path stroke-width="1" id="E4-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E4-MJMAIN-35" x="0" y="0"/>
+ <use xlink:href="#E4-MJMAIN-D7" x="722" y="0"/>
+<g transform="translate(1723,0)">
+ <use xlink:href="#E4-MJMAIN-31"/>
+ <use xlink:href="#E4-MJMAIN-30" x="500" y="0"/>
+ <use transform="scale(0.707)" xlink:href="#E4-MJMAIN-35" x="1415" y="557"/>
+</g>
+</g>
+</svg></span></p>
+<p>黑暗爆炸oj link: <a href="https://darkbzoj.tk/problem/4184/" target="_blank" rel="noopener">#4184. shallot</a></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/articles/bzoj4184/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/linear-basis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -592,12 +798,24 @@
                 
               
 
-              <time title="创建于：2019-10-17 15:52:08 / 更新于：16:03:01" itemprop="dateCreated datePublished" datetime="2019-10-17T15:52:08+08:00">2019-10-17</time>
+              <time title="创建于：2019-10-17 15:52:08" itemprop="dateCreated datePublished" datetime="2019-10-17T15:52:08+08:00">2019-10-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="更新于：2019-10-18 11:04:00" itemprop="dateModified" datetime="2019-10-18T11:04:00+08:00">2019-10-18</time>
               
             
           </span>
@@ -1593,7 +1811,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/BZOJ1833/">
+    <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/bzoj1833/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shq">
@@ -1612,7 +1830,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/articles/BZOJ1833/" itemprop="url">
+                <a class="post-title-link" href="/articles/bzoj1833/" itemprop="url">
                   「BZOJ1833」「ZJOI2010」count 数字计数 - 数位DP
                 </a>
               
@@ -1736,7 +1954,7 @@
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/articles/BZOJ1833/#more" rel="contents">
+              <a class="btn" href="/articles/bzoj1833/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1946,201 +2164,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/uoj67/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shq">
-      <meta itemprop="description" content="生活在阴沟里，依然有仰望星空的权利。">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shq's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/articles/uoj67/" itemprop="url">
-                  「UOJ #67」新年的毒瘤 - tarjan
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建于：2019-10-10 21:34:46" itemprop="dateCreated datePublished" datetime="2019-10-10T21:34:46+08:00">2019-10-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="更新于：2019-10-11 07:24:32" itemprop="dateModified" datetime="2019-10-11T07:24:32+08:00">2019-10-11</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">属于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Link: <a href="http://uoj.ac/problem/67" target="_blank" rel="noopener">UOJ #67</a></p>
-<h1 id="简要题意"><a href="#简要题意" class="headerlink" title="简要题意"></a>简要题意</h1>
-<p>给定一个 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.395ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 600.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">n</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E2-MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E2-MJMATHI-6E" x="0" y="0"/>
-</g>
-</svg></span> 个点 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.04ex" height="1.676ex" style="vertical-align: -0.338ex;" viewbox="0 -576.1 878.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
-<title id="MathJax-SVG-3-Title">m</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E3-MJMATHI-6D" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E3-MJMATHI-6D" x="0" y="0"/>
-</g>
-</svg></span> 条边的无向图, 求出「删掉这个点与其相连的边使得图变为一棵树」的点的个数</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/articles/uoj67/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2190,7 +2213,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2396,7 +2419,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">87</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">90</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
