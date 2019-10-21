@@ -473,17 +473,16 @@
       
         <p>这里就用一个关于 C++11 的简单的问题作为本篇的开头: 下面哪一行代码会CE?</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    []&#123;&#125;;</span><br><span class="line">    []()&#123;&#125;;</span><br><span class="line">    []&#123;&#125;();</span><br><span class="line">    []()&#123;&#125;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <a id="more"></a>
-
 <p>在解决上面那个问题前, 我们先来学习 lambda 表达式相关知识</p>
-<h1 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h1><blockquote>
-<p>Lambda:<br>Constructs a closure: an unnamed function object capable of capturing variables in scope.</p>
+<h1 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h1>
+<blockquote>
+<p>Lambda:
+Constructs a closure: an unnamed function object capable of capturing variables in scope.</p>
 </blockquote>
 <p><strong>Lambda 表达式</strong> 是一个能够捕获作用域中变量的 <strong>未命名</strong> 函数对象。</p>
 <p>首先给出函数原型:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ capture ] ( params ) <span class="keyword">mutable</span> exception attribute -&gt; <span class="keyword">return</span>-type &#123; body &#125;</span><br></pre></td></tr></table></figure>
-
 <p><code>[ capture ]</code> : 捕捉列表. 是lambda的开始标志</p>
 <p><code>( params )</code> : 参数列表. 如果不需要进行参数传递时, 可以连同括号一起省略掉</p>
 <p><code>mutable exception attribute</code> : 修饰符, 默认 <code>const</code>, 可以加 <code>mutable</code>. 当填入 <code>mutable</code> 时 <strong>必须</strong> 要有参数列表</p>
@@ -491,86 +490,82 @@
 <p><code>{body}</code> : 函数体</p>
 <p>现在我们逐一分析开头时提到的语句:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>合法, 一个参数列表为空并省略, 返回 <code>void</code> 的 lambda 表达式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]()&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>合法, 一个参数列表为空, 返回 <code>void</code> 的 lambda 表达式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]&#123;&#125;();</span><br></pre></td></tr></table></figure>
-
 <p>合法, <code>[]{}</code> 表示一个参数列表为空并省略, 返回 <code>void</code> 的 lambda 表达式, 后面加括号表示调用这个函数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[]()&#123;&#125;();</span><br></pre></td></tr></table></figure>
-
 <p>合法, <code>[]{}</code> 表示一个参数列表为空, 返回 <code>void</code> 的 lambda 表达式, 后面加括号表示调用这个函数</p>
 <p>所以开头的几个语句都是正确的qwq</p>
 <p>看完几个特殊的, 我们来介绍 <code>[ capture ]</code></p>
-<h2 id="capture"><a href="#capture" class="headerlink" title="[ capture ]"></a>[ capture ]</h2><p>一般有下面几种方式:</p>
+<h2 id="capture"><a href="#capture" class="headerlink" title="[ capture ]"></a>[ capture ]</h2>
+<p>一般有下面几种方式:</p>
 <ol>
-<li><p><code>[]</code> 不捕获任何外部变量</p>
+<li>
+<p><code>[]</code> 不捕获任何外部变量</p>
 <p>这时候, 使用外部变量就会CE</p>
 </li>
-<li><p><code>[=]</code> 以值的形式捕获所有外部变量</p>
+<li>
+<p><code>[=]</code> 以值的形式捕获所有外部变量</p>
 <p>可以使用外部变量, 但是不能更改(也就是 <code>const</code> )</p>
 </li>
-<li><p><code>[&amp;]</code> 以引用形式捕获所有外部变量</p>
+<li>
+<p><code>[&amp;]</code> 以引用形式捕获所有外部变量</p>
 <p>可以更改外部变量的值</p>
 </li>
 </ol>
 <p>下面是混合形式:</p>
 <ol>
-<li><p><code>[x, &amp;y]</code> x 以传值形式捕获，y 以引用形式捕获</p>
+<li>
+<p><code>[x, &amp;y]</code> x 以传值形式捕获，y 以引用形式捕获</p>
 </li>
-<li><p><code>[=, &amp;z]</code> z 以引用形式捕获，其余变量以传值形式捕获</p>
+<li>
+<p><code>[=, &amp;z]</code> z 以引用形式捕获，其余变量以传值形式捕获</p>
 </li>
-<li><p><code>[&amp;, x]</code> x 以值的形式捕获，其余变量以引用形式捕获</p>
+<li>
+<p><code>[&amp;, x]</code> x 以值的形式捕获，其余变量以引用形式捕获</p>
 </li>
-<li><p>对于 <code>[=]</code> 或 <code>[&amp;]</code> 的形式，lambda 表达式可以直接使用 <code>this</code> 指针。但是，对于 <code>[]</code> 的形式，如果要使用 <code>this</code> 指针，必须显式传入, 比如:</p>
+<li>
+<p>对于 <code>[=]</code> 或 <code>[&amp;]</code> 的形式，lambda 表达式可以直接使用 <code>this</code> 指针。但是，对于 <code>[]</code> 的形式，如果要使用 <code>this</code> 指针，必须显式传入, 比如:</p>
 </li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Shq</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">vegetable</span> <span class="params">()</span> </span>&#123; <span class="built_in">printf</span>(<span class="string">"Shq is vegetable\n"</span>); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">lambda_</span> <span class="params">()</span> </span>&#123; [<span class="keyword">this</span>] &#123; <span class="keyword">this</span>-&gt;vegetable(); &#125; (); &#125;</span><br><span class="line">&#125; _;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123; _.lambda_(); &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="gt-return-type"><a href="#gt-return-type" class="headerlink" title="-&gt; return-type"></a>-&gt; return-type</h2><p>这里的 <code>-&gt; return-type</code> 是 <strong>尾置返回类型</strong>, 其实在 C++11 中的任意函数都可以这样写, 同时函数名前的类型名就可以变为 <code>auto</code> 了, 比如对于一个常规的函数:</p>
+<h2 id="return-type"><a href="#return-type" class="headerlink" title="-> return-type"></a>-&gt; return-type</h2>
+<p>这里的 <code>-&gt; return-type</code> 是 <strong>尾置返回类型</strong>, 其实在 C++11 中的任意函数都可以这样写, 同时函数名前的类型名就可以变为 <code>auto</code> 了, 比如对于一个常规的函数:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">Sort</span> <span class="params">(<span class="keyword">int</span> *v, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::sort (v + <span class="number">1</span>, v + n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>就可以写为:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">auto Sort (int *v, int n) -&gt; int * &#123;</span><br><span class="line">    <span class="built_in">std</span>::sort (v + <span class="number">1</span>, v + n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>当然, lambda 表达式也是如此</p>
-<h2 id="lambda-表达式的返回值"><a href="#lambda-表达式的返回值" class="headerlink" title="lambda 表达式的返回值"></a>lambda 表达式的返回值</h2><p>lambda 表达式的返回值是一个函数, 比如对于下列 lambda 表达式的返回值就是 <code>std::function &lt;bool(int, int)&gt;</code></p>
+<h2 id="lambda-表达式的返回值"><a href="#lambda-表达式的返回值" class="headerlink" title="lambda 表达式的返回值"></a>lambda 表达式的返回值</h2>
+<p>lambda 表达式的返回值是一个函数, 比如对于下列 lambda 表达式的返回值就是 <code>std::function &lt;bool(int, int)&gt;</code></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) &#123; <span class="keyword">return</span> a &lt; b; &#125;;</span><br><span class="line">[] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) -&gt; <span class="keyword">bool</span> &#123; <span class="keyword">return</span> a &lt; b; &#125;;</span><br><span class="line">[] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) -&gt; <span class="keyword">bool</span> &#123; <span class="keyword">return</span> a; &#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>大概 STL 中的 <code>std::sort()</code>, 函数模型是:</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3>
+<p>大概 STL 中的 <code>std::sort()</code>, 函数模型是:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template&lt; class RandomIt, class Compare &gt;</span><br><span class="line">constexpr void sort( RandomIt first, RandomIt last, Compare comp );</span><br></pre></td></tr></table></figure>
-
 <p>后面的 <code>Compare comp</code> 可以使用 lambda 来代替:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::sort (v + <span class="number">1</span>, v + n + <span class="number">1</span>, [] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
 <p>也可以</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> cmp = [] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) &#123;</span><br><span class="line">    <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">std</span>::sort (v + <span class="number">1</span>, v + n + <span class="number">1</span>, cmp);</span><br></pre></td></tr></table></figure>
-
-<h3 id="std-set"><a href="#std-set" class="headerlink" title="std::set"></a>std::set</h3><p>set 也可以通过 lambda 表达式来定义相对顺序, 首先是 <code>std::set</code> 的函数原型:</p>
+<h3 id="std-set"><a href="#std-set" class="headerlink" title="std::set"></a>std::set</h3>
+<p>set 也可以通过 lambda 表达式来定义相对顺序, 首先是 <code>std::set</code> 的函数原型:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Key</span>,</span></span><br><span class="line"><span class="class">    <span class="title">class</span> <span class="title">Compare</span> = <span class="title">std</span>:</span>:less&lt;Key&gt;,</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Allocator</span> = <span class="title">std</span>:</span>:allocator&lt;Key&gt;</span><br><span class="line">&gt; <span class="class"><span class="keyword">class</span> <span class="title">set</span>;</span></span><br></pre></td></tr></table></figure>
-
 <p>第二个参数 <code>Compare</code> 也是可以代替的, 下面是一个不使用 lambda 表达式的方法:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cmp</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp; a, <span class="keyword">const</span> <span class="keyword">int</span>&amp; b)</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> a &lt; b; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">set</span> &lt;<span class="keyword">int</span>, cmp&gt; s;</span><br></pre></td></tr></table></figure>
-
 <p>现在来写一个使用 lambda 表达式的 <code>set</code>, 仿照上面的例子, 我们写出了这样的代码:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::set &lt;int, [] (const int &amp;a, const int &amp;b) &#123; return a &gt; b; &#125; &gt; s;</span><br></pre></td></tr></table></figure>
-
-<p>这样并不是可以的, 而是要是用关键字 (<code>decltype</code>) 来进行获取 <code>cmp</code> 的类型再放入第二位……就像这样:</p>
+<p>这样并不是可以的, 而是要是用关键字 (<code>decltype</code>) 来进行获取 <code>cmp</code> 的类型再放入第二位......就像这样:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> cmp = [] (<span class="keyword">const</span> <span class="keyword">int</span> &amp;a, <span class="keyword">const</span> <span class="keyword">int</span> &amp;b) -&gt; <span class="keyword">bool</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a &gt; b;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">set</span> &lt;<span class="keyword">int</span>, <span class="keyword">decltype</span>(cmp)&gt; s(cmp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>其中 lambda 表达式要是 <strong>静态</strong> 或 <strong>全局无状态</strong> 的才能使用 <code>decltype</code></p>
 <p>其中 <strong>大部分</strong> STL 容器都可以使用这种方式写比较函数</p>
-<h3 id="std-for-each"><a href="#std-for-each" class="headerlink" title="std::for_each"></a>std::for_each</h3><p>新版本 C++ 的函数, 大概是用于遍历, 先放上函数原型:</p>
+<h3 id="std-for-each"><a href="#std-for-each" class="headerlink" title="std::for_each"></a>std::for_each</h3>
+<p>新版本 C++ 的函数, 大概是用于遍历, 先放上函数原型:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">InputIt</span>, <span class="title">class</span> <span class="title">UnaryFunction</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">UnaryFunction</span> <span class="title">for_each</span>( <span class="title">InputIt</span> <span class="title">first</span>, <span class="title">InputIt</span> <span class="title">last</span>, <span class="title">UnaryFunction</span> <span class="title">f</span> );</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">InputIt</span>, <span class="title">class</span> <span class="title">UnaryFunction</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">constexpr</span> <span class="title">UnaryFunction</span> <span class="title">for_each</span>( <span class="title">InputIt</span> <span class="title">first</span>, <span class="title">InputIt</span> <span class="title">last</span>, <span class="title">UnaryFunction</span> <span class="title">f</span> );</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">ExecutionPolicy</span>, <span class="title">class</span> <span class="title">ForwardIt</span>, <span class="title">class</span> <span class="title">UnaryFunction2</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">for_each</span>( <span class="title">ExecutionPolicy</span>&amp;&amp; <span class="title">policy</span>, <span class="title">ForwardIt</span> <span class="title">first</span>, <span class="title">ForwardIt</span> <span class="title">last</span>, <span class="title">UnaryFunction2</span> <span class="title">f</span> );</span></span><br></pre></td></tr></table></figure>
-
 <p>大概原理是这样的:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">InputIt</span>, <span class="title">class</span> <span class="title">UnaryFunction</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">constexpr</span> <span class="title">UnaryFunction</span> <span class="title">for_each</span>(<span class="title">InputIt</span> <span class="title">first</span>, <span class="title">InputIt</span> <span class="title">last</span>, <span class="title">UnaryFunction</span> <span class="title">f</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">for</span> (; first != last; ++first) &#123;</span><br><span class="line">        f(*first);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f; <span class="comment">// implicit move since C++11</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><code>f</code> 自然就随便填 lambda 了, 比如输出 <code>vector</code> 内容:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> print = [](<span class="keyword">const</span> <span class="keyword">int</span>&amp; n) &#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span> &lt;&lt; n; &#125;;</span><br><span class="line"><span class="built_in">std</span>::for_each(v.begin(), v.end(), print);</span><br></pre></td></tr></table></figure>
-
 <p>当然也可以执行操作:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::for_each(nums.begin(), nums.end(), [] (<span class="keyword">int</span> &amp;n) &#123; n++; &#125;);</span><br></pre></td></tr></table></figure>
       
@@ -1015,7 +1010,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda-表达式"><span class="nav-number">1.</span> <span class="nav-text">lambda 表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#capture"><span class="nav-number">1.1.</span> <span class="nav-text">[ capture ]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-return-type"><span class="nav-number">1.2.</span> <span class="nav-text">-&gt; return-type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda-表达式的返回值"><span class="nav-number">1.3.</span> <span class="nav-text">lambda 表达式的返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">1.4.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.4.1.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-set"><span class="nav-number">1.4.2.</span> <span class="nav-text">std::set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-for-each"><span class="nav-number">1.4.3.</span> <span class="nav-text">std::for_each</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda-表达式"><span class="nav-number">1.</span> <span class="nav-text">lambda 表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#capture"><span class="nav-number">1.1.</span> <span class="nav-text">[ capture ]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#return-type"><span class="nav-number">1.2.</span> <span class="nav-text">-&gt; return-type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda-表达式的返回值"><span class="nav-number">1.3.</span> <span class="nav-text">lambda 表达式的返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">1.4.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.4.1.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-set"><span class="nav-number">1.4.2.</span> <span class="nav-text">std::set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-for-each"><span class="nav-number">1.4.3.</span> <span class="nav-text">std::for_each</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
