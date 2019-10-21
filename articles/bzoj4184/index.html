@@ -107,18 +107,18 @@
 
 
 
-  <meta name="description" content="简要题意 对一个可重集  A         进行下列操作：  插入一个数 删除一个数 询问  A         的子集的最大异或和  操作数为  5\times 10^5                      黑暗爆炸oj link: #4184. shallot">
+  <meta name="description" content="简要题意对一个可重集 $A$ 进行下列操作：  插入一个数 删除一个数 询问 $A$ 的子集的最大异或和  操作数为 $5\times 10^5$ 黑暗爆炸oj link: #4184. shallot">
 <meta name="keywords" content="线性基,线段树,时间分治,线段树分治">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「BZOJ4184」shallot - 线段树分治 + 线性基">
 <meta property="og:url" content="https://blog.ishq.site/articles/bzoj4184/index.html">
 <meta property="og:site_name" content="Shq&#39;s Blog">
-<meta property="og:description" content="简要题意 对一个可重集  A         进行下列操作：  插入一个数 删除一个数 询问  A         的子集的最大异或和  操作数为  5\times 10^5                      黑暗爆炸oj link: #4184. shallot">
+<meta property="og:description" content="简要题意对一个可重集 $A$ 进行下列操作：  插入一个数 删除一个数 询问 $A$ 的子集的最大异或和  操作数为 $5\times 10^5$ 黑暗爆炸oj link: #4184. shallot">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-10-18T03:02:32.220Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「BZOJ4184」shallot - 线段树分治 + 线性基">
-<meta name="twitter:description" content="简要题意 对一个可重集  A         进行下列操作：  插入一个数 删除一个数 询问  A         的子集的最大异或和  操作数为  5\times 10^5                      黑暗爆炸oj link: #4184. shallot">
+<meta name="twitter:description" content="简要题意对一个可重集 $A$ 进行下列操作：  插入一个数 删除一个数 询问 $A$ 的子集的最大异或和  操作数为 $5\times 10^5$ 黑暗爆炸oj link: #4184. shallot">
 
 
 
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">44</span></a>
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">45</span></a>
   </li>
         
         
@@ -471,106 +471,35 @@
       
 
       
-        <h1 id="简要题意"><a href="#简要题意" class="headerlink" title="简要题意"></a>简要题意</h1>
-<p>对一个可重集 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.743ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 750.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
-<title id="MathJax-SVG-2-Title">A</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E2-MJMATHI-41" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E2-MJMATHI-41" x="0" y="0"/>
-</g>
-</svg></span> 进行下列操作：</p>
+        <h1 id="简要题意"><a href="#简要题意" class="headerlink" title="简要题意"></a>简要题意</h1><p>对一个可重集 $A$ 进行下列操作：</p>
 <ol>
 <li>插入一个数</li>
 <li>删除一个数</li>
-<li>询问 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.743ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 750.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-3-Title">
-<title id="MathJax-SVG-3-Title">A</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E3-MJMATHI-41" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E3-MJMATHI-41" x="0" y="0"/>
-</g>
-</svg></span> 的子集的最大异或和</li>
+<li>询问 $A$ 的子集的最大异或和</li>
 </ol>
-<p>操作数为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="7.382ex" height="2.676ex" style="vertical-align: -0.338ex;" viewbox="0 -1006.6 3178.4 1152.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-4-Title">
-<title id="MathJax-SVG-4-Title">5\times 10^5</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E4-MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"/>
-<path stroke-width="1" id="E4-MJMAIN-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"/>
-<path stroke-width="1" id="E4-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
-<path stroke-width="1" id="E4-MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E4-MJMAIN-35" x="0" y="0"/>
- <use xlink:href="#E4-MJMAIN-D7" x="722" y="0"/>
-<g transform="translate(1723,0)">
- <use xlink:href="#E4-MJMAIN-31"/>
- <use xlink:href="#E4-MJMAIN-30" x="500" y="0"/>
- <use transform="scale(0.707)" xlink:href="#E4-MJMAIN-35" x="1415" y="557"/>
-</g>
-</g>
-</svg></span></p>
+<p>操作数为 $5\times 10^5$</p>
 <p>黑暗爆炸oj link: <a href="https://darkbzoj.tk/problem/4184/" target="_blank" rel="noopener">#4184. shallot</a></p>
 <a id="more"></a>
-<h1 id="4184-shallot"><a href="#4184-shallot" class="headerlink" title="#4184. shallot"></a>#4184. shallot</h1>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2>
-<p>小苗去市场上买了一捆小葱苗，她突然一时兴起，于是她在每颗小葱苗上写上一个数字，然后把小葱叫过来玩游戏。</p>
+
+<h1 id="4184-shallot"><a href="#4184-shallot" class="headerlink" title="#4184. shallot"></a>#4184. shallot</h1><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>小苗去市场上买了一捆小葱苗，她突然一时兴起，于是她在每颗小葱苗上写上一个数字，然后把小葱叫过来玩游戏。</p>
 <p>每个时刻她会给小葱一颗小葱苗或者是从小葱手里拿走一颗小葱苗，并且</p>
 <p>让小葱从自己手中的小葱苗里选出一些小葱苗使得选出的小葱苗上的数字的异或和最大。</p>
 <p>这种小问题对于小葱来说当然不在话下，但是他的身边没有电脑，于是他打电话给同为Oi选手的你，你能帮帮他吗？</p>
 <p>你只需要输出最大的异或和即可，若小葱手中没有小葱苗则输出0。</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2>
-<p>第一行一个正整数n表示总时间；第二行n个整数a1,a2...an，若ai大于0代表给了小葱一颗数字为ai的小葱苗，否则代表从小葱手中拿走一颗数字为-ai的小葱苗。</p>
-<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2>
-<p>输出共n行，每行一个整数代表第i个时刻的最大异或和。</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">1 2 3 4 -2 -3</span><br></pre></td></tr></table></figure>
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">3</span><br><span class="line">3</span><br><span class="line">7</span><br><span class="line">7</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
-<h2 id="Hint"><a href="#Hint" class="headerlink" title="Hint"></a>Hint</h2>
-<p>N&lt;=500000,Ai&lt;=2^31-1</p>
-<h2 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h2>
-<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1>
-<p>显然是线性基题目，但是由于删除操作的存在并不好处理线性基，直接暴力是不行的</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行一个正整数n表示总时间；第二行n个整数a1,a2…an，若ai大于0代表给了小葱一颗数字为ai的小葱苗，否则代表从小葱手中拿走一颗数字为-ai的小葱苗。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>输出共n行，每行一个整数代表第i个时刻的最大异或和。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">1 2 3 4 -2 -3</span><br></pre></td></tr></table></figure>
+
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">3</span><br><span class="line">3</span><br><span class="line">7</span><br><span class="line">7</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hint"><a href="#Hint" class="headerlink" title="Hint"></a>Hint</h2><p> N&lt;=500000,Ai&lt;=2^31-1</p>
+<h2 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h2><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p>显然是线性基题目，但是由于删除操作的存在并不好处理线性基，直接暴力是不行的</p>
 <p>有插入，删除操作而且并不是强制在线，于是考虑离线做法</p>
-<p>使用 <code>std::set</code> 维护当前点的插入时间 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.259ex" height="2.009ex" style="vertical-align: -0.671ex; margin-left: -0.089ex;" viewbox="-38.5 -576.1 542 865.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-5-Title">
-<title id="MathJax-SVG-5-Title">p</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E5-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E5-MJMATHI-70" x="0" y="0"/>
-</g>
-</svg></span> ，在删除时间 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.07ex" height="2.009ex" style="vertical-align: -0.671ex;" viewbox="0 -576.1 460.5 865.1" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-6-Title">
-<title id="MathJax-SVG-6-Title">q</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E6-MJMATHI-71" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E6-MJMATHI-71" x="0" y="0"/>
-</g>
-</svg></span> 的时候相当于对 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.824ex" height="2.843ex" style="vertical-align: -0.838ex;" viewbox="0 -863.1 2077.2 1223.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-7-Title">
-<title id="MathJax-SVG-7-Title">[p,q)</title>
-<defs aria-hidden="true">
-<path stroke-width="1" id="E7-MJMAIN-5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"/>
-<path stroke-width="1" id="E7-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/>
-<path stroke-width="1" id="E7-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/>
-<path stroke-width="1" id="E7-MJMATHI-71" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"/>
-<path stroke-width="1" id="E7-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/>
-</defs>
-<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
- <use xlink:href="#E7-MJMAIN-5B" x="0" y="0"/>
- <use xlink:href="#E7-MJMATHI-70" x="278" y="0"/>
- <use xlink:href="#E7-MJMAIN-2C" x="782" y="0"/>
- <use xlink:href="#E7-MJMATHI-71" x="1227" y="0"/>
- <use xlink:href="#E7-MJMAIN-29" x="1687" y="0"/>
-</g>
-</svg></span> 进行区间插入一个元素，从而把插入删除变为了区间加入。然后直接进行线段树即可</p>
+<p>使用 <code>std::set</code> 维护当前点的插入时间 $p$ ，在删除时间 $q$ 的时候相当于对 $[p,q)$ 进行区间插入一个元素，从而把插入删除变为了区间加入。然后直接进行线段树即可</p>
 <p>代码十分好写</p>
 <p>代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ul unsigned long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">500000</span> + <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> logN = <span class="number">32</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">lb</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> siz;</span><br><span class="line">    ul base[logN + <span class="number">2</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span> <span class="params">(ul x)</span> </span>&#123;</span><br><span class="line">        down (i, logN, <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> ((x &gt;&gt; i) &amp; <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span> (base[i]) x ^= base[i];</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    base[i] = x;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">ul <span class="title">query</span> <span class="params">(ul x)</span> </span>&#123;</span><br><span class="line">        down (i, logN, <span class="number">0</span>) &#123;</span><br><span class="line">            x = <span class="built_in">std</span>::max(x, x ^ base[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123; mem(base); siz = <span class="number">0</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Seg</span> &#123;</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span> &lt;ul&gt; seg[N * <span class="number">3</span>];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">modify</span> <span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, ul x, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) &#123;</span><br><span class="line">            seg[o].pb(x);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (ql &lt;= mid) modify (o &lt;&lt; <span class="number">1</span>, l, mid, x, ql, qr);</span><br><span class="line">        <span class="keyword">if</span> (mid &lt; qr) modify (o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, x, ql, qr);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">query</span> <span class="params">(<span class="keyword">int</span> o, <span class="keyword">int</span> l, <span class="keyword">int</span> r, lb ret)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : seg[o]) ret.insert(i);</span><br><span class="line">        <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">            print(ret.query(<span class="number">0</span>)), <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        query (o &lt;&lt; <span class="number">1</span>, l, mid, ret);</span><br><span class="line">        query (o &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r, ret);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; tr;</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">set</span> &lt;<span class="built_in">std</span>::pair &lt;ul, <span class="keyword">int</span>&gt; &gt; s;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = read(), x;</span><br><span class="line">    up (i, <span class="number">1</span>, n) &#123;</span><br><span class="line">        x = read();</span><br><span class="line">        <span class="keyword">if</span> (x &gt; <span class="number">0</span>) s.insert(mp(x, i));</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">auto</span> it = s.lower_bound(mp(-x, <span class="number">0</span>));</span><br><span class="line">            tr.modify(<span class="number">1</span>, <span class="number">1</span>, n, -x, it-&gt;second, i - <span class="number">1</span>);</span><br><span class="line">            s.erase(it);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i : s) tr.modify(<span class="number">1</span>, <span class="number">1</span>, n, i.first, i.second, n);</span><br><span class="line">    lb t; t.clear();</span><br><span class="line">    tr.query (<span class="number">1</span>, <span class="number">1</span>, n, t);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -728,7 +657,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
