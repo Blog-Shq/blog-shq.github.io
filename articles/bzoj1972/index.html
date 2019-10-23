@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+<link href="//cdn.staticfile.org/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<link href="//cdn.staticfile.org/KaTeX/0.7.1/katex.min.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.png?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文不算英文字母共11437词。。。自闭了 貌似啥OJ都有这个题，就不放题目链接了qwq 简要题意 大模拟。。。略了">
+<meta name="keywords" content="BZOJ,大模拟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「BZOJ1972」「SDOI2010」猪国杀 - 大模拟">
+<meta property="og:url" content="https://blog.ishq.site/articles/bzoj1972/index.html">
+<meta property="og:site_name" content="Shq&#39;s Blog">
+<meta property="og:description" content="本文不算英文字母共11437词。。。自闭了 貌似啥OJ都有这个题，就不放题目链接了qwq 简要题意 大模拟。。。略了">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-23T13:51:35.825Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「BZOJ1972」「SDOI2010」猪国杀 - 大模拟">
+<meta name="twitter:description" content="本文不算英文字母共11437词。。。自闭了 貌似啥OJ都有这个题，就不放题目链接了qwq 简要题意 大模拟。。。略了">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Shq's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://blog.ishq.site/articles/bzoj1972/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>「BZOJ1972」「SDOI2010」猪国杀 - 大模拟 | Shq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">迷途漫漫，终有一归。</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-bandcamp"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-id-card"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">97</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>系列<span class="badge">3</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-paste"></i> <br>归档<span class="badge">48</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-frlink">
+    <a href="/frlink/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-link"></i> <br>友链</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-comments">
+    <a href="/comments/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-comments"></i> <br>留言板</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-remittance">
+    <a href="/remittance/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-bitcoin"></i> <br>给本站投食</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.ishq.site/articles/bzoj1972/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shq">
+      <meta itemprop="description" content="生活在阴沟里，依然有仰望星空的权利。">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shq's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「BZOJ1972」「SDOI2010」猪国杀 - 大模拟
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建于：2019-10-23 17:49:54 / 更新于：21:51:35" itemprop="dateCreated datePublished" datetime="2019-10-23T17:49:54+08:00">2019-10-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">属于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OI/" itemprop="url" rel="index"><span itemprop="name">OI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文不算英文字母共11437词。。。自闭了</p>
+<p>貌似啥OJ都有这个题，就不放题目链接了qwq</p>
+<h1 id="简要题意"><a href="#简要题意" class="headerlink" title="简要题意"></a>简要题意</h1>
+<p>大模拟。。。略了</p>
+<a id="more"></a>
+<h1 id="「SDOI2010」猪国杀"><a href="#「SDOI2010」猪国杀" class="headerlink" title="「SDOI2010」猪国杀"></a>「SDOI2010」猪国杀</h1>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2>
+<p>《猪国杀》是一种多猪牌类回合制游戏，一共有三种角色：主猪，忠猪，反猪。每局游戏主猪有且只有一只，忠猪和反猪可以有多只，每只猪扮演一种角色。</p>
+<p>游戏目的：</p>
+<p>主猪（MP）：自己存活的情况下消灭所有的反猪。</p>
+<p>忠猪（ZP）：不惜一切保护主猪，胜利条件与主猪相同。</p>
+<p>反猪（FP）：杀死主猪。</p>
+<p>游戏过程：</p>
+<p>游戏开始时候，每个玩家手里都会有4张牌，且体力上限和初始体力都是4。</p>
+<p>开始游戏时，从主猪开始，按照 <strong>逆时针</strong> 方向（数据中就是按照编号从1,2,3..n,1..的顺序）依次行动。</p>
+<p>每个玩家自己的回合可以分为下面的阶段：</p>
+<ul>
+<li>摸牌阶段：从牌堆顶部摸两张牌，依次放到手牌的最右边；</li>
+<li>出牌阶段：你可以使用0张到任意张牌，每次使用牌的时候都使用最靠左的能够使用的牌。当然，要满足如下规则：</li>
+</ul>
+<ol>
+<li>
+<p>如果没有猪哥连弩，每个出牌阶段只能使用一次“杀”来攻击；</p>
+</li>
+<li>
+<p>任何牌被使用后被弃置（武器是装备上）；</p>
+</li>
+</ol>
+<p>被弃置的牌以后都不能再用，即与游戏无关；</p>
+<p>各种牌介绍：</p>
+<p>每张手牌用一个字母表示，字母代表牌的种类。</p>
+<ul>
+<li>
+<p>基本牌：</p>
+<ul>
+<li>『桃(P)』：在自己的回合内，如果自己的体力值不等于体力上限，那么使用一个桃可以为自己补充一点体力，否则不能使用桃；桃只能对自己使用；在自己的回合外，如果自己的血变为0或者更低，那么也可以使用；</li>
+<li>『杀(K)』：在自己的回合内，对攻击范围内除自己以外的一名角色使用。如果没有被『闪』抵消，则造成1点伤害。无论有无武器，杀的攻击范围都是1；</li>
+<li>『闪(D)』：当你受到杀的攻击时，可以弃置一张闪来抵消杀的效果；</li>
+</ul>
+</li>
+<li>
+<p>锦囊牌：</p>
+<ul>
+<li>
+<p>『决斗(F)』：出牌阶段，对除自己以外任意一名角色使用，由目标角色先开始，自己和目标角色轮流弃置一张杀，首先没有杀可弃的一方受到1点伤害，另一方视为此伤害的来源；</p>
+</li>
+<li>
+<p>『南猪入侵(N)』：出牌阶段，对除你以外所有角色使用，按逆时针顺序从使用者下家开始依次结算，除非弃置一张杀，否则受到1点伤害；</p>
+</li>
+<li>
+<p>『万箭齐发(W)』：和南猪入侵类似，不过要弃置的不是杀而是闪；</p>
+</li>
+<li>
+<p>『无懈可击(J)』：在目标锦囊生效前抵消其效果。每次有一张锦囊即将生效时，从使用这张锦囊的猪开始，按照逆时针顺序，依次得到使用无懈可击的机会；</p>
+<p>效果：用于决斗时，决斗无效并弃置；用于南猪入侵或万箭齐发时，当结算到某个角色时才能使用，当前角色不需弃置牌并且不会受到伤害（仅对一个角色产生效果）；用于无懈可击时，成为目标的无懈可击被无效。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>装备牌：</p>
+<ul>
+<li>
+<p>『猪哥连弩(Z)』：武器，攻击范围1，出牌阶段你可以使用任意张杀；</p>
+<p>同一时刻最多只能装一个武器；如果先前已经有了一把武器，那么之后再装武器的话，会弃置以前的武器来装现在的武器；</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>特殊事件及概念解释：</p>
+<p>伤害来源：杀、南猪入侵、万箭齐发的伤害来源均是使用该牌的猪，决斗的伤害来源如上；</p>
+<p>距离：两只猪的距离定义为沿着逆时针方向间隔的猪数＋1。即初始时1和2的距离为1，但是2和1的距离就是n-1。注意一个角色的死亡会导致一些猪距离的改变；</p>
+<p>玩家死亡：如果该玩家的体力降到0或者更低，并且自己手中没有足够的桃使得自己的体力值回到1，那么就死亡了，死亡后所有的牌（装备区，手牌区）被弃置；</p>
+<p>奖励与惩罚：反猪死亡时，最后一个伤害来源处（即使是反猪）立即摸三张牌。忠猪死亡时，如果最后一个伤害来源是主猪，那么主猪所有装备牌、手牌被弃置；</p>
+<ul>
+<li>注意，一旦达成胜利条件，游戏立刻结束，因此即使会摸3张牌或者还有牌可以用也不用执行了。</li>
+</ul>
+<p>现在，我们已经知道每只猪的角色、手牌，还有牌堆初始情况，并且假设每个角色会按照如下的行为准则进行游戏，你需要做的就是告诉小猪iPig最后的结果。</p>
+<p>几种行为：</p>
+<ul>
+<li>
+<p>献殷勤：使用无懈可击挡下南猪入侵、万箭齐发、决斗；使用无懈可击抵消表敌意；</p>
+</li>
+<li>
+<p>表敌意：对某个角色使用杀、决斗；使用无懈可击抵消献殷勤；</p>
+</li>
+<li>
+<p>跳忠：即通过行动表示自己是忠猪。跳忠行动就是对主猪或对某只已经跳忠的猪献殷勤，或者对某只已经跳反的猪表敌意；</p>
+</li>
+<li>
+<p>跳反：即通过行动表示自己是反猪。跳反行动就是对主猪或对某只已经跳忠的猪表敌意，或者对某只已经跳反的猪献殷勤；</p>
+</li>
+</ul>
+<p>忠猪不会跳反，反猪也不会跳忠；不管是忠猪还是反猪，能够跳必然跳；</p>
+<p>行动准则：</p>
+<p>共性：每个角色如果手里有桃且生命值未满，那么必然吃掉；有南猪入侵、万箭齐发、必然使用；有装备必然装上；受到杀时，有闪必然弃置；响应南猪入侵或者万箭齐发时候，有杀/闪必然弃置；不会对未表明身份的猪献殷勤（包括自己）；</p>
+<p>特性：</p>
+<ul>
+<li>
+<p>主猪：主猪会认为没有跳身份，且用南猪入侵/万箭齐发对自己造成伤害的猪是“类反猪”（没伤害到不算，注意“类反猪”并没有表明身份），如果之后跳了，那么主猪会重新认识这只猪；对于每种表敌意的方式，对逆时针方向能够执行到的第一只“类反猪”或者已跳反猪表；如果没有，那么就不表敌意；决斗时会不遗余力弃置杀；如果能对已经跳忠的猪或自己献殷勤，那么一定献；如果能够对已经跳反的猪表敌意，那么一定表；</p>
+</li>
+<li>
+<p>忠猪：对于每种表敌意的方式，对逆时针方向能够执行到的第一只已经跳反的猪表，如果没有，那么就不表敌意；决斗时，如果对方是主猪，那么不会弃置杀，否则，会不遗余力弃置杀；如果有机会对主猪或者已经跳忠的猪献殷勤，那么一定献；</p>
+</li>
+<li>
+<p>反猪：对于每种表敌意的方式，如果有机会则对主猪表，否则，对逆时针方向能够执行到的第一只已经跳忠的猪表，如果没有，那么就不表敌意；决斗时会不遗余力弃置杀；如果有机会对已经跳反的猪献殷勤，那么一定献；</p>
+</li>
+</ul>
+<p>限于iPig只会用P++语言写A + B，他请你用Pigcal(Pascal)、P(C)或P++(C++)语言来帮他预测最后的结果。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2>
+<p>输入文件第一行包含两个正整数n(2 &lt;= n &lt;= 10) 和m( m &lt;= 2000)，分别代表玩家数和牌堆中牌的数量。数据保证牌的数量够用。</p>
+<p>接下来n行，每行5个字符串，依次表示对第i只猪的角色和初始4张手牌描述。编号为1的肯定是主猪。</p>
+<p>再接下来一行，一共m个字符串，按照从牌堆顶部到牌堆底部的顺序描述每张牌。</p>
+<p>所有的相邻的两个字符串都严格用1个空格隔开，行尾没有多余空格。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2>
+<p>输出数据第一行包含一个字符串代表游戏结果。如果是主猪胜利，那么输出“MP”，否则输出“FP”。数据保证游戏总会结束。</p>
+<p>接下来n行，第i行是对第i只猪的手牌描述（注意只需要输出手牌），按照手牌从左往右的顺序输出，相邻两张牌用一个空格隔开，行末尾没有多余空格。如果这只猪已阵亡，那么只要输出“DEAD”即可。注意如果要输出手牌而没有手牌的话，那么只需输出一个空行。</p>
+<h2 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h2>
+<p>输入 #1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3 10</span><br><span class="line">MP D D F F</span><br><span class="line">ZP N N N D</span><br><span class="line">FP J J J J</span><br><span class="line">F F D D J J F F K D</span><br></pre></td></tr></table></figure>
+<p>输出 #1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FP</span><br><span class="line">DEAD</span><br><span class="line">DEAD</span><br><span class="line">J J J J J J D</span><br></pre></td></tr></table></figure>
+<h2 id="说明-提示"><a href="#说明-提示" class="headerlink" title="说明/提示"></a>说明/提示</h2>
+<p>样例1说明：第一回合主猪没有目标可以表敌意；接下来忠猪使用了3张南猪入侵，主猪掉了3点体力，并认为该角色为类反猪，3号角色尽管手里有无懈可击，但是因为自己未表明身份，所以同样不能对自己用，乖乖掉3点体力；下一回合反猪无牌可出；接下来主猪对着类反猪爆发，使用4张决斗，忠猪死亡，结果主猪弃掉所有牌；下来反猪摸到一张杀直接杀死主猪获胜。</p>
+<p>数据说明：一共20组测试数据，每个点5分。10%的数据没有锦囊牌，另外20%的数据没有无懈可击</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1>
+<p>写的心累。。</p>
+<p>注意几种情况就好了，一定要好好读题。。</p>
+<p>分部分考虑....首先每个角色的信息干脆封装起来，不然自闭了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> id; <span class="comment">// 角色</span></span><br><span class="line">    <span class="keyword">int</span> hp; <span class="comment">// 血量</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">bool</span> is_alive; <span class="comment">// 是否存活</span></span><br><span class="line">    <span class="keyword">int</span> is_showed; <span class="comment">// 是否暴露身份</span></span><br><span class="line">                   <span class="comment">//   1: 未暴露</span></span><br><span class="line">                   <span class="comment">//   2: 已暴露（切牌时可以调用id）</span></span><br><span class="line">                   <span class="comment">//   3: 类反</span></span><br><span class="line">    <span class="keyword">bool</span> zgln; <span class="comment">// 诸葛连弩</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> cnt; <span class="comment">// 所有的手牌的数量</span></span><br><span class="line">    <span class="keyword">bool</span> used[CARD]; <span class="comment">// 标记是否切过该卡</span></span><br><span class="line">    <span class="keyword">char</span> card[CARD]; <span class="comment">// 玩家所有抽到的牌（包括过去，现在）</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> nxt, pre;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span> <span class="params">()</span> </span>&#123; <span class="comment">// 清除玩家的手牌以及装备</span></span><br><span class="line">        zgln = <span class="number">0</span>;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        mem(used); mem(card);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">outputCard</span> <span class="params">()</span> </span>&#123; <span class="comment">// 输出当前玩家的手牌</span></span><br><span class="line"><span class="comment">//        up (i, 1, cnt)</span></span><br><span class="line"><span class="comment">//            if (!used[i]) printf("%c%c", card[i], i == cnt ? '\n' : ' ');</span></span><br><span class="line">        up (i, <span class="number">1</span>, cnt)</span><br><span class="line">            <span class="keyword">if</span> (!used[i]) <span class="built_in">printf</span>(<span class="string">"%c "</span>, card[i]);</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在手中找一张牌：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在手牌中寻找一张牌，并返回其ID</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span> <span class="params">(<span class="keyword">int</span> pid, <span class="keyword">char</span> card)</span> </span>&#123;</span><br><span class="line">    up (i, <span class="number">1</span>, v[pid].cnt)</span><br><span class="line">        <span class="keyword">if</span> (v[pid].card[i] == card &amp;&amp; !v[pid].used[i]) <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来是牌山</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Cards</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> cnt; <span class="comment">// 有多少牌</span></span><br><span class="line">    <span class="keyword">char</span> c[CARD]; <span class="comment">// 牌山</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span> <span class="params">()</span> </span>&#123; <span class="comment">// 初始化</span></span><br><span class="line">        <span class="keyword">char</span> ch[<span class="number">5</span>];</span><br><span class="line">        up (i, <span class="number">1</span>, m) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>, ch);</span><br><span class="line">            c[i] = ch[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">get</span> <span class="params">()</span> </span>&#123; <span class="comment">// 摸一张牌</span></span><br><span class="line">        <span class="keyword">return</span> cnt == m ? c[m] : c[++cnt];</span><br><span class="line">    &#125;</span><br><span class="line">    Cards () : cnt(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">&#125; Card;</span><br></pre></td></tr></table></figure>
+<p>然后先看一下总体的过程：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">n = read(); m = read();</span><br><span class="line">up (i, <span class="number">1</span>, n) InputInfo(i); <span class="comment">// 读入每个玩家的手牌，身份</span></span><br><span class="line">v[<span class="number">1</span>].is_showed = <span class="number">1</span>; <span class="comment">// 主公暴露身份</span></span><br><span class="line">Card.init(); <span class="comment">// 读入牌山</span></span><br><span class="line"><span class="keyword">int</span> times = <span class="number">0</span>; <span class="comment">// 巡数</span></span><br><span class="line"><span class="keyword">while</span> (result == <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i = v[i].nxt) &#123;</span><br><span class="line">        GetCard(i); GetCard(i);</span><br><span class="line">        <span class="keyword">int</span> limit = <span class="number">0</span>; <span class="comment">// 杀的数量</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> pos = <span class="number">1</span>; pos &lt;= v[i].cnt; pos++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (v[i].used[pos]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">int</span> done = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">switch</span> (v[i].card[pos]) &#123; <span class="comment">// 能切则切</span></span><br><span class="line">                <span class="keyword">case</span> <span class="string">'P'</span>: done = peach(i); <span class="keyword">break</span>; </span><br><span class="line">                <span class="keyword">case</span> <span class="string">'F'</span>: done = solve_fight(i); <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'Z'</span>: done = zgln(i); <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'N'</span>: done = nmrq(i); <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'W'</span>: done = wjqf(i); <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'K'</span>:</span><br><span class="line">                    <span class="keyword">if</span> (limit == <span class="number">0</span> || v[i].zgln) done = kill(i);</span><br><span class="line">                    <span class="keyword">if</span> (done) limit++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (done) &#123;</span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; mark) mark = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">else</span> v[i].used[pos] = <span class="number">1</span>;</span><br><span class="line">                pos = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!v[i].is_alive) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span> (result + <span class="number">1</span>) <span class="keyword">break</span>; <span class="comment">// 有结果就结束</span></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span> (result + <span class="number">1</span>) <span class="keyword">break</span>; <span class="comment">// 有结果就结束</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">puts</span>(result ^ MP ? <span class="string">"FP"</span> : <span class="string">"MP"</span>); <span class="comment">// 输出结果</span></span><br><span class="line">up (i, <span class="number">1</span>, n) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!v[i].is_alive) &#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">"DEAD"</span>);</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    v[i].outputCard();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="濒死"><a href="#濒死" class="headerlink" title="濒死"></a>濒死</h2>
+<p>在写使用牌之前首先要考虑如何解决角色死亡，比如对于有攻击性的牌，自然切出去可能就会有人掉血，掉多了就有可能死亡</p>
+<p>这里比较棒的一点就是 <strong>自己濒死只有自己对自己使用桃</strong>，也就是不能吃别人送的桃。如果这个没有说明的话，还要考虑忠臣给主公送桃，反贼给反贼送桃等等，写起来比较麻烦</p>
+<p>需要注意的一点是主公在杀死忠臣后会被强制弃掉所有装备与手牌</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span> <span class="params">(<span class="keyword">int</span> pid, <span class="keyword">int</span> from)</span> </span>&#123; <span class="comment">// 来自 from 的伤害使得编号为 pid 的猪濒死</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now removing %d, from %d\n"</span>, pid, from);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> pos = find(pid, <span class="string">'P'</span>); <span class="comment">// 找手牌中是否有桃</span></span><br><span class="line">    <span class="keyword">if</span> (pos) &#123; <span class="comment">// 找到了</span></span><br><span class="line">        v[pid].hp++; <span class="comment">// 恰掉</span></span><br><span class="line">        v[pid].used[pos] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (v[pid].hp &gt; <span class="number">0</span>) <span class="keyword">return</span>; <span class="comment">// 不再处于濒死状态</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 下面是处理死亡</span></span><br><span class="line">    v[pid].is_alive = <span class="number">0</span>; <span class="comment">// 打 tag</span></span><br><span class="line">    v[v[pid].pre].nxt = v[pid].nxt; <span class="comment">// 修复牌局链表</span></span><br><span class="line">    v[v[pid].nxt].pre = v[pid].pre;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == MP) &#123; <span class="comment">// 主公死了</span></span><br><span class="line">        result = FP; <span class="comment">// 反贼胜利</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == FP) &#123; <span class="comment">// 反贼死了</span></span><br><span class="line">        alive_num[FP]--;</span><br><span class="line">        <span class="keyword">if</span> (!alive_num[FP]) &#123; <span class="comment">// 且没有其他活着的反贼</span></span><br><span class="line">            result = MP; <span class="comment">// 主公胜利</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        GetCard(from); GetCard(from); GetCard(from); <span class="comment">// 击杀者抽三张卡</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == ZP) &#123;</span><br><span class="line">        alive_num[ZP]--;</span><br><span class="line">        <span class="keyword">if</span> (from == <span class="number">1</span>) v[<span class="number">1</span>].clear(), mark = <span class="number">1</span>; <span class="comment">// 主公击杀忠臣，弃掉所有牌</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check_alive</span> <span class="params">(<span class="keyword">int</span> pid, <span class="keyword">int</span> from)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].hp &lt;= <span class="number">0</span>) remove(pid, from); <span class="comment">// 检测是否为濒死状态</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面就是本题的核心：使用牌了</p>
+<h2 id="桃-诸葛连弩"><a href="#桃-诸葛连弩" class="headerlink" title="桃 &amp; 诸葛连弩"></a>桃 &amp; 诸葛连弩</h2>
+<p>先写两个较为简单的 — 「桃」与「诸葛连弩」</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">peach</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123; <span class="keyword">return</span> v[pid].hp &lt; <span class="number">4</span> ? v[pid].hp++ : <span class="number">0</span>; &#125; <span class="comment">// 由于上限为 4，血量不健康的时候再用</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">zgln</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123; <span class="keyword">return</span> v[pid].zgln = <span class="number">1</span>; &#125; <span class="comment">// 能装就装</span></span><br></pre></td></tr></table></figure>
+<h2 id="杀-闪"><a href="#杀-闪" class="headerlink" title="杀 &amp; 闪"></a>杀 &amp; 闪</h2>
+<p>然后就是「杀」与「闪」</p>
+<p>这里要注意「杀」的距离始终为 <span class="mjpage"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.162ex" height="2.176ex" style="vertical-align: -0.338ex;" viewbox="0 -791.3 500.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-2-Title">
+<title id="MathJax-SVG-2-Title">1</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E2-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E2-MJMAIN-31" x="0" y="0"/>
+</g>
+</svg></span></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">kill</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123; <span class="comment">// 编号为pid的玩家切杀</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now killing %d\n"</span>, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> to = v[pid].nxt; <span class="comment">// 「杀」的距离为 1</span></span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == FP) &#123; <span class="comment">// 反贼只对主公使用或对身份暴露的忠臣使用</span></span><br><span class="line">        <span class="keyword">if</span> (v[to].is_showed == <span class="number">1</span> &amp;&amp; (v[to].id == MP || v[to].id == ZP)) &#123;</span><br><span class="line">            v[pid].is_showed = <span class="number">1</span>; <span class="comment">// 暴露身份</span></span><br><span class="line">            miss(to); <span class="comment">// 使用「闪」</span></span><br><span class="line">            check_alive(to, pid); <span class="comment">// 检测是否濒死</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 使用成功</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (v[pid].id == ZP) &#123; <span class="comment">// 忠臣只杀暴露身份的反贼</span></span><br><span class="line">        <span class="keyword">if</span> (v[to].is_showed == <span class="number">1</span> &amp;&amp; v[to].id == FP) &#123;</span><br><span class="line">            v[pid].is_showed = <span class="number">1</span>;</span><br><span class="line">            miss(to);</span><br><span class="line">            check_alive(to, pid);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (v[pid].id == MP) &#123; <span class="comment">// 主公杀类反和暴露身份的反贼</span></span><br><span class="line">        <span class="keyword">if</span> (v[to].is_showed == <span class="number">2</span> || (v[to].is_showed == <span class="number">1</span> &amp;&amp; v[to].id == FP)) &#123;</span><br><span class="line">            miss(to);</span><br><span class="line">            check_alive(to, pid);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>闪就能闪就闪就好了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">miss</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = find(pid, <span class="string">'D'</span>); <span class="comment">// 在手牌中寻找是否有闪</span></span><br><span class="line">    <span class="keyword">if</span> (!pos) &#123; v[pid].hp--; <span class="keyword">return</span>; &#125; <span class="comment">// 没有就掉血（</span></span><br><span class="line">    v[pid].used[pos] = <span class="number">1</span>; <span class="comment">// 已经切出该牌</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基本牌的处理已经结束了，接下来就是比较难处理的锦囊牌了</p>
+<h2 id="无懈可击"><a href="#无懈可击" class="headerlink" title="无懈可击"></a>无懈可击</h2>
+<p>先处理无懈可击</p>
+<p>无懈可击是最难处理的一张牌了。。。下面是要注意的地方</p>
+<ol>
+<li>玩家 <strong>不会</strong> 无懈掉相同阵营的无懈</li>
+<li>玩家 <strong>不能</strong> 无懈掉对自己的伤害性锦囊牌（好奇怪啊）</li>
+<li>玩家 <strong>一定</strong> 无懈掉不同阵营的无懈</li>
+<li>玩家 <strong>一定</strong> 会将相同阵营的伤害性锦囊牌无懈掉</li>
+<li>玩家 <strong>一定</strong> 会暴露身份当其打出一张无懈可击</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Undo</span> <span class="params">(<span class="keyword">int</span> pid, <span class="keyword">int</span> to)</span> </span>&#123; <span class="comment">// 其阵容为 to，当前编号为 pid 的玩家使用一张无懈可击</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now Undoing %d, to %d\n"</span>, pid, to);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> k = pid;</span><br><span class="line">    <span class="keyword">do</span> &#123; <span class="comment">// 遍历玩家的手牌</span></span><br><span class="line">        <span class="keyword">int</span> pos = find(k, <span class="string">'J'</span>); <span class="comment">// 寻找当前玩家是否有无懈可击</span></span><br><span class="line">        <span class="keyword">if</span> (!pos) &#123; <span class="comment">// 没有的话就找下一家</span></span><br><span class="line">            k = v[k].nxt;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"[Undo] pos = %d\n"</span>, pos);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        <span class="keyword">if</span> (v[k].id ^ FP &amp;&amp; to == MP) &#123; <span class="comment">// 对反贼阵营使用无懈可击</span></span><br><span class="line">            v[k].used[pos] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (v[k].is_showed ^ <span class="number">1</span>) v[k].is_showed = <span class="number">1</span>; <span class="comment">// 暴露身份</span></span><br><span class="line">            <span class="keyword">return</span> !Undo(k, FP); <span class="comment">// 轮到对方阵营使用无懈可击，对方生效则己方不生效，反之亦然</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (v[k].id == FP &amp;&amp; to == FP) &#123; <span class="comment">// 对主公阵容使用无懈可击</span></span><br><span class="line">            v[k].used[pos] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (v[k].is_showed ^ <span class="number">1</span>) v[k].is_showed = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> !Undo(k, MP);</span><br><span class="line">        &#125;</span><br><span class="line">        k = v[k].nxt;</span><br><span class="line">    &#125; <span class="keyword">while</span> (k ^ pid);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 没有无懈可击了，于是不生效</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="决斗"><a href="#决斗" class="headerlink" title="决斗"></a>决斗</h2>
+<p>然后考虑决斗</p>
+<p>注意主公对忠臣决斗，忠臣 <strong>一定</strong> 不会出杀（<s>不愧是忠臣（</s></p>
+<p>下面模拟过程：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fight</span> <span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now fighting %d, to %d\n"</span>, from, to);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">if</span> (from == <span class="number">1</span> &amp;&amp; v[to].id == ZP) &#123; <span class="comment">// 主公对忠臣使用决斗</span></span><br><span class="line">        v[to].hp--; <span class="comment">// 忠臣掉血</span></span><br><span class="line">        check_alive(to, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">int</span> k = to;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123; <span class="comment">// 直到有一方没有杀</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"now #%d is fighting with %d\n"</span>, from, k);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        <span class="keyword">bool</span> fl = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> pos = find(k, <span class="string">'K'</span>); <span class="comment">// 寻找手牌中是否有杀</span></span><br><span class="line">        <span class="keyword">if</span> (pos) &#123;</span><br><span class="line">            v[k].used[pos] = <span class="number">1</span>; <span class="comment">// 用掉杀</span></span><br><span class="line">            fl = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (fl) k = k ^ to ? to : from; <span class="comment">// 轮到另一方出杀</span></span><br><span class="line">        <span class="keyword">else</span> &#123; <span class="comment">// 否则就掉血</span></span><br><span class="line">            v[k].hp--;</span><br><span class="line">            check_alive (k, from ^ k ? from : to);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来就是处理切决斗的角色：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">solve_fight</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now Solve fighting %d\n"</span>, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == FP) &#123;</span><br><span class="line">        v[pid].is_showed = <span class="number">1</span>; <span class="comment">// 反派使用决斗一定会暴露身份</span></span><br><span class="line">        <span class="keyword">bool</span> fl = Undo (pid, MP); <span class="comment">// 使用无懈可击</span></span><br><span class="line">        <span class="keyword">if</span> (!fl) fight(pid, <span class="number">1</span>); <span class="comment">// 没有被无懈可击就切决斗</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 即使被无懈可击了也算正常打出</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (v[pid].id == ZP) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = v[pid].nxt; i ^ pid; i = v[i].nxt) &#123; <span class="comment">// 决斗无视距离</span></span><br><span class="line">            <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span> &amp;&amp; v[i].id == FP) &#123; <span class="comment">// 忠臣只对暴露身份的反派切决斗</span></span><br><span class="line">                v[pid].is_showed = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">bool</span> fl = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span>) fl = Undo(pid, FP);</span><br><span class="line">                <span class="keyword">if</span> (!fl) fight(pid, i);</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">for</span> (<span class="keyword">int</span> i = v[pid].nxt; i ^ pid; i = v[i].nxt) &#123; <span class="comment">// 决斗无视距离</span></span><br><span class="line">        <span class="keyword">if</span> ((v[i].is_showed == <span class="number">1</span> &amp;&amp; v[i].id == FP) || v[i].is_showed == <span class="number">2</span>) &#123; <span class="comment">// 主公对类反玩家与暴露身份的玩家切决斗</span></span><br><span class="line">            <span class="keyword">bool</span> fl = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span>) fl = Undo(pid, FP);</span><br><span class="line">            <span class="keyword">if</span> (!fl) fight(<span class="number">1</span>, i);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="南蛮入侵-无懈可击"><a href="#南蛮入侵-无懈可击" class="headerlink" title="南蛮入侵 &amp; 无懈可击"></a>南蛮入侵 &amp; 无懈可击</h2>
+<p>接下来就是南蛮入侵与无懈可击，这两个代码只相差一个字母（</p>
+<p>注意的地方：</p>
+<ol>
+<li>无懈可击只能无懈掉对一个人的影响，不能无懈掉整个南蛮入侵与无懈可击</li>
+<li>由于无懈可击与南蛮入侵是AOE，所以之前没有暴露身份的玩家对主公造成伤害就会被判定为类反</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">nmrq</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now nmrq %d\n"</span>, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = v[pid].nxt; i != pid; i = v[i].nxt) &#123; <span class="comment">// 锦囊牌无视距离</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"now doing #%d, is_showed = %d\n"</span>, i, v[i].is_showed);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span>) &#123; <span class="comment">// 暴露身份</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"#%i undoing #%d's nmrq\n"</span>, i, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">            <span class="keyword">if</span> (Undo(pid, v[i].id == ZP ? MP : v[i].id)) <span class="keyword">continue</span>; <span class="comment">// 只无懈掉这个人的影响</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> pos = find(i, <span class="string">'K'</span>); <span class="comment">// 寻找是否有杀来相应</span></span><br><span class="line">        <span class="keyword">if</span> (pos) v[i].used[pos] = <span class="number">1</span>; <span class="comment">// 切出</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            v[i].hp--; <span class="comment">// 掉血并检测</span></span><br><span class="line">            check_alive(i, pid);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; v[pid].is_showed == <span class="number">0</span>) v[pid].is_showed = <span class="number">2</span>; <span class="comment">// 判定为类反</span></span><br><span class="line">            <span class="keyword">if</span> (result ^ <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 在过程中如果有玩家死亡且得到对局结果就直接返回</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"#%d's hp = %d\n"</span>, i, v[i].hp);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 成功打出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>万箭齐发就是将 <code>'K'</code> 改为 <code>'D'</code> 就好了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">wjqf</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now wjqf %d\n"</span>, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = v[pid].nxt; i != pid; i = v[i].nxt) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Undo(pid, v[i].id == ZP ? MP : v[i].id)) <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> pos = find(i, <span class="string">'D'</span>);</span><br><span class="line">        <span class="keyword">if</span> (pos) v[i].used[pos] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            v[i].hp--;</span><br><span class="line">            check_alive(i, pid);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; v[pid].is_showed == <span class="number">0</span>) v[pid].is_showed = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (result ^ <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2>
+<p>貌似写了那么多没有写输入....</p>
+<p>读入一个玩家的信息：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fix_Node</span> <span class="params">(<span class="keyword">int</span> pos)</span> </span>&#123; <span class="comment">// 修复链表</span></span><br><span class="line">    v[pos].nxt = pos == n ? <span class="number">1</span> : pos + <span class="number">1</span>;</span><br><span class="line">    v[pos].pre = pos == <span class="number">1</span> ? n : pos - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InputInfo</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> ch[<span class="number">5</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, ch); <span class="comment">// 身份</span></span><br><span class="line">    v[pid].id = ch[<span class="number">0</span>]; alive_num[v[pid].id]++; <span class="comment">// 统计玩家数量与身份</span></span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == MP) v[pid].is_showed = <span class="number">1</span>; <span class="comment">// 主公</span></span><br><span class="line">    up (i, <span class="number">1</span>, <span class="number">4</span>) &#123; <span class="comment">// 读入手牌</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>, ch);</span><br><span class="line">        v[pid].cnt++;</span><br><span class="line">        v[pid].card[i] = ch[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    fix_Node(pid);</span><br><span class="line">    v[pid].hp = <span class="number">4</span>; v[pid].is_alive = <span class="number">1</span>; <span class="comment">// 存活且默认 4 血</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 摸牌</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetCard</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123; v[pid].card[++v[pid].cnt] = Card.get(); &#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>至此，全部内容就都已经结束了（鼓掌）</p>
+<h2 id="总代码"><a href="#总代码" class="headerlink" title="总代码"></a>总代码</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> CARD = <span class="number">2000</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MP <span class="meta-string">'M'</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ZP <span class="meta-string">'Z'</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FP <span class="meta-string">'F'</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">int</span> hp;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">bool</span> is_alive;</span><br><span class="line">    <span class="keyword">int</span> is_showed; <span class="comment">// 1 - none, 2 - done, 3 - back</span></span><br><span class="line">    <span class="keyword">bool</span> zgln;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> cnt;</span><br><span class="line">    <span class="keyword">bool</span> used[CARD];</span><br><span class="line">    <span class="keyword">char</span> card[CARD];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> nxt, pre;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        zgln = <span class="number">0</span>;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        mem(used); mem(card);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">outputCard</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="comment">//        up (i, 1, cnt)</span></span><br><span class="line"><span class="comment">//            if (!used[i]) printf("%c%c", card[i], i == cnt ? '\n' : ' ');</span></span><br><span class="line">        up (i, <span class="number">1</span>, cnt)</span><br><span class="line">            <span class="keyword">if</span> (!used[i]) <span class="built_in">printf</span>(<span class="string">"%c "</span>, card[i]);</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Cards</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> cnt;</span><br><span class="line">    <span class="keyword">char</span> c[CARD];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> ch[<span class="number">5</span>];</span><br><span class="line">        up (i, <span class="number">1</span>, m) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>, ch);</span><br><span class="line">            c[i] = ch[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">get</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cnt == m ? c[m] : c[++cnt];</span><br><span class="line">    &#125;</span><br><span class="line">    Cards () : cnt(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">&#125; Card;</span><br><span class="line"></span><br><span class="line">Node v[N];</span><br><span class="line"><span class="keyword">int</span> alive_num[<span class="number">255</span>];</span><br><span class="line"><span class="keyword">int</span> result =- <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> mark;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fix_Node</span> <span class="params">(<span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    v[pos].nxt = pos == n ? <span class="number">1</span> : pos + <span class="number">1</span>;</span><br><span class="line">    v[pos].pre = pos == <span class="number">1</span> ? n : pos - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InputInfo</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> ch[<span class="number">5</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, ch);</span><br><span class="line">    v[pid].id = ch[<span class="number">0</span>]; alive_num[v[pid].id]++;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == MP) v[pid].is_showed = <span class="number">1</span>;</span><br><span class="line">    up (i, <span class="number">1</span>, <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>, ch);</span><br><span class="line">        v[pid].cnt++;</span><br><span class="line">        v[pid].card[i] = ch[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    fix_Node(pid);</span><br><span class="line">    v[pid].hp = <span class="number">4</span>; v[pid].is_alive = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetCard</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123; v[pid].card[++v[pid].cnt] = Card.get(); &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// find a card, then return card id</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span> <span class="params">(<span class="keyword">int</span> pid, <span class="keyword">char</span> card)</span> </span>&#123;</span><br><span class="line">    up (i, <span class="number">1</span>, v[pid].cnt)</span><br><span class="line">        <span class="keyword">if</span> (v[pid].card[i] == card &amp;&amp; !v[pid].used[i]) <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span> <span class="params">(<span class="keyword">int</span> pid, <span class="keyword">int</span> from)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now removing %d, from %d\n"</span>, pid, from);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> pos = find(pid, <span class="string">'P'</span>);</span><br><span class="line">    <span class="keyword">if</span> (pos) &#123;</span><br><span class="line">        v[pid].hp++;</span><br><span class="line">        v[pid].used[pos] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (v[pid].hp &gt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    v[pid].is_alive = <span class="number">0</span>;</span><br><span class="line">    v[v[pid].pre].nxt = v[pid].nxt;</span><br><span class="line">    v[v[pid].nxt].pre = v[pid].pre;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == MP) &#123;</span><br><span class="line">        result = FP;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == FP) &#123;</span><br><span class="line">        alive_num[FP]--;</span><br><span class="line">        <span class="keyword">if</span> (!alive_num[FP]) &#123;</span><br><span class="line">            result = MP;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        GetCard(from); GetCard(from); GetCard(from);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == ZP) &#123;</span><br><span class="line">        alive_num[ZP]--;</span><br><span class="line">        <span class="keyword">if</span> (from == <span class="number">1</span>) v[<span class="number">1</span>].clear(), mark = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">peach</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123; <span class="keyword">return</span> v[pid].hp &lt; <span class="number">4</span> ? v[pid].hp++ : <span class="number">0</span>; &#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">zgln</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123; <span class="keyword">return</span> v[pid].zgln = <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">check_alive</span> <span class="params">(<span class="keyword">int</span> pid, <span class="keyword">int</span> from)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].hp &lt;= <span class="number">0</span>) remove(pid, from);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">miss</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pos = find(pid, <span class="string">'D'</span>);</span><br><span class="line">    <span class="keyword">if</span> (!pos) &#123; v[pid].hp--; <span class="keyword">return</span>; &#125;</span><br><span class="line">    v[pid].used[pos] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">kill</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now killing %d\n"</span>, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> to = v[pid].nxt;</span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == FP) &#123; <span class="comment">// Kill MP, ZP</span></span><br><span class="line">        <span class="keyword">if</span> (v[to].is_showed == <span class="number">1</span> &amp;&amp; (v[to].id == MP || v[to].id == ZP)) &#123;</span><br><span class="line">            v[pid].is_showed = <span class="number">1</span>;</span><br><span class="line">            miss(to);</span><br><span class="line">            check_alive(to, pid);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (v[pid].id == ZP) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v[to].is_showed == <span class="number">1</span> &amp;&amp; v[to].id == FP) &#123;</span><br><span class="line">            v[pid].is_showed = <span class="number">1</span>;</span><br><span class="line">            miss(to);</span><br><span class="line">            check_alive(to, pid);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (v[pid].id == MP) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v[to].is_showed == <span class="number">2</span> || (v[to].is_showed == <span class="number">1</span> &amp;&amp; v[to].id == FP)) &#123;</span><br><span class="line">            miss(to);</span><br><span class="line">            check_alive(to, pid);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Undo</span> <span class="params">(<span class="keyword">int</span> pid, <span class="keyword">int</span> to)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now Undoing %d, to %d\n"</span>, pid, to);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">int</span> k = pid;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> pos = find(k, <span class="string">'J'</span>);</span><br><span class="line">        <span class="keyword">if</span> (!pos) &#123;</span><br><span class="line">            k = v[k].nxt;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"[Undo] pos = %d\n"</span>, pos);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        <span class="keyword">if</span> (v[k].id ^ FP &amp;&amp; to == MP) &#123;</span><br><span class="line">            v[k].used[pos] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (v[k].is_showed ^ <span class="number">1</span>) v[k].is_showed = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> !Undo(k, FP);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (v[k].id == FP &amp;&amp; to == FP) &#123;</span><br><span class="line">            v[k].used[pos] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (v[k].is_showed ^ <span class="number">1</span>) v[k].is_showed = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">return</span> !Undo(k, MP);</span><br><span class="line">        &#125;</span><br><span class="line">        k = v[k].nxt;</span><br><span class="line">    &#125; <span class="keyword">while</span> (k ^ pid);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fight</span> <span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now fighting %d, to %d\n"</span>, from, to);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">if</span> (from == <span class="number">1</span> &amp;&amp; v[to].id == ZP) &#123;</span><br><span class="line">        v[to].hp--;</span><br><span class="line">        check_alive(to, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">int</span> k = to;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"now #%d is fighting with %d\n"</span>, from, k);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        <span class="keyword">bool</span> fl = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> pos = find(k, <span class="string">'K'</span>);</span><br><span class="line">        <span class="keyword">if</span> (pos) &#123;</span><br><span class="line">            v[k].used[pos] = <span class="number">1</span>;</span><br><span class="line">            fl = <span class="number">1</span>; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (fl) k = k ^ to ? to : from;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            v[k].hp--;</span><br><span class="line">            check_alive (k, from ^ k ? from : to);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">solve_fight</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now Solve fighting %d\n"</span>, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">if</span> (v[pid].id == FP) &#123;</span><br><span class="line">        v[pid].is_showed = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">bool</span> fl = Undo (pid, MP);</span><br><span class="line">        <span class="keyword">if</span> (!fl) fight(pid, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (v[pid].id == ZP) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = v[pid].nxt; i ^ pid; i = v[i].nxt) &#123;</span><br><span class="line">            <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span> &amp;&amp; v[i].id == FP) &#123;</span><br><span class="line">                v[pid].is_showed = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">bool</span> fl = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span>) fl = Undo(pid, FP);</span><br><span class="line">                <span class="keyword">if</span> (!fl) fight(pid, i);</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">for</span> (<span class="keyword">int</span> i = v[pid].nxt; i ^ pid; i = v[i].nxt) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((v[i].is_showed == <span class="number">1</span> &amp;&amp; v[i].id == FP) || v[i].is_showed == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">bool</span> fl = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span>) fl = Undo(pid, FP);</span><br><span class="line">            <span class="keyword">if</span> (!fl) fight(<span class="number">1</span>, i);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">nmrq</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now nmrq %d\n"</span>, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = v[pid].nxt; i != pid; i = v[i].nxt) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"now doing #%d, is_showed = %d\n"</span>, i, v[i].is_showed);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span>) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"#%i undoing #%d's nmrq\n"</span>, i, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">            <span class="keyword">if</span> (Undo(pid, v[i].id == ZP ? MP : v[i].id)) <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> pos = find(i, <span class="string">'K'</span>);</span><br><span class="line">        <span class="keyword">if</span> (pos) v[i].used[pos] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            v[i].hp--;</span><br><span class="line">            check_alive(i, pid);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; v[pid].is_showed == <span class="number">0</span>) v[pid].is_showed = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (result ^ <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"#%d's hp = %d\n"</span>, i, v[i].hp);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">wjqf</span> <span class="params">(<span class="keyword">int</span> pid)</span> </span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"now wjqf %d\n"</span>, pid);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = v[pid].nxt; i != pid; i = v[i].nxt) &#123;</span><br><span class="line">        <span class="keyword">if</span> (v[i].is_showed == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Undo(pid, v[i].id == ZP ? MP : v[i].id)) <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> pos = find(i, <span class="string">'D'</span>);</span><br><span class="line">        <span class="keyword">if</span> (pos) v[i].used[pos] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            v[i].hp--;</span><br><span class="line">            check_alive(i, pid);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; v[pid].is_showed == <span class="number">0</span>) v[pid].is_showed = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (result ^ <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="comment">//    freopen("13.in", "r", stdin);</span></span><br><span class="line"><span class="comment">//    freopen("7.in", "r", stdin);</span></span><br><span class="line">    n = read(); m = read();</span><br><span class="line">    up (i, <span class="number">1</span>, n) InputInfo(i);</span><br><span class="line">    v[<span class="number">1</span>].is_showed = <span class="number">1</span>;</span><br><span class="line">    Card.init();</span><br><span class="line"><span class="comment">//    up (i, 1, n) v[i].outputCard();</span></span><br><span class="line">    <span class="keyword">int</span> times = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (result == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i = v[i].nxt) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">            up (i, <span class="number">1</span>, n) v[i].outputCard();</span><br><span class="line">            up (i, <span class="number">1</span>, n) <span class="built_in">printf</span>(<span class="string">"#%d's hp = %d, is_allowed = %d\n"</span>, i, v[i].hp, v[i].is_showed);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">            GetCard(i); GetCard(i);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"now is #%d, player = %d\n"</span>, ++times, i);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">            <span class="keyword">int</span> limit = <span class="number">0</span>; <span class="comment">// kill_c number </span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> pos = <span class="number">1</span>; pos &lt;= v[i].cnt; pos++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (v[i].used[pos]) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">int</span> done = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">switch</span> (v[i].card[pos]) &#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'P'</span>: done = peach(i); <span class="keyword">break</span>; </span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'F'</span>: done = solve_fight(i); <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'Z'</span>: done = zgln(i); <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'N'</span>: done = nmrq(i); <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'W'</span>: done = wjqf(i); <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'K'</span>:</span><br><span class="line">                        <span class="keyword">if</span> (limit == <span class="number">0</span> || v[i].zgln) done = kill(i);</span><br><span class="line">                        <span class="keyword">if</span> (done) limit++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (done) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> debug</span></span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">"      - By %d\n"</span>, i);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">                    <span class="keyword">if</span> (i == <span class="number">1</span> &amp;&amp; mark) mark = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">else</span> v[i].used[pos] = <span class="number">1</span>;</span><br><span class="line">                    pos = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (!v[i].is_alive) <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">if</span> (result + <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">if</span> (result + <span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(result ^ MP ? <span class="string">"FP"</span> : <span class="string">"MP"</span>);</span><br><span class="line">    up (i, <span class="number">1</span>, n) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!v[i].is_alive) &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"DEAD"</span>);</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        v[i].outputCard();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Shq 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Shq 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BZOJ/" rel="tag"># BZOJ</a>
+          
+            <a href="/tags/大模拟/" rel="tag"># 大模拟</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/exCRT/" rel="next" title="「EXCRT」拓展中国剩余定理学习笔记">
+                <i class="fa fa-chevron-left"></i> 「EXCRT」拓展中国剩余定理学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTIzMi8xNzc4MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Shq">
+            
+              <p class="site-author-name" itemprop="name">Shq</p>
+              <p class="site-description motion-element" itemprop="description">生活在阴沟里，依然有仰望星空的权利。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">97</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/Blog-Shq" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.luogu.org/space/show?uid=52556" target="_blank" title="洛谷"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/shq666" target="_blank" title="知乎"><i class="fa fa-fw fa-comment-o"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://ly.men.ci" target="_blank" title="LYOI"><i class="fa fa-fw fa-star"></i>LYOI</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://t.me/qwq_shq" target="_blank" title="telegram"><i class="fa fa-fw fa-telegram"></i>telegram</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简要题意"><span class="nav-number">1.</span> <span class="nav-text">简要题意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#「SDOI2010」猪国杀"><span class="nav-number">2.</span> <span class="nav-text">「SDOI2010」猪国杀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">2.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式"><span class="nav-number">2.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出样例"><span class="nav-number">2.4.</span> <span class="nav-text">输入输出样例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明-提示"><span class="nav-number">2.5.</span> <span class="nav-text">说明/提示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">3.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#濒死"><span class="nav-number">3.1.</span> <span class="nav-text">濒死</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桃-诸葛连弩"><span class="nav-number">3.2.</span> <span class="nav-text">桃 &amp; 诸葛连弩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#杀-闪"><span class="nav-number">3.3.</span> <span class="nav-text">杀 &amp; 闪</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无懈可击"><span class="nav-number">3.4.</span> <span class="nav-text">无懈可击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决斗"><span class="nav-number">3.5.</span> <span class="nav-text">决斗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#南蛮入侵-无懈可击"><span class="nav-number">3.6.</span> <span class="nav-text">南蛮入侵 &amp; 无懈可击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入"><span class="nav-number">3.7.</span> <span class="nav-text">输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总代码"><span class="nav-number">3.8.</span> <span class="nav-text">总代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shq</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">不忘初心 继续前行 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: 'articles/bzoj1972/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.5.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.5.0"></script>
+
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+</body>
+</html>
